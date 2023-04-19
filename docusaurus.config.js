@@ -8,7 +8,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const { createHash } = require("crypto");
 
 const baseUrl = '/';
-const brickPackages = ['@next-bricks/shoelace'];
+const brickPackages = ['@next-bricks/shoelace', '@next-bricks/basic'];
 
 const bootstrapJson = {
   brickPackages: brickPackages.map((pkg) => require(`${pkg}/dist/bricks.json`)).map(pkg => ({
@@ -169,6 +169,13 @@ const config = {
       configureWebpack(config, isServer, utils) {
         const previewDir = path.join(require.resolve('@next-core/brick-playground/package.json'), '../dist-preview');
         return {
+          mergeStrategy: {'module.rules': 'prepend'},
+          module: {
+            rules: [{
+              test: /\.yaml/,
+              type: 'asset/source',
+            }]
+          },
           plugins: [
             new CopyPlugin({
               patterns: [

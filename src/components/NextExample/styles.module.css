@@ -1,0 +1,12 @@
+.example {
+  display: flex;
+}
+
+.example > * {
+  flex: 1;
+  border: solid 1px #e4e4e7;
+}
+
+.example > *:not(:last-child) {
+  border-right: none;
+}

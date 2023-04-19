@@ -3,14 +3,49 @@ sidebar_position: 4
 ---
 
 import NextExample from "@site/src/components/NextExample";
+import weatherAppBricks from "@site/src/components/NextExample/examples/weather-app/bricks.yaml";
+import weatherAppContext from "@site/src/components/NextExample/examples/weather-app/context.yaml";
 
 # Markdown Features
 
 Docusaurus supports **[Markdown](https://daringfireball.net/projects/markdown/syntax)** and a few **additional features**.
 
-## Next Examples
+### Control Nodes
 
-<NextExample />
+<NextExample files={[
+      {
+        name: "Bricks",
+        code:
+`brick: ':forEach'
+dataSource: '<% CTX.list %>'
+children:
+- brick: div
+  properties:
+    textContent: '<% \`Hello, \${ITEM}\` %>'`
+      },
+      {
+        name: "Context",
+        code:
+`- name: list
+  value:
+  - boys
+  - girls`
+      }
+    ]} />
+
+### Weather App
+
+<NextExample files={[
+      {
+        name: "Bricks",
+        code: weatherAppBricks,
+      },
+      {
+        name: "Context",
+        code: weatherAppContext,
+      }
+    ]} />
+
 
 ## Front Matter
 

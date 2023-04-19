@@ -1,0 +1,19 @@
+- name: city
+  value: Shenzhen
+- name: weather
+  resolve:
+    useProvider: basic.http-request
+    args:
+    - |
+      <%
+        `//api.weatherapi.com/v1/forecast.json?${
+          new URLSearchParams({
+            key: '9e08e5e99e0c4b4c89023605231804',
+            q: CTX.city,
+            days: '2',
+            aqi: 'no',
+          })
+        }`
+      %>
+    lazy: true
+  track: true
