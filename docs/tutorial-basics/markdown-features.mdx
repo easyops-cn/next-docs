@@ -16,11 +16,16 @@ Docusaurus supports **[Markdown](https://daringfireball.net/projects/markdown/sy
         name: "Bricks",
         code:
 `brick: ':forEach'
-dataSource: '<% CTX.list %>'
+dataSource: <% CTX.list %>
 children:
 - brick: tpl-test
   properties:
-    who: '<% ITEM %>'`
+    who: '<% ITEM %>'
+    ml: |
+      <%
+        String("")
+      %>
+    size: lg`
       },
       {
         name: "Context",

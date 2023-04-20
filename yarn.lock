@@ -1750,10 +1750,10 @@
   resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.2.2.tgz#0c000ef528b08225c95a5e0aa0fd101f5f47b177"
   integrity sha512-5V0s5As25OWlS3ku6iALLe9xVPfLEGytJXHTs6NtWBvb5hTVl5Z+DYmSPnL7v5mSwGu3slo0/LbiWRaHEjC0BQ==
 
-"@next-core/brick-playground@^1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@next-core/brick-playground/-/brick-playground-1.7.2.tgz#567a70f4652b3edbb3d8fe6646969bfad809233e"
-  integrity sha512-XFWOvNSvWW9Yv30zsFpo4mvWXPvct1j5ZB0Jl2vGXaK4cAeOSFPqHeJbIMokuKg24IPocyHCP9wEhRmgsgJnzA==
+"@next-core/brick-playground@^1.7.4":
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/@next-core/brick-playground/-/brick-playground-1.7.4.tgz#254efdcea378358136cc2321bd74139a4d0edc01"
+  integrity sha512-RRUZhgbL/Vo/9INXxWbHCC1NPPZifP2hRzotlEUeUGQvvNt7UNjAMrH+gk99eSt0o4HAqSAum3nRfWB6COlBoQ==
   dependencies:
     "@next-core/serve-helpers" "^1.0.6"
     compression "^1.7.4"
@@ -6178,11 +6178,6 @@ react-router@5.3.4, react-router@^5.3.3:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
-
-react-simple-code-editor@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.13.1.tgz#4514553fa132dcaffec33a6612c58f1613c52416"
-  integrity sha512-XYeVwRZwgyKtjNIYcAEgg2FaQcCZwhbarnkJIV20U2wkCU9q/CPFBo8nRXrK4GXUz3AvbqZFsZRrpUTkqqEYyQ==
 
 react-textarea-autosize@^8.3.2:
   version "8.4.1"

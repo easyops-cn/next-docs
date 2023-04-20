@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import "./register";
 
 export interface MonacoEditorWorkspaceProps {
   files: FileInfo[];
@@ -38,7 +39,7 @@ export default function MonacoEditorWorkspace({
       const file = files.find(f => f.name === currentFile);
       model = monaco.editor.createModel(
         file.code,
-        file.lang ?? "yaml",
+        file.lang ?? "nextYaml",
         monaco.Uri.file(`${workspace}/${file.name}`)
       );
       modelsMap.set(currentFile, model);
