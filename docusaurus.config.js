@@ -6,6 +6,7 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const CopyPlugin = require('copy-webpack-plugin');
 const { createHash } = require("crypto");
+const MonacoEditorWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const baseUrl = '/';
 const brickPackages = ['@next-bricks/shoelace', '@next-bricks/basic'];
@@ -212,6 +213,19 @@ const config = {
               ],
             }),
             new EmitBootstrapJsonPlugin(),
+            new MonacoEditorWebpackPlugin({
+              languages: ['javascript', 'typescript', 'yaml'],
+              features: [
+                '!accessibilityHelp',
+                '!codelens',
+                '!colorPicker',
+                '!documentSymbols',
+                '!fontZoom',
+                '!iPadShowKeyboard',
+                '!inspectTokens',
+              ],
+              filename: `workers/[name].[contenthash:8].worker.js`,
+            }),
           ]
         };
       }

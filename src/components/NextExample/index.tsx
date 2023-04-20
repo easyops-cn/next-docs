@@ -1,22 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { useColorMode } from '@docusaurus/theme-common';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDeferredValue from '@site/src/hooks/useDeferredValue';
-import Editor from 'react-simple-code-editor';
-import { highlight, languages } from 'prismjs/components/prism-core';
-import 'prismjs/components/prism-yaml';
-import 'prismjs/themes/prism.css';
 import clsx from 'clsx';
+import type { FileInfo } from '../MonacoEditorWorkspace';
 import styles from './styles.module.css';
 
 export interface NextExampleProps {
   files: FileInfo[];
   defaultFile?: string;
-}
-
-export interface FileInfo {
-  name: string;
-  code: string;
 }
 
 const MIN_HEIGHT = 32;
@@ -77,12 +70,12 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
     };
   }, [ready]);
 
-  const handleCodeChange = useCallback((code: string) => {
+  const handleCodeChange = useCallback((code: string, filename: string) => {
     setCodeByFile((prev) => ({
       ...prev,
-      [currentFile]: code,
+      [filename]: code,
     }));
-  }, [currentFile]);
+  }, []);
 
   return (
     <div className={styles.example}>
@@ -97,26 +90,20 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
       </div>
       <div className={styles.editorAndPreview}>
         <div className={styles.editorColumn}>
-          <div className={styles.editorContainer}>
-            <Editor
-              value={codeByFile[currentFile]}
-              onValueChange={handleCodeChange}
-              highlight={
-                code =>
-                  highlight(code, languages.yaml)
-                    .split('\n')
-                    .map((line, i) => `<span class="${styles.lineNumber}">${i + 1}</span>${line}`)
-                    .join('\n')
-              }
-              padding={16}
-              textareaClassName={styles.codeTextarea}
-              preClassName={styles.codePre}
-              style={{
-                fontFamily: 'var(--ifm-font-family-monospace)',
-                fontSize: 13,
-              }}
-            />
-          </div>
+          <BrowserOnly>
+            {() => {
+              const MonacoEditorWorkspace = require("../MonacoEditorWorkspace").default;
+              return (
+                <MonacoEditorWorkspace
+                  files={files}
+                  currentFile={currentFile}
+                  theme={colorMode === 'dark' ? 'vs-dark' : 'vs-light'}
+                  className={styles.editorContainer}
+                  onChange={handleCodeChange}
+                />
+              )
+            }}
+          </BrowserOnly>
         </div>
         <div className={styles.previewColumn}>
           <div className={styles.preview}>

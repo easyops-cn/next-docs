@@ -3,8 +3,7 @@ sidebar_position: 4
 ---
 
 import NextExample from "@site/src/components/NextExample";
-import weatherAppBricks from "@site/src/components/NextExample/examples/weather-app/bricks.yaml";
-import weatherAppContext from "@site/src/components/NextExample/examples/weather-app/context.yaml";
+import WeatherApp from "@site/src/examples/weather-app";
 
 # Markdown Features
 
@@ -69,17 +68,7 @@ en:
 
 ### Weather App
 
-<NextExample files={[
-      {
-        name: "Bricks",
-        code: weatherAppBricks,
-      },
-      {
-        name: "Context",
-        code: weatherAppContext,
-      }
-    ]} />
-
+<NextExample files={WeatherApp} />
 
 ## Front Matter
 
