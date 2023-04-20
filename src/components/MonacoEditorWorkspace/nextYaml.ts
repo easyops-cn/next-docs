@@ -1,6 +1,7 @@
-import { languages } from '../../fillers/monaco-editor-core';
+// https://github.com/microsoft/monaco-editor/blob/8270c45a385a180a53fd8ef8e3a189b1471100ed/src/basic-languages/yaml/yaml.ts
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
-export const conf: languages.LanguageConfiguration = {
+export const conf: monaco.languages.LanguageConfiguration = {
 	comments: {
 		lineComment: '#'
 	},
@@ -30,14 +31,14 @@ export const conf: languages.LanguageConfiguration = {
 		{
 			beforeText: /:\s*$/,
 			action: {
-				indentAction: languages.IndentAction.Indent
+				indentAction: monaco.languages.IndentAction.Indent
 			}
 		}
 	]
 };
 
-export const language = <languages.IMonarchLanguage>{
-	tokenPostfix: '.yaml',
+export const language = <monaco.languages.IMonarchLanguage>{
+	tokenPostfix: '.yaml.next',
 
 	brackets: [
 		{ token: 'delimiter.bracket', open: '{', close: '}' },
@@ -89,6 +90,7 @@ export const language = <languages.IMonarchLanguage>{
 			[/(".*?"|'.*?'|[^#'"]*?)([ \t]*)(:)( |$)/, ['type', 'white', 'operators', 'white']],
 
 			{ include: '@flowScalars' },
+			{ include: '@flowExpression' },
 
 			// String nodes
 			[
@@ -173,13 +175,16 @@ export const language = <languages.IMonarchLanguage>{
 		],
 
 		// First line of a Block Style
-		multiString: [[/^( +).+$/, 'string', '@multiStringContinued.$1']],
+		multiString: [
+			[/^( +)(<%(?:\s|$))/, ['string', { token: '@rematch', next: '@multiExpression.$1'}]],
+			[/^( +).+$/, 'string', '@multiStringContinued.$1']
+		],
 
 		// Further lines of a Block Style
 		//   Workaround for indentation detection
 		multiStringContinued: [
 			[
-				/^( *).+$/,
+				/^( *)(.+)$/,
 				{
 					cases: {
 						'$1==$S2': 'string',
@@ -204,11 +209,27 @@ export const language = <languages.IMonarchLanguage>{
 		flowScalars: [
 			[/"([^"\\]|\\.)*$/, 'string.invalid'],
 			[/'([^'\\]|\\.)*$/, 'string.invalid'],
-			[/'[^']*'/, 'string'],
+			[/'/, 'string', '@singleQuotedString'],
 			[/"/, 'string', '@doubleQuotedString']
 		],
 
+		singleQuotedString: [
+			{ include: '@expressionStart' },
+			[/(%>)(\s*)(')/, [
+				{token: 'delimiter', bracket: '@close'},
+				'white',
+				{token: 'string', next: '@pop'},
+			]],
+			[/[^']*'/, 'string', '@pop']
+		],
+
 		doubleQuotedString: [
+			{ include: '@expressionStart' },
+			[/(%>)(\s*)(")/, [
+				{token: 'delimiter', bracket: '@close'},
+				'white',
+				{token: 'string', next: '@pop'},
+			]],
 			[/[^\\"]+/, 'string'],
 			[/@escapes/, 'string.escape'],
 			[/\\./, 'string.escape.invalid'],
@@ -231,6 +252,44 @@ export const language = <languages.IMonarchLanguage>{
 
 		tagHandle: [[/\![^ ]*/, 'tag']],
 
-		anchor: [[/[&*][^ ]+/, 'namespace']]
+		anchor: [[/[&*][^ ]+/, 'namespace']],
+
+		flowExpression: [
+			{ include: '@expressionStart' },
+			[/(\s+)(%>)(\s*)/, [
+				'white',
+				{token: 'delimiter', bracket: '@close'},
+				{token: 'white', next: '@pop'},
+			]],
+		],
+
+		expressionStart: [
+			[/(\s*)(<%)(\s+)/, [
+				'white',
+				{token: 'delimiter', bracket: '@open'},
+				{token: 'white', next: '@expressionEmbedded', nextEmbedded: 'text/javascript'}
+			]]
+		],
+
+		multiExpression: [
+			[/(<%)/, {token: 'white', next: '@expressionEmbedded', nextEmbedded: 'text/javascript'}],
+			[/(%>)(\s*)/, [
+				{token: 'delimiter', bracket: '@close'},
+				{token: 'white', next: '@pop'},
+			]],
+			[
+				/^( *).+$/,
+				{
+					cases: {
+						'$1==$S2': 'string',
+						'@default': { token: '@rematch', next: '@popall' }
+					}
+				}
+			]
+		],
+
+		expressionEmbedded: [
+			[/%>/, { token: '@rematch', next: '@pop', nextEmbedded: '@pop' }]
+		]
 	}
 };
