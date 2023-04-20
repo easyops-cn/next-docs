@@ -21,13 +21,23 @@ const bootstrapJsonHash = getContentHash(bootstrapJsonContent);
 const bootstrapJsonPath = `bootstrap.${bootstrapJsonHash}.json`;
 
 class EmitBootstrapJsonPlugin {
+  /**
+   * @param {import("webpack").Compiler} compiler 
+   */
   apply(compiler) {
-    compiler.hooks.emit.tapAsync('EmitBootstrapJsonPlugin', (compilation, callback) => {
-      compilation.assets[`preview/${bootstrapJsonPath}`] = {
-        source: () => bootstrapJsonContent,
-        size: () => bootstrapJsonContent.length,
-      };
-      callback();
+    compiler.hooks.thisCompilation.tap('EmitBootstrapJsonPlugin', (compilation) => {
+      compilation.hooks.processAssets.tapAsync(
+        {
+          name: "copy-webpack-plugin",
+          stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
+        },
+        async (unusedAssets, callback) => {
+          const { RawSource } = compiler.webpack.sources;
+          const source = new RawSource(bootstrapJsonContent);
+          compilation.emitAsset(`preview/${bootstrapJsonPath}`, source);
+          callback();
+        },
+      );
     });
   }
 }

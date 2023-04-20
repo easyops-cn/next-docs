@@ -3,10 +3,27 @@
 }
 
 .example > * {
-  flex: 1;
+  flex: 50%;
   border: solid 1px #e4e4e7;
+  min-width: 0;
 }
 
 .example > *:not(:last-child) {
   border-right: none;
+}
+
+.previewContainer {
+  padding: 2em;
+}
+
+.preview {
+  position: sticky;
+  top: calc(2em + 60px);
+}
+
+.preview > iframe {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: none;
 }

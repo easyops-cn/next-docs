@@ -1,20 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import clsx from 'clsx';
-import {
-  SlTabGroup,
-  SlTab,
-  SlTabPanel,
-} from '@shoelace-style/shoelace/dist/react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/themes/prism.css';
-import '@shoelace-style/shoelace/dist/themes/light.css';
-import '@shoelace-style/shoelace/dist/themes/dark.css';
 
 export interface FileTabsProps {
   files: FileInfo[];
-  activeFile: string;
+  defaultFile?: string;
   onChange?: (codeByFile: Record<string, string>) => void;
 }
 
@@ -23,34 +17,28 @@ export interface FileInfo {
   code: string;
 }
 
-export default function FileTabs({ files, activeFile, onChange } : FileTabsProps): JSX.Element {
+export default function FileTabs({ files, defaultFile, onChange } : FileTabsProps): JSX.Element {
   const [codeByFile, setCodeByFile] = useState<Record<string, string>>(
     () => Object.fromEntries(files.map(f => [f.name, f.code]))
   );
-  const [activePanel, setActivePanel] = useState<string>(activeFile);
+  const [defaultIndex] = useState(() => defaultFile ? files.findIndex(f => f.name === defaultFile) : 0);
 
   useEffect(() => {
     onChange?.(codeByFile);
   }, [onChange, codeByFile]);
 
-  useEffect(() => {
-    setActivePanel(activeFile);
-  }, [activeFile]);
-
-  const handleTabShow = useCallback((e: CustomEvent<{name: string}>) => {
-    setActivePanel(e.detail.name);
-  }, []);
-
   return (
-    <SlTabGroup onSlTabShow={handleTabShow}>
+    <Tabs defaultIndex={defaultIndex}>
+      <TabList>
       {
         files.map(file => (
-          <SlTab key={file.name} slot="nav" panel={file.name}>{file.name}</SlTab>
+          <Tab key={file.name}>{file.name}</Tab>
         ))
       }
+      </TabList>
       {
         files.map(file => (
-          <SlTabPanel key={file.name} name={file.name} active={activePanel === file.name}>
+          <TabPanel key={file.name} name={file.name}>
             <Editor
               key={file.name}
               value={codeByFile[file.name]}
@@ -72,9 +60,9 @@ export default function FileTabs({ files, activeFile, onChange } : FileTabsProps
                 fontSize: 13,
               }}
             />
-          </SlTabPanel>
+          </TabPanel>
         ))
       }
-    </SlTabGroup>
+    </Tabs>
   )
 }

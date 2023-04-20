@@ -19,9 +19,9 @@ Docusaurus supports **[Markdown](https://daringfireball.net/projects/markdown/sy
 `brick: ':forEach'
 dataSource: '<% CTX.list %>'
 children:
-- brick: div
+- brick: tpl-test
   properties:
-    textContent: '<% \`Hello, \${ITEM}\` %>'`
+    who: '<% ITEM %>'`
       },
       {
         name: "Context",
@@ -30,6 +30,40 @@ children:
   value:
   - boys
   - girls`
+      },
+      {
+        name: "Functions",
+        code:
+`- name: sayHello
+  source: |
+    function sayHello(name, suffix) {
+      return \`\${I18N('HELLO')}, \${name}\${suffix ?? ''}\`;
+    }`
+      },
+      {
+        name: "Templates",
+        code:
+`- name: tpl-test
+  state:
+  - name: who
+    expose: true
+  bricks:
+  - brick: div
+    properties:
+      textContent: |
+        <%
+          "track state",
+          FN.sayHello(STATE.who)
+        %>`
+      },
+      {
+        name: "I18N",
+        code:
+`zh:
+  HELLO: 你好
+en:
+  HELLO: Hello
+`
       }
     ]} />
 
