@@ -123,3 +123,25 @@ html[data-theme='dark'] .buttonToggleShowMore {
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
 }
+
+@media (min-width: 1740px) {
+  :global(.theme-doc-toc-desktop) {
+    transform: translate(40px, 0);
+  }
+
+  .example {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+}
+
+@media (min-width: 1900px) {
+  :global(.theme-doc-toc-desktop) {
+    transform: translate(80px, 0);
+  }
+
+  .example {
+    margin-left: -80px;
+    margin-right: -80px;
+  }
+}
