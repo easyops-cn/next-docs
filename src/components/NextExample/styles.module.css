@@ -102,14 +102,24 @@
   gap: 6px;
 }
 
-html[data-theme='dark'] .example {
-  background-color: transparent;
+.unExpandable :global(.monaco-editor) {
+  border-bottom-left-radius: var(--ifm-code-border-radius);
 }
 
-html[data-theme='dark'] .tabs {
-  background-color: #343a46;
+.unExpandable :global(.monaco-editor) :global(.overflow-guard) {
+  border-bottom-left-radius: inherit;
+}
+
+html[data-theme='dark'] .example {
+  background-color: var(--ifm-color-emphasis-200);
 }
 
 html[data-theme='dark'] .previewColumn {
   background-color: var(--ifm-color-emphasis-100);
+}
+
+html[data-theme='dark'] .buttonToggleShowMore {
+  background-color: var(--ifm-color-emphasis-200);
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 }

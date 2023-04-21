@@ -2,7 +2,6 @@ import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useRef } fr
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { EDITOR_SCROLLBAR_SIZE, EDITOR_PADDING_TOP, EXAMPLE_CODE_LINE_HEIGHT } from '@site/src/constants';
 import "./register";
-import styles from "./styles.module.css";
 
 export interface MonacoEditorWorkspaceProps {
   files: FileInfo[];
@@ -90,7 +89,6 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
             top: EDITOR_PADDING_TOP,
           },
           overviewRulerBorder: false,
-          extraEditorClassName: styles.editor,
           mouseWheelScrollSensitivity: 0.5,
         }
       );

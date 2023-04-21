@@ -1,7 +1,0 @@
-.editor {
-  border-bottom-left-radius: var(--ifm-code-border-radius);
-}
-
-.editor :global(.overflow-guard) {
-  border-bottom-left-radius: inherit;
-}

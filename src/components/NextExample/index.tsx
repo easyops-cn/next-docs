@@ -114,7 +114,7 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
   };
 
   return (
-    <div className={styles.example} ref={containerRef}>
+    <div className={clsx(styles.example, {[styles.unExpandable]: !overflowed})} ref={containerRef}>
       <div className={styles.tabs}>
         {
           files.map(file => (
