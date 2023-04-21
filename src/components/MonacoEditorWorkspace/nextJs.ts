@@ -58,6 +58,7 @@ export const language = <monaco.languages.IMonarchLanguage>{
 		'of'
 	],
 	typeKeywords: [],
+	controlKeywords: tsLanguage.controlKeywords.filter(k => k !== 'as'),
 
 	operators: tsLanguage.operators,
 	symbols: tsLanguage.symbols,

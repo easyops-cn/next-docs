@@ -2,8 +2,6 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const path = require('path');
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
 const CopyPlugin = require('copy-webpack-plugin');
 const { createHash } = require("crypto");
 const MonacoEditorWebpackPlugin = require('monaco-editor-webpack-plugin');
@@ -168,10 +166,7 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
-      prism: {
-        // theme: lightCodeTheme,
-        // darkTheme: darkCodeTheme,
-      },
+      prism: {},
     }),
   
   plugins: [
@@ -219,7 +214,7 @@ const config = {
             }),
             new EmitBootstrapJsonPlugin(),
             new MonacoEditorWebpackPlugin({
-              languages: ['javascript', 'typescript', 'yaml'],
+              languages: [/* 'javascript', 'typescript', 'yaml' */],
               features: [
                 '!accessibilityHelp',
                 '!codelens',

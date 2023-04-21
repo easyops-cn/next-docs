@@ -159,6 +159,38 @@ export const language = {
 		'of'
 	],
 
+    controlKeywords: [
+		'break',
+		'continue',
+		'return',
+	  
+		'if',
+		'else',
+		'switch',
+		'case',
+		'default',
+	  
+		'do',
+		'for',
+		'while',
+	  
+		'try',
+		'throw',
+		'catch',
+		'finally',
+	  
+		'as',
+	  
+		'import',
+		'export',
+		'from',
+		// 'type',
+		'await',
+		'yield',
+		'with',
+		'package',
+    ],
+
 	operators: [
 		'<=',
 		'>=',
@@ -226,6 +258,7 @@ export const language = {
 				/[a-z_$][\w$]*/,
 				{
 					cases: {
+						'@controlKeywords': 'keyword.flow',
 						'@keywords': 'keyword',
 						'@default': 'identifier'
 					}
