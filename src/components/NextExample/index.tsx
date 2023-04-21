@@ -9,6 +9,7 @@ import { EDITOR_PADDING_TOP, EDITOR_SCROLLBAR_SIZE, EXAMPLE_CODE_LINE_HEIGHT, EX
 import ChevronUp from "./chevron-up.svg";
 import ChevronDown from "./chevron-Down.svg";
 import type { default as MonacoEditorWorkspaceType, FileInfo, MonacoEditorWorkspaceRef } from '../MonacoEditorWorkspace';
+import LoadingRing from '../LoadingRing';
 import styles from './styles.module.css';
 
 export interface NextExampleProps {
@@ -125,7 +126,7 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
       </div>
       <div className={styles.editorAndPreview}>
         <div className={styles.editorColumn} style={columnStyle}>
-          <BrowserOnly fallback={<div>Loading...</div>}>
+          <BrowserOnly fallback={<LoadingRing />}>
             {() => {
               const MonacoEditorWorkspace = require("../MonacoEditorWorkspace").default as typeof MonacoEditorWorkspaceType;
               return (
@@ -137,14 +138,15 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
                   onChange={handleCodeChange}
                   ref={editorRef}
                 />
-              )
+              );
             }}
           </BrowserOnly>
         </div>
         <div className={clsx(styles.previewColumn, expanded ? styles.showMore : styles.showLess)} style={columnStyle}>
-          <div className={styles.preview}>
+          <div className={clsx(styles.preview, { [styles.ready]: ready })}>
             <iframe ref={iframeRef} src={previewSrc} onLoad={handleIframeLoad} style={{height: iframeHeight}} />
           </div>
+          { !ready && <LoadingRing /> }
         </div>
       </div>
       {

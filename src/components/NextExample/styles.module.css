@@ -13,6 +13,7 @@
 .previewColumn {
   flex: 50%;
   min-width: 0;
+  position: relative;
 }
 
 .editorContainer {
@@ -29,6 +30,11 @@
   box-shadow: var(--ifm-global-shadow-lw);
   border-radius: var(--ifm-code-border-radius);
   overflow: hidden;
+  visibility: hidden;
+}
+
+.ready {
+  visibility: visible;
 }
 
 .showMore .preview {
