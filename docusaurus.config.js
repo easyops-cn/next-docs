@@ -214,7 +214,7 @@ const config = {
             }),
             new EmitBootstrapJsonPlugin(),
             new MonacoEditorWebpackPlugin({
-              languages: [/* 'javascript', 'typescript', 'yaml' */],
+              languages: ['javascript', 'typescript'/* , 'yaml' */],
               features: [
                 '!accessibilityHelp',
                 '!codelens',
@@ -227,6 +227,7 @@ const config = {
                 '!links',
                 '!inlayHints',
                 '!documentSymbols',
+                '!browser',
               ],
               filename: `workers/[name].[contenthash:8].worker.js`,
             }),

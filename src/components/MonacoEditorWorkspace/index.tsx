@@ -26,6 +26,15 @@ function uniqueId(prefix: string) {
   return `${prefix}${++count}`;
 }
 
+monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+  allowNonTsExtensions: true,
+  lib: [],
+});
+monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+  allowNonTsExtensions: true,
+  lib: [],
+});
+
 export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(function MonacoEditorWorkspace({
   files,
   currentFile,
