@@ -87,7 +87,7 @@ export const language = <monaco.languages.IMonarchLanguage>{
 			[/@numberDate(?![ \t]*\S+)/, 'number.date'],
 
 			// Key:Value pair
-			[/(".*?"|'.*?'|[^#'"]*?)([ \t]*)(:)( |$)/, ['type', 'white', 'operators', 'white']],
+			[/(".*?"|'.*?'|[^#'"]*?)([ \t]*)(:)( |$)/, ['tag', 'white', 'operators', 'white']],
 
 			{ include: '@flowScalars' },
 			{ include: '@flowExpression' },
@@ -119,7 +119,7 @@ export const language = <monaco.languages.IMonarchLanguage>{
 			[/:(?= )/, 'operators'],
 
 			// Flow Mapping Key:Value key
-			[/(?:".*?"|'.*?'|[^,\{\[]+?)(?=: )/, 'type'],
+			[/(?:".*?"|'.*?'|[^,\{\[]+?)(?=: )/, 'tag'],
 
 			// Start Flow Style
 			{ include: '@flowCollections' },

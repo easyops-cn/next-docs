@@ -3,12 +3,12 @@
 
 const path = require('path');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
 const CopyPlugin = require('copy-webpack-plugin');
 const { createHash } = require("crypto");
 const MonacoEditorWebpackPlugin = require('monaco-editor-webpack-plugin');
 
-const baseUrl = '/';
+const baseUrl = '/next-docs/';
 const brickPackages = ['@next-bricks/shoelace', '@next-bricks/basic'];
 
 const bootstrapJson = {
@@ -169,8 +169,8 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        // theme: lightCodeTheme,
+        // darkTheme: darkCodeTheme,
       },
     }),
   
@@ -181,6 +181,11 @@ const config = {
         const previewDir = path.join(require.resolve('@next-core/brick-playground/package.json'), '../dist-preview');
         return {
           mergeStrategy: {'module.rules': 'prepend'},
+          devServer: {
+            client: {
+              overlay: false,
+            }
+          },
           module: {
             rules: [{
               test: /\.yaml/,
@@ -223,6 +228,10 @@ const config = {
                 '!fontZoom',
                 '!iPadShowKeyboard',
                 '!inspectTokens',
+                '!stickyScroll',
+                '!links',
+                '!inlayHints',
+                '!documentSymbols',
               ],
               filename: `workers/[name].[contenthash:8].worker.js`,
             }),
@@ -239,4 +248,14 @@ function getContentHash(content) {
   return hash.digest("hex").slice(0, 8);
 }
 
-module.exports = config;
+async function createConfig() {
+  const lightCodeTheme = (await import('./src/utils/prismLight.mjs')).default;
+  const darkCodeTheme = (await import('./src/utils/prismDark.mjs')).default;
+  config.themeConfig.prism.theme = lightCodeTheme;
+  config.themeConfig.prism.darkTheme = darkCodeTheme;
+  return config;
+}
+
+module.exports = createConfig;
+
+// module.exports = config;

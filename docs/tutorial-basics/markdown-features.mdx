@@ -9,6 +9,23 @@ import WeatherApp from "@site/src/examples/weather-app";
 
 Docusaurus supports **[Markdown](https://daringfireball.net/projects/markdown/syntax)** and a few **additional features**.
 
+## Examples
+
+```javascript
+function abc() {
+  const abc = 1 || true | null;
+  call(abc);
+  return String("def");
+}
+```
+
+```yaml title="Bricks"
+brick: ':forEach'
+dataSource: '<% CTX.list %>'
+children:
+- brick: 'tpl-test'
+```
+
 ### Control Nodes
 
 <NextExample files={[
@@ -36,13 +53,13 @@ children:
   - girls`
       },
       {
-        name: "Functions",
+        name: "Functions/sayHello.js",
+        lang: "javascript",
         code:
-`- name: sayHello
-  source: |
-    function sayHello(name, suffix) {
-      return \`\${I18N('HELLO')}, \${name}\${suffix ?? ''}\`;
-    }`
+`function sayHello(name, suffix) {
+  return \`\${I18N('HELLO')}, \${name}\${suffix ?? ''}\`;
+}
+`
       },
       {
         name: "Templates",

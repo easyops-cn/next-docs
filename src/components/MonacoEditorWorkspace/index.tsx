@@ -1,6 +1,8 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import { EDITOR_SCROLLBAR_SIZE, EDITOR_PADDING_TOP, EXAMPLE_CODE_LINE_HEIGHT } from '@site/src/constants';
 import "./register";
+import styles from "./styles.module.css";
 
 export interface MonacoEditorWorkspaceProps {
   files: FileInfo[];
@@ -16,18 +18,22 @@ export interface FileInfo {
   lang?: string;
 }
 
+export interface MonacoEditorWorkspaceRef {
+  resetScrollTop(): void;
+}
+
 let count = 0;
 function uniqueId(prefix: string) {
   return `${prefix}${++count}`;
 }
 
-export default function MonacoEditorWorkspace({
+export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(function MonacoEditorWorkspace({
   files,
   currentFile,
   className,
   theme,
   onChange,
-}: MonacoEditorWorkspaceProps): JSX.Element {
+}, ref): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
   const modelsMap = useMemo(() => new Map<string, monaco.editor.ITextModel>(), []);
@@ -71,10 +77,31 @@ export default function MonacoEditorWorkspace({
           tabSize: 2,
           insertSpaces: true,
           automaticLayout: true,
+          fontSize: 13,
+          lineHeight: EXAMPLE_CODE_LINE_HEIGHT,
+          scrollbar: {
+            horizontalScrollbarSize: EDITOR_SCROLLBAR_SIZE,
+            verticalScrollbarSize: EDITOR_SCROLLBAR_SIZE,
+            horizontalSliderSize: 8,
+            verticalSliderSize: 8,
+            alwaysConsumeMouseWheel: false,
+          },
+          padding: {
+            top: EDITOR_PADDING_TOP,
+          },
+          overviewRulerBorder: false,
+          extraEditorClassName: styles.editor,
+          mouseWheelScrollSensitivity: 0.5,
         }
       );
     }
   }, [currentModel]);
+
+  useImperativeHandle(ref, () => ({
+    resetScrollTop() {
+      return editorRef.current.setScrollTop(0, monaco.editor.ScrollType.Immediate);
+    },
+  }), []);
 
   useEffect(() => {
     const listener = currentModel.onDidChangeContent(() => {
@@ -95,4 +122,4 @@ export default function MonacoEditorWorkspace({
   }, []);
 
   return <div ref={containerRef} className={className}></div>
-}
+});
