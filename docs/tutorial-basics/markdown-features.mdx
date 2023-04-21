@@ -21,9 +21,10 @@ function abc() {
 
 ```yaml title="Bricks"
 brick: ':forEach'
-dataSource: '<% CTX.list %>'
+dataSource: <% CTX.list %>
 children:
-- brick: 'tpl-test'
+- brick: tpl-test
+  hidden: true
 ```
 
 ### Control Nodes

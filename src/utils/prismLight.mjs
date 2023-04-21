@@ -27,7 +27,7 @@ export default {
     {
       types: ['boolean', 'rule', 'color', 'number', 'constant', 'property'],
       style: {
-        color: '#005CC5',
+        color: '#0000ff',
       },
     },
     {
@@ -51,7 +51,7 @@ export default {
     {
       types: ['font-matter', 'string', 'attr-value'],
       style: {
-        color: '#C6105F',
+        color: '#0451a5',
       },
     },
     {
