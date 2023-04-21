@@ -1,17 +1,14 @@
 .example {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: var(--ifm-leading);
   box-shadow: var(--ifm-global-shadow-md);
   border-radius: var(--ifm-code-border-radius);
-  background-color: #fffffe;
-}
-
-.editorAndPreview {
-  display: flex;
 }
 
 .editorColumn,
 .previewColumn {
-  flex: 50%;
+  width: 100%;
   min-width: 0;
   position: relative;
 }
@@ -22,8 +19,10 @@
 }
 
 .previewColumn {
-  padding: 32px;
-  border-left: 1px solid var(--ifm-color-emphasis-300);
+  order: 4;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 }
 
 .preview {
@@ -56,6 +55,7 @@
 }
 
 .tabs {
+  width: 100%;
   display: flex;
   border-bottom: 1px solid var(--ifm-color-emphasis-300);
   font-size: var(--ifm-code-font-size);
@@ -94,23 +94,18 @@
 }
 
 .buttonToggleShowMore {
+  width: 100%;
   cursor: pointer;
   border-top: 1px solid var(--ifm-color-emphasis-300);
   padding: 8px 16px;
   display: flex;
   align-items: center;
   gap: 6px;
+  order: 3;
 }
 
-.unExpandable :global(.monaco-editor) {
-  border-bottom-left-radius: var(--ifm-code-border-radius);
-}
-
-.unExpandable :global(.monaco-editor) :global(.overflow-guard) {
-  border-bottom-left-radius: inherit;
-}
-
-html[data-theme='dark'] .example {
+html[data-theme='dark'] .tabs,
+html[data-theme='dark'] .buttonToggleShowMore {
   background-color: var(--ifm-color-emphasis-200);
 }
 
@@ -120,8 +115,42 @@ html[data-theme='dark'] .previewColumn {
 
 html[data-theme='dark'] .buttonToggleShowMore {
   background-color: var(--ifm-color-emphasis-200);
-  border-bottom-left-radius: inherit;
-  border-bottom-right-radius: inherit;
+}
+
+@media (min-width: 1280px) {
+  .editorColumn,
+  .previewColumn {
+    flex: 50%;
+  }
+
+  .buttonToggleShowMore {
+    order: 4;
+  }
+
+  .previewColumn {
+    border-top: 0;
+    border-left: 1px solid var(--ifm-color-emphasis-300);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    order: 3;
+  }
+
+  .unExpandable .previewColumn {
+    border-bottom-right-radius: inherit;
+  }
+
+  .unExpandable :global(.monaco-editor) {
+    border-bottom-left-radius: var(--ifm-code-border-radius);
+  }
+  
+  .unExpandable :global(.monaco-editor) :global(.overflow-guard) {
+    border-bottom-left-radius: inherit;
+  }
+  
+  html[data-theme='dark'] .buttonToggleShowMore {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }  
 }
 
 @media (min-width: 1740px) {

@@ -5,7 +5,7 @@ import { useColorMode } from '@docusaurus/theme-common';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import clsx from 'clsx';
 import useDeferredValue from '@site/src/hooks/useDeferredValue';
-import { EDITOR_PADDING_TOP, EDITOR_SCROLLBAR_SIZE, EXAMPLE_CODE_LINE_HEIGHT, EXAMPLE_HEIGHT_THRESHOLD, EXAMPLE_IFRAME_MARGIN, EXAMPLE_IFRAME_MIN_HEIGHT } from '@site/src/constants';
+import { EDITOR_PADDING_TOP, EDITOR_SCROLLBAR_SIZE, EXAMPLE_CODE_LINE_HEIGHT, EXAMPLE_MAX_HEIGHT, EXAMPLE_IFRAME_MARGIN, EXAMPLE_IFRAME_MIN_HEIGHT, EXAMPLE_MIN_HEIGHT } from '@site/src/constants';
 import ChevronUp from "./chevron-up.svg";
 import ChevronDown from "./chevron-Down.svg";
 import type { default as MonacoEditorWorkspaceType, FileInfo, MonacoEditorWorkspaceRef } from '../MonacoEditorWorkspace';
@@ -108,9 +108,9 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
     }
   }, [expanded]);
 
-  const overflowed = contentMaxHeight > EXAMPLE_HEIGHT_THRESHOLD;
+  const overflowed = contentMaxHeight > EXAMPLE_MAX_HEIGHT;
   const columnStyle = {
-    height: overflowed && !expanded ? EXAMPLE_HEIGHT_THRESHOLD : contentMaxHeight,
+    height: overflowed && !expanded ? EXAMPLE_MAX_HEIGHT : Math.max(contentMaxHeight, EXAMPLE_MIN_HEIGHT),
   };
 
   return (
@@ -124,30 +124,31 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
           ))
         }
       </div>
-      <div className={styles.editorAndPreview}>
-        <div className={styles.editorColumn} style={columnStyle}>
-          <BrowserOnly fallback={<LoadingRing />}>
-            {() => {
-              const MonacoEditorWorkspace = require("../MonacoEditorWorkspace").default as typeof MonacoEditorWorkspaceType;
-              return (
-                <MonacoEditorWorkspace
-                  files={files}
-                  currentFile={currentFile}
-                  theme={colorMode === 'dark' ? 'vs-dark' : 'vs'}
-                  className={styles.editorContainer}
-                  onChange={handleCodeChange}
-                  ref={editorRef}
-                />
-              );
-            }}
-          </BrowserOnly>
+      <div className={styles.editorColumn} style={columnStyle}>
+        <BrowserOnly fallback={<LoadingRing />}>
+          {() => {
+            const MonacoEditorWorkspace = require("../MonacoEditorWorkspace").default as typeof MonacoEditorWorkspaceType;
+            return (
+              <MonacoEditorWorkspace
+                files={files}
+                currentFile={currentFile}
+                theme={colorMode === 'dark' ? 'vs-dark' : 'vs'}
+                className={styles.editorContainer}
+                onChange={handleCodeChange}
+                ref={editorRef}
+              />
+            );
+          }}
+        </BrowserOnly>
+      </div>
+      <div className={clsx(styles.previewColumn, expanded ? styles.showMore : styles.showLess)} style={{
+        maxHeight: overflowed && !expanded ? EXAMPLE_MAX_HEIGHT : "unset",
+        padding: EXAMPLE_IFRAME_MARGIN,
+      }}>
+        <div className={clsx(styles.preview, { [styles.ready]: ready })}>
+          <iframe ref={iframeRef} src={previewSrc} onLoad={handleIframeLoad} style={{height: iframeHeight}} />
         </div>
-        <div className={clsx(styles.previewColumn, expanded ? styles.showMore : styles.showLess)} style={columnStyle}>
-          <div className={clsx(styles.preview, { [styles.ready]: ready })}>
-            <iframe ref={iframeRef} src={previewSrc} onLoad={handleIframeLoad} style={{height: iframeHeight}} />
-          </div>
-          { !ready && <LoadingRing /> }
-        </div>
+        { !ready && <LoadingRing /> }
       </div>
       {
         overflowed && (
@@ -162,7 +163,7 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
 }
 
 function getContentMaxHeight(codeLines: number, iframeHeight: number): number {
-  const previewHeight = iframeHeight + EXAMPLE_IFRAME_MARGIN;
+  const previewHeight = iframeHeight + EXAMPLE_IFRAME_MARGIN * 2;
   const codeHeight = codeLines * EXAMPLE_CODE_LINE_HEIGHT + EDITOR_SCROLLBAR_SIZE + EDITOR_PADDING_TOP;
   return Math.max(previewHeight, codeHeight);
 }
