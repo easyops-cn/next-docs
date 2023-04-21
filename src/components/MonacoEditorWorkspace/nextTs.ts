@@ -70,7 +70,7 @@ export const conf: monaco.languages.LanguageConfiguration = {
 	}
 };
 
-export const language = {
+export const language = <monaco.languages.IMonarchLanguage>{
 	// Set defaultToken to invalid to see what you do not tokenize yet
 	defaultToken: 'invalid',
 	tokenPostfix: '.ts',

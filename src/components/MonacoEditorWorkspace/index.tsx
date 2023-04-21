@@ -44,7 +44,7 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
       const file = files.find(f => f.name === currentFile);
       model = monaco.editor.createModel(
         file.code,
-        file.lang ?? "nextYaml",
+        file.lang ?? "yaml",
         monaco.Uri.file(`${workspace}/${file.name}`)
       );
       modelsMap.set(currentFile, model);
