@@ -1,0 +1,7 @@
+.homeExample {
+  padding: 2rem 0;
+}
+
+.homeExample:nth-of-type(2n) {
+  background-color: var(--ifm-color-emphasis-100);
+}

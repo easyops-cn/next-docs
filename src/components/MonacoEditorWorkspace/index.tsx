@@ -1,6 +1,16 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import { EDITOR_SCROLLBAR_SIZE, EDITOR_PADDING_TOP, EXAMPLE_CODE_LINE_HEIGHT } from '@site/src/constants';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import {
+  EDITOR_SCROLLBAR_SIZE,
+  EDITOR_PADDING_TOP,
+  EXAMPLE_CODE_LINE_HEIGHT,
+} from "@site/src/constants";
 import "./register";
 
 export interface MonacoEditorWorkspaceProps {
@@ -12,10 +22,20 @@ export interface MonacoEditorWorkspaceProps {
 }
 
 export interface FileInfo {
-  name: string;
+  name: ExampleFileName;
   code: string;
   lang?: string;
+  defaultActive?: boolean;
 }
+
+export type ExampleFileName =
+  | "Bricks"
+  | "Context"
+  | "Functions"
+  | "Templates"
+  | "I18N"
+  | `Functions/${string}`
+  | `Templates/${string}`;
 
 export interface MonacoEditorWorkspaceRef {
   resetScrollTop(): void;
@@ -35,47 +55,46 @@ monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
   lib: [],
 });
 
-export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(function MonacoEditorWorkspace({
-  files,
-  currentFile,
-  className,
-  theme,
-  onChange,
-}, ref): JSX.Element {
-  const containerRef = useRef<HTMLDivElement>();
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
-  const modelsMap = useMemo(() => new Map<string, monaco.editor.ITextModel>(), []);
-  const workspace = useMemo(() => uniqueId('workspace/'), []);
+export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
+  function MonacoEditorWorkspace(
+    { files, currentFile, className, theme, onChange },
+    ref
+  ): JSX.Element {
+    const containerRef = useRef<HTMLDivElement>();
+    const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
+    const modelsMap = useMemo(
+      () => new Map<string, monaco.editor.ITextModel>(),
+      []
+    );
+    const workspace = useMemo(() => uniqueId("workspace/"), []);
 
-  const currentModel = useMemo(() => {
-    let model = modelsMap.get(currentFile);
-    if (!model) {
-      const file = files.find(f => f.name === currentFile);
-      model = monaco.editor.createModel(
-        file.code,
-        file.lang ?? "yaml",
-        monaco.Uri.file(`${workspace}/${file.name}`)
-      );
-      modelsMap.set(currentFile, model);
-    }
-    return model;
-  }, [currentFile, modelsMap, files, workspace]);
+    const currentModel = useMemo(() => {
+      let model = modelsMap.get(currentFile);
+      if (!model) {
+        const file = files.find((f) => f.name === currentFile);
+        model = monaco.editor.createModel(
+          file.code,
+          file.lang ?? "yaml",
+          monaco.Uri.file(`${workspace}/${file.name}`)
+        );
+        modelsMap.set(currentFile, model);
+      }
+      return model;
+    }, [currentFile, modelsMap, files, workspace]);
 
-  useEffect(() => {
-    if (theme) {
-      // Currently theme is configured globally.
-      // See https://github.com/microsoft/monaco-editor/issues/338
-      monaco.editor.setTheme(theme);
-    }
-  }, [theme]);
+    useEffect(() => {
+      if (theme) {
+        // Currently theme is configured globally.
+        // See https://github.com/microsoft/monaco-editor/issues/338
+        monaco.editor.setTheme(theme);
+      }
+    }, [theme]);
 
-  useEffect(() => {
-    if (editorRef.current) {
-      editorRef.current.setModel(currentModel);
-    } else {
-      editorRef.current = monaco.editor.create(
-        containerRef.current,
-        {
+    useEffect(() => {
+      if (editorRef.current) {
+        editorRef.current.setModel(currentModel);
+      } else {
+        editorRef.current = monaco.editor.create(containerRef.current, {
           model: currentModel,
           theme,
           minimap: {
@@ -99,34 +118,41 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
           },
           overviewRulerBorder: false,
           mouseWheelScrollSensitivity: 0.5,
-        }
-      );
-    }
-  }, [currentModel]);
-
-  useImperativeHandle(ref, () => ({
-    resetScrollTop() {
-      return editorRef.current.setScrollTop(0, monaco.editor.ScrollType.Immediate);
-    },
-  }), []);
-
-  useEffect(() => {
-    const listener = currentModel.onDidChangeContent(() => {
-      onChange?.(currentModel.getValue(), currentFile);
-    });
-    return () => {
-      listener.dispose();
-    };
-  }, [currentModel, onChange]);
-
-  useEffect(() => {
-    return () => {
-      editorRef.current.dispose();
-      for (const model of modelsMap.values()) {
-        model.dispose();
+        });
       }
-    };
-  }, []);
+    }, [currentModel]);
 
-  return <div ref={containerRef} className={className}></div>
-});
+    useImperativeHandle(
+      ref,
+      () => ({
+        resetScrollTop() {
+          return editorRef.current.setScrollTop(
+            0,
+            monaco.editor.ScrollType.Immediate
+          );
+        },
+      }),
+      []
+    );
+
+    useEffect(() => {
+      const listener = currentModel.onDidChangeContent(() => {
+        onChange?.(currentModel.getValue(), currentFile);
+      });
+      return () => {
+        listener.dispose();
+      };
+    }, [currentModel, onChange]);
+
+    useEffect(() => {
+      return () => {
+        editorRef.current.dispose();
+        for (const model of modelsMap.values()) {
+          model.dispose();
+        }
+      };
+    }, []);
+
+    return <div ref={containerRef} className={className}></div>;
+  }
+);

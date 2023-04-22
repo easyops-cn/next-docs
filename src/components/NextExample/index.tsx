@@ -26,13 +26,9 @@ import styles from "./styles.module.css";
 
 export interface NextExampleProps {
   files: FileInfo[];
-  defaultFile?: string;
 }
 
-export default function NextExample({
-  files,
-  defaultFile,
-}: NextExampleProps): JSX.Element {
+export default function NextExample({ files }: NextExampleProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
   const editorRef = useRef<MonacoEditorWorkspaceRef>();
   const { colorMode } = useColorMode();
@@ -41,7 +37,7 @@ export default function NextExample({
   const [iframeHeight, setIframeHeight] = useState(EXAMPLE_IFRAME_MIN_HEIGHT);
   const [ready, setReady] = useState(false);
   const [currentFile, setCurrentFile] = useState(
-    () => defaultFile ?? files[0].name
+    () => (files.find((f) => f.defaultActive) ?? files[0]).name
   );
   const [codeLines, setCodeLines] = useState(() =>
     getCodeLines(files, currentFile)
