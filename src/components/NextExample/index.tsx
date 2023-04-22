@@ -141,22 +141,22 @@ export default function NextExample({
     }
   }, [expanded]);
 
-  const overflowed = contentMaxHeight > EXAMPLE_MAX_HEIGHT;
+  const expandable = contentMaxHeight > EXAMPLE_MAX_HEIGHT;
   const columnStyle = {
     height:
-      overflowed && !expanded
+      expandable && !expanded
         ? EXAMPLE_MAX_HEIGHT
         : Math.max(contentMaxHeight, EXAMPLE_MIN_HEIGHT),
   };
 
   return (
     <div
-      className={clsx(styles.example, { [styles.unExpandable]: !overflowed })}
+      className={clsx(styles.example, { [styles.expandable]: expandable })}
       ref={containerRef}
     >
       <div className={styles.tabs}>
         {files.map((file) => (
-          <div
+          <button
             className={clsx(styles.tab, {
               [styles.active]: file.name === currentFile,
             })}
@@ -166,7 +166,7 @@ export default function NextExample({
             }}
           >
             {file.name}
-          </div>
+          </button>
         ))}
       </div>
       <div className={styles.editorColumn} style={columnStyle}>
@@ -191,10 +191,10 @@ export default function NextExample({
       <div
         className={clsx(
           styles.previewColumn,
-          expanded ? styles.showMore : styles.showLess
+          expanded ? styles.expanded : styles.collapsed
         )}
         style={{
-          maxHeight: overflowed && !expanded ? EXAMPLE_MAX_HEIGHT : "unset",
+          maxHeight: expandable && !expanded ? EXAMPLE_MAX_HEIGHT : "unset",
           padding: EXAMPLE_IFRAME_MARGIN,
         }}
       >
@@ -208,15 +208,15 @@ export default function NextExample({
         </div>
         {!ready && <LoadingRing />}
       </div>
-      {overflowed && (
-        <div
+      {expandable && (
+        <button
           className={styles.buttonToggleShowMore}
           role="button"
           onClick={toggleShowMore}
         >
           {expanded ? <ChevronUp /> : <ChevronDown />}
           <span>{expanded ? "Show less" : "Show more"}</span>
-        </div>
+        </button>
       )}
     </div>
   );

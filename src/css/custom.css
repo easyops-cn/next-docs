@@ -17,7 +17,7 @@
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #368aff;
   --ifm-color-primary-dark: #1778ff;
   --ifm-color-primary-darker: #086fff;
@@ -28,9 +28,9 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --ifm-background-color: #29292d;
-  --ifm-navbar-shadow: 0 0 2px 0 rgba(255,255,255,0.3);
+  --ifm-navbar-shadow: 0 0 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 html:not([data-theme="dark"]) .theme-code-block-highlighted-line {
@@ -41,4 +41,24 @@ html:not([data-theme="dark"]) .theme-code-block-highlighted-line {
 html[data-theme="dark"] .theme-code-block-highlighted-line {
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: inset 3px 0 var(--ifm-color-primary-darkest);
+}
+
+button {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+[role="button"],
+button {
+  cursor: pointer;
 }
