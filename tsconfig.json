@@ -3,6 +3,9 @@
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "ES2015"
-  }
+    "target": "ESNext",
+    "strictNullChecks": false
+  },
+  "include": ["src"],
+  "exclude": ["**/*.js"]
 }

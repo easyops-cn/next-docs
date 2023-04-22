@@ -1,40 +1,63 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { flushSync } from 'react-dom';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import { useColorMode } from '@docusaurus/theme-common';
-import BrowserOnly from '@docusaurus/BrowserOnly';
-import clsx from 'clsx';
-import useDeferredValue from '@site/src/hooks/useDeferredValue';
-import { EDITOR_PADDING_TOP, EDITOR_SCROLLBAR_SIZE, EXAMPLE_CODE_LINE_HEIGHT, EXAMPLE_MAX_HEIGHT, EXAMPLE_IFRAME_MARGIN, EXAMPLE_IFRAME_MIN_HEIGHT, EXAMPLE_MIN_HEIGHT } from '@site/src/constants';
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { useColorMode } from "@docusaurus/theme-common";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+import clsx from "clsx";
+import useDeferredValue from "@site/src/hooks/useDeferredValue";
+import {
+  EDITOR_PADDING_TOP,
+  EDITOR_SCROLLBAR_SIZE,
+  EXAMPLE_CODE_LINE_HEIGHT,
+  EXAMPLE_MAX_HEIGHT,
+  EXAMPLE_IFRAME_MARGIN,
+  EXAMPLE_IFRAME_MIN_HEIGHT,
+  EXAMPLE_MIN_HEIGHT,
+} from "@site/src/constants";
 import ChevronUp from "./chevron-up.svg";
 import ChevronDown from "./chevron-Down.svg";
-import type { default as MonacoEditorWorkspaceType, FileInfo, MonacoEditorWorkspaceRef } from '../MonacoEditorWorkspace';
-import LoadingRing from '../LoadingRing';
-import styles from './styles.module.css';
+import type {
+  default as MonacoEditorWorkspaceType,
+  FileInfo,
+  MonacoEditorWorkspaceRef,
+} from "../MonacoEditorWorkspace";
+import LoadingRing from "../LoadingRing";
+import styles from "./styles.module.css";
 
 export interface NextExampleProps {
   files: FileInfo[];
   defaultFile?: string;
 }
 
-export default function NextExample({ files, defaultFile }: NextExampleProps): JSX.Element {
+export default function NextExample({
+  files,
+  defaultFile,
+}: NextExampleProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
   const editorRef = useRef<MonacoEditorWorkspaceRef>();
-  const {colorMode} = useColorMode();
-  const previewSrc = useBaseUrl('/preview/');
+  const { colorMode } = useColorMode();
+  const previewSrc = useBaseUrl("/preview/");
   const iframeRef = useRef<HTMLIFrameElement>();
   const [iframeHeight, setIframeHeight] = useState(EXAMPLE_IFRAME_MIN_HEIGHT);
   const [ready, setReady] = useState(false);
-  const [currentFile, setCurrentFile] = useState(() => defaultFile ?? files[0].name);
-  const [codeLines, setCodeLines] = useState(() => getCodeLines(files, currentFile));
-  const [contentMaxHeight, setContentMaxHeight] = useState(() => getContentMaxHeight(codeLines, iframeHeight));
+  const [currentFile, setCurrentFile] = useState(
+    () => defaultFile ?? files[0].name
+  );
+  const [codeLines, setCodeLines] = useState(() =>
+    getCodeLines(files, currentFile)
+  );
+  const [contentMaxHeight, setContentMaxHeight] = useState(() =>
+    getContentMaxHeight(codeLines, iframeHeight)
+  );
   const [expanded, setExpanded] = useState(false);
 
   const handleIframeLoad = useCallback(() => {
     setReady(true);
   }, []);
 
-  const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() => Object.fromEntries(files.map(f => [f.name, f.code])));
+  const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>
+    Object.fromEntries(files.map((f) => [f.name, f.code]))
+  );
 
   const deferredFiles = useDeferredValue(codeByFile);
 
@@ -64,11 +87,16 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
     }
     const ro = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        setIframeHeight(Math.max(EXAMPLE_IFRAME_MIN_HEIGHT, entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height));
+        setIframeHeight(
+          Math.max(
+            EXAMPLE_IFRAME_MIN_HEIGHT,
+            entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height
+          )
+        );
       }
     });
     ro.observe(iframeRef.current.contentDocument.body, {
-      box: "border-box"
+      box: "border-box",
     });
     return () => {
       ro.disconnect();
@@ -98,41 +126,60 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
     });
     if (!nextExpanded) {
       editorRef.current.resetScrollTop();
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       if (containerRef.current.scrollIntoViewIfNeeded) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         containerRef.current.scrollIntoViewIfNeeded();
       } else {
-        containerRef.current.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        containerRef.current.scrollIntoView({
+          block: "nearest",
+          inline: "nearest",
+        });
       }
     }
   }, [expanded]);
 
   const overflowed = contentMaxHeight > EXAMPLE_MAX_HEIGHT;
   const columnStyle = {
-    height: overflowed && !expanded ? EXAMPLE_MAX_HEIGHT : Math.max(contentMaxHeight, EXAMPLE_MIN_HEIGHT),
+    height:
+      overflowed && !expanded
+        ? EXAMPLE_MAX_HEIGHT
+        : Math.max(contentMaxHeight, EXAMPLE_MIN_HEIGHT),
   };
 
   return (
-    <div className={clsx(styles.example, {[styles.unExpandable]: !overflowed})} ref={containerRef}>
+    <div
+      className={clsx(styles.example, { [styles.unExpandable]: !overflowed })}
+      ref={containerRef}
+    >
       <div className={styles.tabs}>
-        {
-          files.map(file => (
-            <div className={clsx(styles.tab, {[styles.active]: file.name === currentFile})} key={file.name} onClick={() => {
+        {files.map((file) => (
+          <div
+            className={clsx(styles.tab, {
+              [styles.active]: file.name === currentFile,
+            })}
+            key={file.name}
+            onClick={() => {
               setCurrentFile(file.name);
-            }}>{file.name}</div>
-          ))
-        }
+            }}
+          >
+            {file.name}
+          </div>
+        ))}
       </div>
       <div className={styles.editorColumn} style={columnStyle}>
         <BrowserOnly fallback={<LoadingRing />}>
           {() => {
-            const MonacoEditorWorkspace = require("../MonacoEditorWorkspace").default as typeof MonacoEditorWorkspaceType;
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            const MonacoEditorWorkspace = require("../MonacoEditorWorkspace")
+              .default as typeof MonacoEditorWorkspaceType;
             return (
               <MonacoEditorWorkspace
                 files={files}
                 currentFile={currentFile}
-                theme={colorMode === 'dark' ? 'vs-dark' : 'vs'}
+                theme={colorMode === "dark" ? "vs-dark" : "vs"}
                 className={styles.editorContainer}
                 onChange={handleCodeChange}
                 ref={editorRef}
@@ -141,35 +188,52 @@ export default function NextExample({ files, defaultFile }: NextExampleProps): J
           }}
         </BrowserOnly>
       </div>
-      <div className={clsx(styles.previewColumn, expanded ? styles.showMore : styles.showLess)} style={{
-        maxHeight: overflowed && !expanded ? EXAMPLE_MAX_HEIGHT : "unset",
-        padding: EXAMPLE_IFRAME_MARGIN,
-      }}>
+      <div
+        className={clsx(
+          styles.previewColumn,
+          expanded ? styles.showMore : styles.showLess
+        )}
+        style={{
+          maxHeight: overflowed && !expanded ? EXAMPLE_MAX_HEIGHT : "unset",
+          padding: EXAMPLE_IFRAME_MARGIN,
+        }}
+      >
         <div className={clsx(styles.preview, { [styles.ready]: ready })}>
-          <iframe ref={iframeRef} src={previewSrc} onLoad={handleIframeLoad} style={{height: iframeHeight}} />
+          <iframe
+            ref={iframeRef}
+            src={previewSrc}
+            onLoad={handleIframeLoad}
+            style={{ height: iframeHeight }}
+          />
         </div>
-        { !ready && <LoadingRing /> }
+        {!ready && <LoadingRing />}
       </div>
-      {
-        overflowed && (
-          <div className={styles.buttonToggleShowMore} role="button" onClick={toggleShowMore}>
-            { expanded ? <ChevronUp /> : <ChevronDown /> }
-            <span>{ expanded ? "Show less" : "Show more" }</span>
-          </div>
-        )
-      }
+      {overflowed && (
+        <div
+          className={styles.buttonToggleShowMore}
+          role="button"
+          onClick={toggleShowMore}
+        >
+          {expanded ? <ChevronUp /> : <ChevronDown />}
+          <span>{expanded ? "Show less" : "Show more"}</span>
+        </div>
+      )}
     </div>
   );
 }
 
 function getContentMaxHeight(codeLines: number, iframeHeight: number): number {
   const previewHeight = iframeHeight + EXAMPLE_IFRAME_MARGIN * 2;
-  const codeHeight = codeLines * EXAMPLE_CODE_LINE_HEIGHT + EDITOR_SCROLLBAR_SIZE + EDITOR_PADDING_TOP;
+  const codeHeight =
+    codeLines * EXAMPLE_CODE_LINE_HEIGHT +
+    EDITOR_SCROLLBAR_SIZE +
+    EDITOR_PADDING_TOP;
   return Math.max(previewHeight, codeHeight);
 }
 
 function getCodeLines(files: FileInfo[], currentFile: string): number {
-  return files.find(file => file.name === currentFile).code.split("\n").length;
+  return files.find((file) => file.name === currentFile).code.split("\n")
+    .length;
 }
 
 interface StoryboardFunction {
