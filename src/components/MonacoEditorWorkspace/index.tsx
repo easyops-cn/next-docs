@@ -11,6 +11,7 @@ import {
   EDITOR_PADDING_TOP,
   EXAMPLE_CODE_LINE_HEIGHT,
 } from "@site/src/constants";
+import type { FileInfo } from "@site/src/interfaces";
 import "./register";
 
 export interface MonacoEditorWorkspaceProps {
@@ -20,22 +21,6 @@ export interface MonacoEditorWorkspaceProps {
   className?: string;
   onChange?(value: string, filename: string): void;
 }
-
-export interface FileInfo {
-  name: ExampleFileName;
-  code: string;
-  lang?: string;
-  defaultActive?: boolean;
-}
-
-export type ExampleFileName =
-  | "Bricks"
-  | "Context"
-  | "Functions"
-  | "Templates"
-  | "I18N"
-  | `Functions/${string}`
-  | `Templates/${string}`;
 
 export interface MonacoEditorWorkspaceRef {
   resetScrollTop(): void;

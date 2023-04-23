@@ -14,13 +14,10 @@ import {
   EXAMPLE_IFRAME_MIN_HEIGHT,
   EXAMPLE_MIN_HEIGHT,
 } from "@site/src/constants";
+import type { FileInfo } from "@site/src/interfaces";
 import ChevronUp from "./chevron-up.svg";
 import ChevronDown from "./chevron-down.svg";
-import type {
-  default as MonacoEditorWorkspaceType,
-  FileInfo,
-  MonacoEditorWorkspaceRef,
-} from "../MonacoEditorWorkspace";
+import type { MonacoEditorWorkspaceRef } from "../MonacoEditorWorkspace";
 import LoadingRing from "../LoadingRing";
 import styles from "./styles.module.css";
 
@@ -136,7 +133,7 @@ export default function NextExample({
       setExpanded(nextExpanded);
     });
     if (!nextExpanded) {
-      editorRef.current.resetScrollTop();
+      editorRef.current?.resetScrollTop();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       if (containerRef.current.scrollIntoViewIfNeeded) {
@@ -185,9 +182,21 @@ export default function NextExample({
       <div className={styles.editorColumn} style={columnStyle}>
         <BrowserOnly fallback={<LoadingRing />}>
           {() => {
+            const isMobile = !!navigator.maxTouchPoints;
+            if (isMobile) {
+              const SimpleEditorWorkspace =
+                require("../SimpleEditorWorkspace").default;
+              return (
+                <SimpleEditorWorkspace
+                  files={files}
+                  currentFile={currentFile}
+                  onChange={handleCodeChange}
+                />
+              );
+            }
             // eslint-disable-next-line @typescript-eslint/no-var-requires
-            const MonacoEditorWorkspace = require("../MonacoEditorWorkspace")
-              .default as typeof MonacoEditorWorkspaceType;
+            const MonacoEditorWorkspace =
+              require("../MonacoEditorWorkspace").default;
             return (
               <MonacoEditorWorkspace
                 files={files}
