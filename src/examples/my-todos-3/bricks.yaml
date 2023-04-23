@@ -1,0 +1,37 @@
+- brick: sl-card
+  children:
+  - brick: strong
+    slot: header
+    properties:
+      textContent: My Todos
+  - brick: ':forEach'
+    dataSource: <% "track context", CTX.todos %>
+    children:
+    - brick: sl-checkbox
+      properties:
+        textContent: <% ITEM %>
+        value: <% ITEM %>
+      events:
+        sl-change:
+        - action: context.replace
+          args:
+          - todos
+          - <% CTX.todos.filter(t => t !== EVENT.target.value) %>
+        - action: context.replace
+          args:
+          - done
+          - <% CTX.done.concat(EVENT.target.value) %>
+- brick: sl-card
+  children:
+  - brick: strong
+    slot: header
+    properties:
+      textContent: Done
+  - brick: ':forEach'
+    dataSource: <% "track context", CTX.done %>
+    children:
+    - brick: sl-checkbox
+      properties:
+        textContent: <% ITEM %>
+        disabled: true
+        checked: true

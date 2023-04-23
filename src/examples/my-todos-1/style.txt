@@ -1,0 +1,19 @@
+#preview-root {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+}
+
+sl-card {
+  display: block;
+  min-width: 200px;
+  max-width: 300px;
+  flex: 1;
+}
+
+sl-card::part(body) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}

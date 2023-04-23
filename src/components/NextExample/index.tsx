@@ -26,9 +26,13 @@ import styles from "./styles.module.css";
 
 export interface NextExampleProps {
   files: FileInfo[];
+  style?: string;
 }
 
-export default function NextExample({ files }: NextExampleProps): JSX.Element {
+export default function NextExample({
+  files,
+  style,
+}: NextExampleProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
   const editorRef = useRef<MonacoEditorWorkspaceRef>();
   const { colorMode } = useColorMode();
@@ -73,9 +77,10 @@ export default function NextExample({ files }: NextExampleProps): JSX.Element {
         functions: normalized.Functions,
         templates: normalized.Templates,
         i18n: normalized.I18N,
+        style,
       }
     );
-  }, [ready, colorMode, deferredFiles]);
+  }, [ready, colorMode, deferredFiles, style]);
 
   useEffect(() => {
     if (!ready) {

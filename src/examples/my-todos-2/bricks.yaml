@@ -1,0 +1,12 @@
+brick: sl-card
+children:
+- brick: strong
+  slot: header
+  properties:
+    textContent: My Todos
+- brick: ':forEach'
+  dataSource: <% CTX.todos %>
+  children:
+  - brick: sl-checkbox
+    properties:
+      textContent: <% ITEM %>

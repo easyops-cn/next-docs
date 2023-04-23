@@ -3,7 +3,7 @@ sidebar_position: 4
 ---
 
 import NextExample from "@site/src/components/NextExample";
-import WeatherApp from "@site/src/examples/weather-app";
+import * as WeatherApp from "@site/src/examples/weather-app";
 
 # Markdown Features
 
@@ -91,7 +91,7 @@ en:
 
 ### Weather App
 
-<NextExample files={WeatherApp} />
+<NextExample {...WeatherApp} />
 
 ## Front Matter
 

@@ -6,6 +6,7 @@
   margin-bottom: var(--ifm-leading);
   box-shadow: var(--ifm-global-shadow-md);
   border-radius: var(--ifm-code-border-radius);
+  background-color: #fffffe;
 }
 
 .editorColumn,
@@ -107,6 +108,7 @@
 
 html[data-theme="dark"] .example {
   --row-border-color: rgb(48 47 57);
+  background-color: transparent;
 }
 
 html[data-theme="dark"] .tabs,
