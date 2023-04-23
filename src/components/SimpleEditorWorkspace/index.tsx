@@ -1,12 +1,13 @@
-import React, { useCallback } from "react";
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-yaml";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
-import "prismjs/themes/prism.css";
-import { EXAMPLE_CODE_LINE_HEIGHT } from "@site/src/constants";
+import React from "react";
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import { usePrismTheme } from "@docusaurus/theme-common";
+import {
+  EXAMPLE_CODE_LINE_HEIGHT,
+  EDITOR_PADDING_TOP,
+  EDITOR_SCROLLBAR_SIZE,
+} from "@site/src/constants";
 import type { FileInfo } from "@site/src/interfaces";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 export interface SimpleEditorWorkspaceProps {
@@ -14,36 +15,44 @@ export interface SimpleEditorWorkspaceProps {
   currentFile: string;
   theme?: string;
   className?: string;
-  onChange?(value: string, filename: string): void;
 }
 
 export default function SimpleEditorWorkspace({
   files,
   currentFile,
-  onChange,
+  className: classNameProp,
 }: SimpleEditorWorkspaceProps): JSX.Element {
+  const prismTheme = usePrismTheme();
   const file = files.find((file) => file.name === currentFile);
 
-  const handleCodeChange = useCallback(
-    (code: string) => {
-      onChange?.(code, currentFile);
-    },
-    [currentFile, onChange]
-  );
-
   return (
-    <Editor
-      value={file.code}
-      onValueChange={handleCodeChange}
-      highlight={(code) => highlight(code, languages[file.lang ?? "yaml"])}
-      padding={16}
-      textareaClassName={styles.codeTextarea}
-      preClassName={styles.codePre}
-      style={{
-        fontFamily: "var(--ifm-font-family-monospace)",
-        fontSize: 13,
-        lineHeight: `${EXAMPLE_CODE_LINE_HEIGHT}px`,
-      }}
-    />
+    <Highlight
+      {...defaultProps}
+      theme={prismTheme}
+      code={file.code}
+      language={(file.lang ?? "yaml") as Language}
+    >
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre
+          className={clsx(className, classNameProp, styles.editor)}
+          style={{
+            ...style,
+            lineHeight: `${EXAMPLE_CODE_LINE_HEIGHT}px`,
+            paddingTop: EDITOR_PADDING_TOP,
+            paddingBottom: EDITOR_SCROLLBAR_SIZE,
+          }}
+        >
+          {tokens.map((line, i) => (
+            // eslint-disable-next-line react/jsx-key
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                // eslint-disable-next-line react/jsx-key
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
   );
 }

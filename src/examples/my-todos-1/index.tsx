@@ -1,5 +1,5 @@
 import React from "react";
-import { FileInfo } from "@site/src/components/MonacoEditorWorkspace";
+import type { FileInfo } from "@site/src/interfaces";
 import Bricks from "./bricks.yaml";
 import styleText from "./style.txt";
 

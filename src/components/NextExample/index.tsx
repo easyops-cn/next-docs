@@ -190,6 +190,7 @@ export default function NextExample({
                 <SimpleEditorWorkspace
                   files={files}
                   currentFile={currentFile}
+                  className={styles.editorContainer}
                   onChange={handleCodeChange}
                 />
               );

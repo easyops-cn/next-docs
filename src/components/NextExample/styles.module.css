@@ -152,6 +152,7 @@ html[data-theme="dark"] .previewColumn {
     border-bottom-right-radius: 0;
   }
 
+  .example:not(.expandable) :global(.prism-code),
   .example:not(.expandable) :global(.monaco-editor) {
     border-bottom-left-radius: var(--example-border-radius);
   }

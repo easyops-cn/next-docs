@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "@docusaurus/Link";
 import clsx from "clsx";
-import type { FileInfo } from "../MonacoEditorWorkspace";
+import type { FileInfo } from "../../interfaces";
 import NextExample from "../NextExample";
 import * as MyTodos1 from "../../examples/my-todos-1";
 import * as MyTodos2 from "../../examples/my-todos-2";

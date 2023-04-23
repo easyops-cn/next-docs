@@ -1,4 +1,4 @@
-import { FileInfo } from "@site/src/components/MonacoEditorWorkspace";
+import type { FileInfo } from "@site/src/interfaces";
 import Bricks from "./bricks.yaml";
 import Context from "./context.yaml";
 import TplSelectCity from "./tpl-select-city.yaml";
