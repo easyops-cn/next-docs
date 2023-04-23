@@ -50,7 +50,7 @@ class EmitBootstrapJsonPlugin {
 const config = {
   title: "Brick Next",
   tagline: "A low-code engine library based on Web Components",
-  favicon: "img/favicon.ico",
+  favicon: "img/favicon.png",
 
   // Set the production url of your site here
   url: "https://your-docusaurus-test-site.com",
