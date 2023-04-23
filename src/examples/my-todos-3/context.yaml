@@ -1,8 +1,0 @@
-- name: todos
-  value:
-  - Have launch
-  - More hard work
-  - Go on vacation
-- name: done
-  value:
-  - Hard work

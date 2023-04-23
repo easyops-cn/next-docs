@@ -53,6 +53,11 @@ export default function NextExample({
 
   const handleIframeLoad = useCallback(() => {
     setReady(true);
+    const { contentWindow } = iframeRef.current;
+    contentWindow.customElements.define(
+      "grid-layout",
+      class extends (contentWindow as any).HTMLElement {}
+    );
   }, []);
 
   const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>

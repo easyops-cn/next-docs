@@ -1,19 +1,21 @@
+- name: cities
+  value:
+  - Shenzhen
+  - Beijing
+  - Tokyo
+  - Los Angeles
+  - New York
+  - London
 - name: city
-  value: Shenzhen
+  value: <% CTX.cities[0] %>
 - name: weather
   resolve:
     useProvider: basic.http-request
     args:
     - |
       <%
-        `//api.weatherapi.com/v1/forecast.json?${
-          new URLSearchParams({
-            key: '9e08e5e99e0c4b4c89023605231804',
-            q: CTX.city,
-            days: '2',
-            aqi: 'no',
-          })
-        }`
+        `//api.weatherapi.com/v1/forecast.json?q=${
+          CTX.city
+        }&days=2&key=9e08e5e99e0c4b4c89023605231804`
       %>
-    lazy: true
   track: true

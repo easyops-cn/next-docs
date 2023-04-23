@@ -1,10 +1,10 @@
 import React from "react";
 import type { FileInfo } from "../MonacoEditorWorkspace";
 import NextExample from "../NextExample";
-import * as WeatherApp from "../../examples/weather-app";
 import * as MyTodos1 from "../../examples/my-todos-1";
 import * as MyTodos2 from "../../examples/my-todos-2";
 import * as MyTodos3 from "../../examples/my-todos-3";
+import * as WeatherApp from "../../examples/weather-app";
 import styles from "./styles.module.css";
 
 export interface ExampleInfo {
@@ -20,6 +20,7 @@ export default function HomepageExamples(): JSX.Element {
       <HomepageExample {...MyTodos1} />
       <HomepageExample {...MyTodos2} />
       <HomepageExample {...MyTodos3} />
+      <HomepageExample {...WeatherApp} />
     </>
   );
 }

@@ -1,37 +1,26 @@
-- brick: sl-card
-  children:
-  - brick: strong
-    slot: header
-    properties:
-      textContent: My Todos
-  - brick: ':forEach'
-    dataSource: <% "track context", CTX.todos %>
-    children:
-    - brick: sl-checkbox
+brick: sl-card
+children:
+- brick: strong
+  slot: header
+  properties:
+    textContent: My Todos
+- brick: sl-input
+  properties:
+    placeholder: What todo?
+  events:
+    keypress:
+    - if: <% EVENT.code === 'Enter' %>
+      action: context.replace
+      args:
+      - todos
+      - <% CTX.todos.concat(EVENT.target.value) %>
+    - if: <% EVENT.code === 'Enter' %>
+      target: _self
       properties:
-        textContent: <% ITEM %>
-        value: <% ITEM %>
-      events:
-        sl-change:
-        - action: context.replace
-          args:
-          - todos
-          - <% CTX.todos.filter(t => t !== EVENT.target.value) %>
-        - action: context.replace
-          args:
-          - done
-          - <% CTX.done.concat(EVENT.target.value) %>
-- brick: sl-card
+        value: ''
+- brick: ':forEach'
+  dataSource: <% 'track context', CTX.todos %>
   children:
-  - brick: strong
-    slot: header
+  - brick: sl-checkbox
     properties:
-      textContent: Done
-  - brick: ':forEach'
-    dataSource: <% "track context", CTX.done %>
-    children:
-    - brick: sl-checkbox
-      properties:
-        textContent: <% ITEM %>
-        disabled: true
-        checked: true
+      textContent: <% ITEM %>
