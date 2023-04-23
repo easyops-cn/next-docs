@@ -1,0 +1,39 @@
+state:
+- name: cities
+  value:
+  - Shenzhen
+  - Beijing
+  - Tokyo
+  - Los Angeles
+  - New York
+  - London
+- name: defaultCity
+  expose: true
+bricks:
+- brick: div
+  properties:
+    className: flex-layout
+  children:
+  - brick: strong
+    properties:
+      textContent: Weather
+  - brick: sl-select
+    slot: header
+    properties:
+      placeholder: Select a city
+      value: <% STATE.defaultCity %>
+      size: small
+    children:
+    - brick: ':forEach'
+      dataSource: <% STATE.cities %>
+      children:
+      - brick: sl-option
+        properties:
+          value: <% ITEM.replace(/ /g, "_") %>
+          textContent: <% ITEM %>
+    events:
+      sl-change:
+        action: tpl.dispatchEvent
+        args:
+        - city-change
+        - detail: <% EVENT.target.value %>

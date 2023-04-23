@@ -1,30 +1,21 @@
 brick: sl-card
 children:
-- brick: sl-select
+- brick: tpl-select-city
   slot: header
   properties:
-    placeholder: Select a city
-    value: <% CTX.city %>
-  children:
-  - brick: ':forEach'
-    dataSource: <% CTX.cities %>
-    children:
-    - brick: sl-option
-      properties:
-        value: <% ITEM.replace(/ /g, "_") %>
-        textContent: <% ITEM %>
+    defaultCity: <% CTX.city %>
   events:
-    sl-change:
+    city-change:
       action: context.replace
       args:
       - city
-      - <% EVENT.target.value %>
-- brick: div
-  properties:
-    className: grid-layout
+      - <% EVENT.detail %>
+- brick: ':if'
+  dataSource: <% "track context", !!CTX.weather %>
   children:
-  - brick: ':if'
-    dataSource: <% "track context", !!CTX.weather %>
+  - brick: div
+    properties:
+      className: grid-layout
     children:
     - brick: img
       properties:
@@ -36,76 +27,9 @@ children:
       properties:
         src: ../img/thermometer-half.svg
     - brick: span
-      children:
-      - brick: span
-        properties:
-          textContent: <% `${Math.round(CTX.weather.current.temp_c)}°C` %>
-      - brick: span
-        properties:
-          textContent: |
-            <%
-              ` (${
-                Math.round(CTX.weather.forecast.forecastday[0].day.mintemp_c)
-              }°C - ${
-                Math.round(CTX.weather.forecast.forecastday[0].day.maxtemp_c)
-              }°C)`
-            %>
-          style:
-            color: gray
-    - brick: small
       properties:
-        textContent: Houryly forecast
-        style:
-          gridColumn: span 2
-    - brick: div
-      properties:
-        className: column-grid
-      children:
-      - brick: span
-        properties:
-          textContent: Now
-      - brick: img
-        properties:
-          src: <% CTX.weather.current.condition.icon %>
-          style:
-            gridRow: span 2
-      - brick: span
-        properties:
-          textContent: <% `${Math.round(CTX.weather.current.temp_c)}°C` %>
-      - brick: ':forEach'
-        dataSource: |
-          <%
-            CTX.weather.forecast.forecastday
-              .flatMap(d => d.hour)
-              .filter(
-                h => h.time_epoch * 1e3 > +(new Date())
-              )
-              .slice(0, 12)
-          %>
-        children:
-        - brick: span
-          properties:
-            textContent: |
-              <%
-                  new Date(ITEM.time_epoch * 1e3)
-                    .toLocaleString(undefined, {
-                      timeZone: CTX.weather.location.tz_id,
-                      hour: 'numeric',
-                      hour12: true,
-                    })
-                    .match(/\d\d?/)?.[0]
-              %>
-        - brick: img
-          properties:
-            src: <% ITEM.condition.icon %>
-            style:
-              gridRow: '<% `span ${ITEM.chance_of_rain > 0 ? 1 : 2}` %>'
-        - brick: small
-          if: <% ITEM.chance_of_rain > 0 %>
-          properties:
-            textContent: <% `${Math.round(ITEM.chance_of_rain)}%` %>
-            style:
-              color: '#2a87e5'
-        - brick: span
-          properties:
-            textContent: <% `${Math.round(ITEM.temp_c)}°C` %>
+        textContent: |
+          <% `${Math.round(CTX.weather.current.temp_c)}°C` %>
+  - brick: tpl-hourly-forecast
+    properties:
+      weather: <% CTX.weather %>

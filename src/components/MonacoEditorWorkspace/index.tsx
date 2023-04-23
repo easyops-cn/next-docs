@@ -118,6 +118,7 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
           },
           overviewRulerBorder: false,
           mouseWheelScrollSensitivity: 0.5,
+          renderLineHighlight: "none",
         });
       }
     }, [currentModel]);

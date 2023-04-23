@@ -1,7 +1,7 @@
 import { FileInfo } from "@site/src/components/MonacoEditorWorkspace";
 import Bricks from "./bricks.yaml";
 import Context from "./context.yaml";
-import style from "../my-todos-1/style.txt";
+import styleText from "../my-todos-1/style.txt";
 
 export const files = [
   {
@@ -14,4 +14,4 @@ export const files = [
   },
 ] as FileInfo[];
 
-export { style };
+export { styleText };

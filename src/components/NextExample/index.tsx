@@ -26,12 +26,14 @@ import styles from "./styles.module.css";
 
 export interface NextExampleProps {
   files: FileInfo[];
-  style?: string;
+  styleText?: string;
+  className?: string;
 }
 
 export default function NextExample({
   files,
-  style,
+  styleText,
+  className,
 }: NextExampleProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
   const editorRef = useRef<MonacoEditorWorkspaceRef>();
@@ -53,11 +55,6 @@ export default function NextExample({
 
   const handleIframeLoad = useCallback(() => {
     setReady(true);
-    const { contentWindow } = iframeRef.current;
-    contentWindow.customElements.define(
-      "grid-layout",
-      class extends (contentWindow as any).HTMLElement {}
-    );
   }, []);
 
   const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>
@@ -70,22 +67,30 @@ export default function NextExample({
     if (!ready) {
       return;
     }
-    const normalized = getNormalizedFiles(deferredFiles);
+    const {
+      Bricks,
+      Context,
+      Functions,
+      Templates,
+      I18N,
+      templatesAreArrayOfYaml,
+    } = getNormalizedFiles(deferredFiles);
     (iframeRef.current.contentWindow as any)._preview_only_render(
       "yaml",
       {
-        yaml: normalized.Bricks,
+        yaml: Bricks,
       },
       {
         theme: colorMode,
-        context: normalized.Context,
-        functions: normalized.Functions,
-        templates: normalized.Templates,
-        i18n: normalized.I18N,
-        style,
+        context: Context,
+        functions: Functions,
+        templates: Templates,
+        i18n: I18N,
+        styleText,
+        templatesAreArrayOfYaml: templatesAreArrayOfYaml,
       }
     );
-  }, [ready, colorMode, deferredFiles, style]);
+  }, [ready, colorMode, deferredFiles, styleText]);
 
   useEffect(() => {
     if (!ready) {
@@ -157,7 +162,9 @@ export default function NextExample({
 
   return (
     <div
-      className={clsx(styles.example, { [styles.expandable]: expandable })}
+      className={clsx(styles.example, className, {
+        [styles.expandable]: expandable,
+      })}
       ref={containerRef}
     >
       <div className={styles.tabs}>
@@ -248,9 +255,15 @@ interface StoryboardFunction {
   typescript?: boolean;
 }
 
+interface YamlTemplate {
+  name: string;
+  yaml: string;
+}
+
 function getNormalizedFiles(files: Record<string, string>) {
   const normalized: Record<string, unknown> = {};
   const functions: StoryboardFunction[] = [];
+  const templates: YamlTemplate[] = [];
   for (const [filename, content] of Object.entries(files)) {
     if (filename.startsWith("Functions/")) {
       const [fnName, ext] = filename.split("/")[1].split(".");
@@ -259,12 +272,21 @@ function getNormalizedFiles(files: Record<string, string>) {
         source: content,
         typescript: ext === "ts",
       });
+    } else if (filename.startsWith("tpl-")) {
+      templates.push({
+        name: filename,
+        yaml: content,
+      });
     } else {
       normalized[filename] = content;
     }
   }
   if (functions.length > 0) {
     normalized.Functions = functions;
+  }
+  if (templates.length > 0) {
+    normalized.Templates = templates;
+    normalized.templatesAreArrayOfYaml = true;
   }
   return normalized;
 }

@@ -1,7 +1,41 @@
-.homeExample {
-  padding: 2rem 0;
+.container {
+  padding: 4rem 0;
 }
 
-.homeExample:nth-of-type(2n) {
+.container:nth-of-type(2n) {
   background-color: var(--ifm-color-emphasis-100);
+}
+
+.title {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.description {
+  text-align: center;
+  font-size: 18px;
+  /* margin-bottom: 0; */
+}
+
+.homeExample {
+  margin: 2rem 0;
+}
+
+/** In mobile view, reduce the padding */
+@media screen and (max-width: 996px) {
+  .title {
+    text-align: initial;
+    font-size: 38px;
+  }
+
+  .description {
+    text-align: initial;
+    font-size: 16px;
+  }
+
+  .homeExample {
+    --example-border-radius: 0;
+
+    margin: 1rem calc(-1 * var(--ifm-spacing-horizontal));
+  }
 }

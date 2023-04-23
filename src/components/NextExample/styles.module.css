@@ -1,11 +1,13 @@
 .example {
   --row-border-color: var(--ifm-color-emphasis-300);
+  --example-border-radius: var(--ifm-code-border-radius);
+  --example-boxy-shadow-2: 0 0 0 1px hsla(0, 0%, 0%, 0.05);
 
   display: flex;
   flex-wrap: wrap;
   margin-bottom: var(--ifm-leading);
-  box-shadow: var(--ifm-global-shadow-md);
-  border-radius: var(--ifm-code-border-radius);
+  box-shadow: var(--ifm-global-shadow-md), var(--example-boxy-shadow-2);
+  border-radius: var(--example-border-radius);
   background-color: #fffffe;
 }
 
@@ -30,7 +32,7 @@
 
 .preview {
   box-shadow: var(--ifm-global-shadow-lw);
-  border-radius: var(--ifm-code-border-radius);
+  border-radius: var(--example-border-radius);
   overflow: hidden;
   visibility: hidden;
 }
@@ -108,6 +110,8 @@
 
 html[data-theme="dark"] .example {
   --row-border-color: rgb(48 47 57);
+  --example-boxy-shadow-2: 0 0 0 1px hsla(0, 0%, 100%, 0.1);
+
   background-color: transparent;
 }
 
@@ -142,7 +146,7 @@ html[data-theme="dark"] .previewColumn {
   }
 
   .example:not(.expandable) :global(.monaco-editor) {
-    border-bottom-left-radius: var(--ifm-code-border-radius);
+    border-bottom-left-radius: var(--example-border-radius);
   }
 
   .example:not(.expandable) :global(.monaco-editor) :global(.overflow-guard) {

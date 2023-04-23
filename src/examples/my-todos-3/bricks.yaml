@@ -13,7 +13,7 @@ children:
       action: context.replace
       args:
       - todos
-      - <% CTX.todos.concat(EVENT.target.value) %>
+      - <% [EVENT.target.value].concat(CTX.todos) %>
     - if: <% EVENT.code === 'Enter' %>
       target: _self
       properties:

@@ -1,13 +1,5 @@
-- name: cities
-  value:
-  - Shenzhen
-  - Beijing
-  - Tokyo
-  - Los Angeles
-  - New York
-  - London
 - name: city
-  value: <% CTX.cities[0] %>
+  value: Shenzhen
 - name: weather
   resolve:
     useProvider: basic.http-request
