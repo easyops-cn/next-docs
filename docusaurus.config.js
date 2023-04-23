@@ -188,7 +188,6 @@ const config = {
             client: {
               overlay: false,
             },
-            host: "0.0.0.0",
           },
           module: {
             rules: [
