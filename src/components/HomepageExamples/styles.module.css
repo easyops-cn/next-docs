@@ -21,6 +21,11 @@
   margin: 2rem 0;
 }
 
+.buttonContainer {
+  text-align: center;
+  margin: 2rem 0;
+}
+
 /** In mobile view, reduce the padding */
 @media screen and (max-width: 996px) {
   .title {

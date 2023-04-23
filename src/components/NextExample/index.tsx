@@ -15,7 +15,7 @@ import {
   EXAMPLE_MIN_HEIGHT,
 } from "@site/src/constants";
 import ChevronUp from "./chevron-up.svg";
-import ChevronDown from "./chevron-Down.svg";
+import ChevronDown from "./chevron-down.svg";
 import type {
   default as MonacoEditorWorkspaceType,
   FileInfo,

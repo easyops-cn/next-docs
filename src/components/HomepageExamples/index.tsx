@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "@docusaurus/Link";
+import clsx from "clsx";
 import type { FileInfo } from "../MonacoEditorWorkspace";
 import NextExample from "../NextExample";
 import * as MyTodos1 from "../../examples/my-todos-1";
@@ -13,6 +15,7 @@ export interface ExampleInfo {
   description?: string | JSX.Element;
   postDescription?: string | JSX.Element;
   styleText?: string;
+  showButton?: boolean;
 }
 
 export default function HomepageExamples(): JSX.Element {
@@ -21,7 +24,7 @@ export default function HomepageExamples(): JSX.Element {
       <HomepageExample {...MyTodos1} />
       {/* <HomepageExample {...MyTodos2} /> */}
       <HomepageExample {...MyTodos3} />
-      <HomepageExample {...WeatherApp} />
+      <HomepageExample showButton {...WeatherApp} />
     </>
   );
 }
@@ -32,6 +35,7 @@ function HomepageExample({
   description,
   postDescription,
   styleText,
+  showButton,
 }: ExampleInfo): JSX.Element {
   return (
     <section className={styles.container}>
@@ -60,6 +64,18 @@ function HomepageExample({
             <p className={`styles.description`}>{postDescription}</p>
           </div>
         </div>
+        {showButton && (
+          <div className={clsx("row", styles.buttonContainer)}>
+            <div className="col col--8 col--offset-2">
+              <Link
+                className="button button--outline button--primary button--lg"
+                to="/docs/intro"
+              >
+                Getting Started
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
