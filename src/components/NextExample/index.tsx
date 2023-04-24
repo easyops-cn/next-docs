@@ -182,24 +182,9 @@ export default function NextExample({
       <div className={styles.editorColumn} style={columnStyle}>
         <BrowserOnly fallback={<LoadingRing />}>
           {() => {
-            const isMobile = !!navigator.maxTouchPoints;
-            if (isMobile) {
-              const SimpleEditorWorkspace =
-                require("../SimpleEditorWorkspace").default;
-              return (
-                <SimpleEditorWorkspace
-                  files={files}
-                  currentFile={currentFile}
-                  className={styles.editorContainer}
-                  onChange={handleCodeChange}
-                />
-              );
-            }
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
-            const MonacoEditorWorkspace =
-              require("../MonacoEditorWorkspace").default;
+            const MixedEditor = require("../MixedEditor").default;
             return (
-              <MonacoEditorWorkspace
+              <MixedEditor
                 files={files}
                 currentFile={currentFile}
                 theme={colorMode === "dark" ? "vs-dark" : "vs"}

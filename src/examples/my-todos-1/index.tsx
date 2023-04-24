@@ -1,7 +1,7 @@
 import React from "react";
 import type { FileInfo } from "@site/src/interfaces";
 import Bricks from "./bricks.yaml";
-import styleText from "./style.txt";
+import styleText from "!!raw-loader!./style.raw.css";
 
 export const title = "Create user interfaces by declaring bricks";
 

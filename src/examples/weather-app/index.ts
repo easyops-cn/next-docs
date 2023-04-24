@@ -3,7 +3,7 @@ import Bricks from "./bricks.yaml";
 import Context from "./context.yaml";
 import TplSelectCity from "./tpl-select-city.yaml";
 import TplHourlyForecast from "./tpl-hourly-forecast.yaml";
-import styleText from "./style.txt";
+import styleText from "!!raw-loader!./style.raw.css";
 
 export const title = "Connect to remote services";
 

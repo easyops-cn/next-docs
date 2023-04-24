@@ -1,7 +1,7 @@
 import type { FileInfo } from "@site/src/interfaces";
 import Bricks from "./bricks.yaml";
 import Context from "./context.yaml";
-import styleText from "../my-todos-1/style.txt";
+import styleText from "!!raw-loader!../my-todos-1/style.raw.css";
 
 export const files = [
   {
