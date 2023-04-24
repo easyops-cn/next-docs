@@ -1,8 +1,8 @@
-.container {
+.homeContainer {
   padding: 4rem 0;
 }
 
-.container:nth-of-type(2n) {
+.homeContainer:nth-of-type(2n) {
   background-color: var(--ifm-color-emphasis-100);
 }
 
@@ -14,11 +14,11 @@
 .description {
   text-align: center;
   font-size: 18px;
-  /* margin-bottom: 0; */
+  margin-bottom: 0;
 }
 
 .homeExample {
-  margin: 2rem 0;
+  margin: 3rem 0;
 }
 
 .buttonContainer {
@@ -26,8 +26,31 @@
   margin: 2rem 0;
 }
 
+.buttonContainer :global(.button--secondary) {
+  border-radius: 9999px;
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.image {
+  --example-boxy-shadow-2: 0 0 0 1px hsla(0, 0%, 0%, 0.05);
+
+  display: block;
+  margin: 1rem auto;
+  border-radius: var(--ifm-global-radius);
+  box-shadow: var(--ifm-global-shadow-tl), var(--example-boxy-shadow-2);
+}
+
+html[data-theme="dark"] .image {
+  --example-boxy-shadow-2: 0 0 0 1px hsla(0, 0%, 100%, 0.1);
+}
+
 /** In mobile view, reduce the padding */
 @media screen and (max-width: 996px) {
+  .homeExample {
+    --example-border-radius: 0;
+    --example-boxy-shadow-1: var(--ifm-global-shadow-lw);
+  }
+
   .title {
     text-align: initial;
     font-size: 38px;
@@ -38,9 +61,8 @@
     font-size: 16px;
   }
 
-  .homeExample {
-    --example-border-radius: 0;
-
+  .homeExample,
+  .buttonContainer {
     margin: 1rem calc(-1 * var(--ifm-spacing-horizontal));
   }
 }

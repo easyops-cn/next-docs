@@ -3,10 +3,10 @@ import type { FileInfo } from "@site/src/interfaces";
 import Bricks from "./bricks.yaml";
 import styleText from "!!raw-loader!./style.raw.css";
 
-export const title = "Create user interfaces by declaring bricks";
+export const title = "Create user interfaces from storyboards";
 
 export const description =
-  "Brick Next lets you build user interfaces out of individual pieces called bricks, declaratively. Combine bricks into pages and apps, just like building LEGOs.";
+  "Brick Next lets you build user interfaces by defining storyboards, which are composed of individual pieces called bricks. Combine bricks into pages and apps, just like building LEGOs.";
 
 export const postDescription = (
   <>

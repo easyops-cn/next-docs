@@ -1,12 +1,13 @@
 .example {
   --row-border-color: var(--ifm-color-emphasis-300);
-  --example-border-radius: var(--ifm-code-border-radius);
+  --example-border-radius: var(--ifm-global-radius);
+  --example-boxy-shadow-1: var(--ifm-global-shadow-md);
   --example-boxy-shadow-2: 0 0 0 1px hsla(0, 0%, 0%, 0.05);
 
   display: flex;
   flex-wrap: wrap;
   margin-bottom: var(--ifm-leading);
-  box-shadow: var(--ifm-global-shadow-md), var(--example-boxy-shadow-2);
+  box-shadow: var(--example-boxy-shadow-1), var(--example-boxy-shadow-2);
   border-radius: var(--example-border-radius);
   background-color: #fffffe;
 }

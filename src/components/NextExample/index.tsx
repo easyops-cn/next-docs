@@ -175,7 +175,7 @@ export default function NextExample({
               setCurrentFile(file.name);
             }}
           >
-            {file.name}
+            {file.name === "Bricks" ? "Storyboard" : file.name}
           </button>
         ))}
       </div>

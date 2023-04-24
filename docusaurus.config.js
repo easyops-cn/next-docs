@@ -200,10 +200,6 @@ const config = {
                 test: /\.yaml/,
                 type: "asset/source",
               },
-              {
-                test: /\.txt$/,
-                type: "asset/source",
-              },
             ],
           },
           plugins: [

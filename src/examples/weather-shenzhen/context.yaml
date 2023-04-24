@@ -1,0 +1,12 @@
+- name: city
+  value: Shenzhen
+- name: weather
+  resolve:
+    useProvider: basic.http-request
+    args:
+    - |
+      <%
+        `//api.weatherapi.com/v1/current.json?q=${
+          CTX.city
+        }&key=${MISC.weather_api_key}`
+      %>

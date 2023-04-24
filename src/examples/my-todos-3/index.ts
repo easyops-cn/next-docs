@@ -9,7 +9,7 @@ export const description =
   "While bricks with properties describe the UI, you can define actions in response to events triggered by user interactions, and manage page states by simple JavaScript expressions.";
 
 export const postDescription =
-  "The typical data flow in Brick Next is: properties → UI → events → actions → states → properties.";
+  "Contexts are global states that can be shared across bricks on the page. The typical data flow in Brick Next is: properties → UI → events → actions → states → properties.";
 
 export const files = [
   {
