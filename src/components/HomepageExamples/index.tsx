@@ -6,11 +6,13 @@ import NextExample from "../NextExample";
 import * as MyTodos1 from "../../examples/my-todos-1";
 import * as MyTodos2 from "../../examples/my-todos-2";
 import * as MyTodos3 from "../../examples/my-todos-3";
+import * as WeatherShenzhen from "../../examples/weather-shenzhen";
 import * as WeatherApp from "../../examples/weather-app";
 import styles from "./styles.module.css";
 
 export interface ExampleInfo {
-  files: FileInfo[];
+  files?: FileInfo[];
+  image?: string;
   title?: string | JSX.Element;
   description?: string | JSX.Element;
   postDescription?: string | JSX.Element;
@@ -24,6 +26,7 @@ export default function HomepageExamples(): JSX.Element {
       <HomepageExample {...MyTodos1} />
       {/* <HomepageExample {...MyTodos2} /> */}
       <HomepageExample {...MyTodos3} />
+      <HomepageExample {...WeatherShenzhen} />
       <HomepageExample showButton {...WeatherApp} />
     </>
   );
@@ -31,6 +34,7 @@ export default function HomepageExamples(): JSX.Element {
 
 function HomepageExample({
   files,
+  image,
   title,
   description,
   postDescription,
@@ -52,11 +56,14 @@ function HomepageExample({
         </div>
         <div className="row">
           <div className="col">
-            <NextExample
-              files={files}
-              styleText={styleText}
-              className={styles.homeExample}
-            />
+            {files && (
+              <NextExample
+                files={files}
+                styleText={styleText}
+                className={styles.homeExample}
+              />
+            )}
+            {image && <img src={image} />}
           </div>
         </div>
         <div className="row">

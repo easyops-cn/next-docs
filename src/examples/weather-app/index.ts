@@ -5,13 +5,10 @@ import TplSelectCity from "./tpl-select-city.yaml";
 import TplHourlyForecast from "./tpl-hourly-forecast.yaml";
 import styleText from "!!raw-loader!./style.raw.css";
 
-export const title = "Connect to remote services";
+export const title = "Break the UI into a brick hierarchy";
 
 export const description =
-  "You can easily combine page states with any remote HTTP services.";
-
-export const postDescription =
-  "You can also make templates to reuse parts of your UI. Guess what, templates are also bricks!";
+  "Split up the UI as it grows, you can make templates to encapsulate parts of your UI, and reuse them just as other bricks.";
 
 export const files = [
   {

@@ -18,11 +18,16 @@ bricks:
     properties:
       textContent: Weather
   - brick: sl-select
-    slot: header
     properties:
       placeholder: Select a city
       value: <% STATE.defaultCity %>
       size: small
+    events:
+      sl-change:
+        action: tpl.dispatchEvent
+        args:
+        - city-change
+        - detail: <% EVENT.target.value %>
     children:
     - brick: ':forEach'
       dataSource: <% STATE.cities %>
@@ -31,9 +36,3 @@ bricks:
         properties:
           value: <% ITEM.replace(/ /g, "_") %>
           textContent: <% ITEM %>
-    events:
-      sl-change:
-        action: tpl.dispatchEvent
-        args:
-        - city-change
-        - detail: <% EVENT.target.value %>

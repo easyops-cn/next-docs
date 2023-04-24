@@ -1,0 +1,23 @@
+brick: sl-card
+children:
+- brick: strong
+  slot: header
+  properties:
+    textContent: <% `Weather in ${CTX.city}` %>
+- brick: div
+  properties:
+    className: grid-layout
+  children:
+  - brick: img
+    properties:
+      src: <% CTX.weather.current.condition.icon %>
+  - brick: span
+    properties:
+      textContent: <% CTX.weather.current.condition.text %>
+  - brick: img
+    properties:
+      src: ../img/thermometer-half.svg
+  - brick: span
+    properties:
+      textContent: |
+        <% `${Math.round(CTX.weather.current.temp_c)}°C` %>
