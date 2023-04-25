@@ -18,7 +18,12 @@
 }
 
 .homeExample {
-  margin: 3rem 0;
+  margin: 3rem auto;
+  max-width: 1068px;
+}
+
+.homeExampleLarge {
+  max-width: unset;
 }
 
 .buttonContainer {
@@ -35,7 +40,7 @@
   --example-boxy-shadow-2: 0 0 0 1px hsla(0, 0%, 0%, 0.05);
 
   display: block;
-  margin: 1rem auto;
+  margin: 3rem auto;
   border-radius: var(--ifm-global-radius);
   box-shadow: var(--ifm-global-shadow-tl), var(--example-boxy-shadow-2);
 }

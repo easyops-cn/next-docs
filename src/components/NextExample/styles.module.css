@@ -120,7 +120,7 @@ html[data-theme="dark"] .example {
   --row-border-color: rgb(48 47 57);
   --example-boxy-shadow-2: 0 0 0 1px hsla(0, 0%, 100%, 0.1);
 
-  background-color: transparent;
+  background-color: #1e1e1e;
 }
 
 html[data-theme="dark"] .tabs,

@@ -3,7 +3,7 @@ import Link from "@docusaurus/Link";
 import clsx from "clsx";
 import type { FileInfo } from "../../interfaces";
 import NextExample from "../NextExample";
-import * as MyTodos1 from "../../examples/my-todos-1";
+// import * as MyTodos1 from "../../examples/my-todos-1";
 // import * as MyTodos2 from "../../examples/my-todos-2";
 import * as MyTodos3 from "../../examples/my-todos-3";
 import * as WeatherShenzhen from "../../examples/weather-shenzhen";
@@ -19,6 +19,7 @@ interface ExampleInfo {
   postDescription?: string | JSX.Element;
   styleText?: string;
   button?: HomepageButtonType;
+  large?: boolean;
 }
 
 type HomepageButtonType =
@@ -30,11 +31,15 @@ type HomepageButtonType =
 export default function HomepageExamples(): JSX.Element {
   return (
     <>
-      <HomepageExample {...MyTodos1} />
+      {/* <HomepageExample {...MyTodos1} /> */}
       {/* <HomepageExample {...MyTodos2} /> */}
       <HomepageExample button="learn-more-about-context" {...MyTodos3} />
       <HomepageExample {...WeatherShenzhen} />
-      <HomepageExample button="learn-more-about-templates" {...WeatherApp} />
+      <HomepageExample
+        button="learn-more-about-templates"
+        large
+        {...WeatherApp}
+      />
       <HomepageExample
         title="Empower with a visual IDE"
         description="Even better, build your app storyboards in a visual IDE, with minimal programming experience."
@@ -45,7 +50,7 @@ export default function HomepageExamples(): JSX.Element {
   );
 }
 
-function HomepageExample({
+export function HomepageExample({
   files,
   image,
   title,
@@ -53,6 +58,7 @@ function HomepageExample({
   postDescription,
   styleText,
   button,
+  large,
 }: ExampleInfo): JSX.Element {
   return (
     <section className={styles.homeContainer}>
@@ -67,28 +73,26 @@ function HomepageExample({
             <p className={styles.description}>{description}</p>
           </div>
         </div>
-        <div className="row">
-          <div className="col">
-            {files && (
-              <NextExample
-                files={files}
-                styleText={styleText}
-                className={styles.homeExample}
-              />
-            )}
-            {image && (
-              <img
-                src={image}
-                className={styles.image}
-                width={840}
-                loading="lazy"
-              />
-            )}
-          </div>
-        </div>
+        {files && (
+          <NextExample
+            files={files}
+            styleText={styleText}
+            className={clsx(styles.homeExample, {
+              [styles.homeExampleLarge]: large,
+            })}
+          />
+        )}
+        {image && (
+          <img
+            src={image}
+            className={styles.image}
+            width={840}
+            loading="lazy"
+          />
+        )}
         <div className="row">
           <div className="col col--8 col--offset-2">
-            <p className={`styles.description`}>{postDescription}</p>
+            <p className={styles.description}>{postDescription}</p>
           </div>
         </div>
         {button && (
