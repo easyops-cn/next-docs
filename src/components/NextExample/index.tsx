@@ -24,12 +24,14 @@ import styles from "./styles.module.css";
 export interface NextExampleProps {
   files: FileInfo[];
   styleText?: string;
+  condensed?: boolean;
   className?: string;
 }
 
 export default function NextExample({
   files,
   styleText,
+  condensed,
   className,
 }: NextExampleProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
@@ -172,6 +174,7 @@ export default function NextExample({
     <div
       className={clsx(styles.example, className, {
         [styles.expandable]: expandable,
+        [styles.condensed]: condensed,
       })}
       ref={containerRef}
     >

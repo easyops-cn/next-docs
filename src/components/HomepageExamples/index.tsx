@@ -77,6 +77,7 @@ export function HomepageExample({
           <NextExample
             files={files}
             styleText={styleText}
+            condensed
             className={clsx(styles.homeExample, {
               [styles.homeExampleLarge]: large,
             })}

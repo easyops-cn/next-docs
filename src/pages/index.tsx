@@ -26,6 +26,7 @@ function HomepageHeader() {
           files={files}
           styleText={styleText}
           className={styles.heroExample}
+          condensed
         />
         <div className="row">
           <div className="col col--8 col--offset-2">

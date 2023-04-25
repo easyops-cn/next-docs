@@ -173,7 +173,7 @@ html[data-theme="dark"] .previewColumn {
     transform: translate(40px, 0);
   }
 
-  .example {
+  .example:not(.condensed) {
     margin-left: -40px;
     margin-right: -40px;
   }
@@ -184,7 +184,7 @@ html[data-theme="dark"] .previewColumn {
     transform: translate(80px, 0);
   }
 
-  .example {
+  .example:not(.condensed) {
     margin-left: -80px;
     margin-right: -80px;
   }
