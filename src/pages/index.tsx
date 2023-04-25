@@ -19,6 +19,13 @@ function HomepageHeader() {
           <Link className="button button--primary button--lg" to="/docs/intro">
             Get Started
           </Link>
+          <Link
+            className="button button--secondary button--outline button--lg"
+            href="https://stackblitz.com/edit/brick-next-renderer?file=storyboard.yml"
+            target="_blank"
+          >
+            Try a Demo
+          </Link>
         </div>
       </div>
       <div className="container">
