@@ -1,4 +1,4 @@
-import React, { Suspense, forwardRef } from "react";
+import React, { Suspense, forwardRef, useEffect } from "react";
 import LoadingRing from "../LoadingRing";
 import type {
   MonacoEditorWorkspaceProps,
@@ -24,6 +24,16 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
     ref
   ) {
     const isMobile = !!navigator.maxTouchPoints;
+
+    useEffect(() => {
+      if (isMobile && onChange) {
+        const file = files.find((f) => f.name === currentFile);
+        if (file.codeSlides) {
+          onChange(file.code, currentFile);
+        }
+      }
+    }, [currentFile, files, isMobile, onChange]);
+
     return (
       <Suspense fallback={<LoadingRing />}>
         {isMobile ? (

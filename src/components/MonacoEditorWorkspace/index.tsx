@@ -4,6 +4,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import {
@@ -11,8 +12,10 @@ import {
   EDITOR_PADDING_TOP,
   EXAMPLE_CODE_LINE_HEIGHT,
 } from "@site/src/constants";
+import clsx from "clsx";
 import type { FileInfo } from "@site/src/interfaces";
 import "./register";
+import styles from "./styles.module.css";
 
 export interface MonacoEditorWorkspaceProps {
   files: FileInfo[];
@@ -24,6 +27,12 @@ export interface MonacoEditorWorkspaceProps {
 
 export interface MonacoEditorWorkspaceRef {
   resetScrollTop(): void;
+}
+
+enum SlideStatus {
+  None,
+  Active,
+  Finished,
 }
 
 let count = 0;
@@ -52,13 +61,16 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
       []
     );
     const workspace = useMemo(() => uniqueId("workspace/"), []);
+    const [slideStatus, setSlideStatus] = useState<SlideStatus>(
+      SlideStatus.None
+    );
 
     const currentModel = useMemo(() => {
       let model = modelsMap.get(currentFile);
       if (!model) {
         const file = files.find((f) => f.name === currentFile);
         model = monaco.editor.createModel(
-          file.code,
+          file.codeSlides?.[0] ?? file.code,
           file.lang ?? "yaml",
           monaco.Uri.file(`${workspace}/${file.name}`)
         );
@@ -81,7 +93,6 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
       } else {
         editorRef.current = monaco.editor.create(containerRef.current, {
           model: currentModel,
-          theme,
           minimap: {
             enabled: false,
           },
@@ -128,7 +139,39 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
       return () => {
         listener.dispose();
       };
-    }, [currentModel, onChange]);
+    }, [currentFile, currentModel, onChange]);
+
+    useEffect(() => {
+      const file = files.find((f) => f.name === currentFile);
+      if (file.codeSlides) {
+        setSlideStatus(SlideStatus.Active);
+        const cursorDecoration =
+          editorRef.current.createDecorationsCollection();
+        performCodeSlides(file.codeSlides, currentModel, cursorDecoration).then(
+          () => {
+            cursorDecoration.set([]);
+            editorRef.current.setPosition(getLastPosition(currentModel));
+            setSlideStatus(SlideStatus.Finished);
+          }
+        );
+      }
+    }, [currentFile, currentModel, files]);
+
+    useEffect(() => {
+      switch (slideStatus) {
+        case SlideStatus.Active:
+          editorRef.current.updateOptions({
+            readOnly: true,
+            domReadOnly: true,
+          });
+          break;
+        case SlideStatus.Finished:
+          editorRef.current.updateOptions({
+            readOnly: false,
+            domReadOnly: false,
+          });
+      }
+    }, [slideStatus]);
 
     useEffect(() => {
       return () => {
@@ -139,6 +182,90 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
       };
     }, []);
 
-    return <div ref={containerRef} className={className}></div>;
+    return (
+      <div
+        ref={containerRef}
+        className={clsx(className, {
+          [styles.slidesActive]: slideStatus === SlideStatus.Active,
+        })}
+      ></div>
+    );
   }
 );
+
+async function performCodeSlides(
+  codeSlides: string[],
+  model: monaco.editor.ITextModel,
+  cursorDecoration: monaco.editor.IEditorDecorationsCollection
+) {
+  return new Promise<void>((resolve) => {
+    const transitions = getTransitions(codeSlides);
+    let i = 0;
+    const run = function () {
+      const text = transitions[i] as string;
+      const { lineNumber, column } = getLastPosition(model);
+      const range = new monaco.Range(lineNumber, column, lineNumber, column);
+      model.applyEdits([{ range, text }]);
+      updateCursorDecoration();
+
+      const delay = transitions[++i] as number;
+      if (delay) {
+        i++;
+        setTimeout(run, delay);
+      } else {
+        setTimeout(resolve, 1000);
+      }
+    };
+    const updateCursorDecoration = function () {
+      const { lineNumber, column } = getLastPosition(model);
+      cursorDecoration.set([
+        {
+          range: {
+            startLineNumber: lineNumber,
+            startColumn: column,
+            endLineNumber: lineNumber,
+            endColumn: column,
+          },
+          options: {
+            afterContentClassName: styles.cursor,
+          },
+        },
+      ]);
+    };
+
+    updateCursorDecoration();
+    setTimeout(run, 2000);
+  });
+}
+
+function getLastPosition(model: monaco.editor.ITextModel) {
+  const lineNumber = model.getLineCount();
+  const column = model.getLineLength(lineNumber) + 1;
+  return { lineNumber, column };
+}
+
+function getTransitions(codeSlides: string[]) {
+  return transitionJoin(
+    codeSlides.slice(1).map((line) => transitionJoin(line.split(""), 20)),
+    1000
+  );
+}
+
+type TransitionItem = string | number;
+
+function transitionJoin(
+  array: unknown[],
+  ...joins: TransitionItem[]
+): TransitionItem[] {
+  const result = [];
+  let i = 0;
+  while (i < array.length) {
+    const parts = [].concat(array[i]).flat(Infinity);
+    result.push(...parts);
+    i++;
+    if (i < array.length && parts.length > 0) {
+      result.push(...joins);
+    }
+  }
+  return result;
+}

@@ -1,6 +1,8 @@
 export interface FileInfo {
   name: ExampleFileName;
   code: string;
+  codeSlides?: string[];
+  minLines?: number;
   lang?: string;
   defaultActive?: boolean;
 }

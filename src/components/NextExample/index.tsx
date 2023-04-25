@@ -55,13 +55,18 @@ export default function NextExample({
   }, []);
 
   const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>
-    Object.fromEntries(files.map((f) => [f.name, f.code]))
+    Object.fromEntries(files.map((f) => [f.name, f.codeSlides?.[0] ?? f.code]))
   );
 
   const deferredFiles = useDeferredValue(codeByFile);
 
   useEffect(() => {
     if (!ready) {
+      return;
+    }
+    const render = (iframeRef.current?.contentWindow as any)
+      ?._preview_only_render;
+    if (!render) {
       return;
     }
     const {
@@ -72,7 +77,7 @@ export default function NextExample({
       I18N,
       templatesAreArrayOfYaml,
     } = getNormalizedFiles(deferredFiles);
-    (iframeRef.current.contentWindow as any)._preview_only_render(
+    render(
       "yaml",
       {
         yaml: Bricks,
@@ -111,13 +116,19 @@ export default function NextExample({
     };
   }, [ready]);
 
-  const handleCodeChange = useCallback((code: string, filename: string) => {
-    setCodeByFile((prev) => ({
-      ...prev,
-      [filename]: code,
-    }));
-    setCodeLines(code.split("\n").length);
-  }, []);
+  const handleCodeChange = useCallback(
+    (code: string, filename: string) => {
+      setCodeByFile((prev) => ({
+        ...prev,
+        [filename]: code,
+      }));
+      const file = getFile(files, filename);
+      if (!file.minLines) {
+        setCodeLines(code.split("\n").length);
+      }
+    },
+    [files]
+  );
 
   useEffect(() => {
     setCodeLines(getCodeLines(files, currentFile));
@@ -239,9 +250,13 @@ function getContentMaxHeight(codeLines: number, iframeHeight: number): number {
   return Math.max(previewHeight, codeHeight);
 }
 
+function getFile(files: FileInfo[], currentFile: string) {
+  return files.find((f) => f.name === currentFile);
+}
+
 function getCodeLines(files: FileInfo[], currentFile: string): number {
-  return files.find((file) => file.name === currentFile).code.split("\n")
-    .length;
+  const file = getFile(files, currentFile);
+  return file.minLines ?? file.code.split("\n").length;
 }
 
 interface StoryboardFunction {

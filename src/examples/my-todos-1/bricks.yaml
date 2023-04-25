@@ -7,7 +7,14 @@ children:
 - brick: sl-checkbox
   properties:
     textContent: Hard work
+# slide
     checked: true
+# slide
+- brick: sl-checkbox
+# slide
+  properties:
+    textContent: Try it now
+# slide
 - brick: sl-checkbox
   properties:
     textContent: Have fun
