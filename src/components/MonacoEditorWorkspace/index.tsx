@@ -145,6 +145,7 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
     useEffect(() => {
       const file = files.find((f) => f.name === currentFile);
       if (file.codeSlides && typingEffectReady) {
+        editorRef.current.focus();
         setSlideStatus(SlideStatus.Active);
         const cursorDecoration =
           editorRef.current.createDecorationsCollection();
