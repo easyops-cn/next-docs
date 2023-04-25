@@ -53,7 +53,14 @@ export default function NextExample({
   const [expanded, setExpanded] = useState(false);
 
   const handleIframeLoad = useCallback(() => {
-    setReady(true);
+    const check = () => {
+      if ((iframeRef.current?.contentWindow as any)?._preview_only_render) {
+        setReady(true);
+      } else {
+        setTimeout(check, 100);
+      }
+    };
+    check();
   }, []);
 
   const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>
@@ -225,6 +232,7 @@ export default function NextExample({
           <iframe
             ref={iframeRef}
             src={previewSrc}
+            loading="lazy"
             onLoad={handleIframeLoad}
             style={{ height: iframeHeight }}
           />
