@@ -203,6 +203,7 @@ export default function NextExample({
                 currentFile={currentFile}
                 theme={colorMode === "dark" ? "vs-dark" : "vs"}
                 className={styles.editorContainer}
+                typingEffectReady={ready}
                 onChange={handleCodeChange}
                 ref={editorRef}
               />

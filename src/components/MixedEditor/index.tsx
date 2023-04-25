@@ -19,6 +19,7 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
       currentFile,
       theme,
       className,
+      typingEffectReady,
       onChange,
     }: MonacoEditorWorkspaceProps,
     ref
@@ -48,6 +49,7 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
             currentFile={currentFile}
             theme={theme}
             className={className}
+            typingEffectReady={typingEffectReady}
             onChange={onChange}
             ref={ref}
           />

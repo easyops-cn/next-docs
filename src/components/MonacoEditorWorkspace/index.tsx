@@ -22,6 +22,7 @@ export interface MonacoEditorWorkspaceProps {
   currentFile: string;
   theme?: string;
   className?: string;
+  typingEffectReady?: boolean;
   onChange?(value: string, filename: string): void;
 }
 
@@ -51,7 +52,7 @@ monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
 
 export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
   function MonacoEditorWorkspace(
-    { files, currentFile, className, theme, onChange },
+    { files, currentFile, className, theme, typingEffectReady, onChange },
     ref
   ): JSX.Element {
     const containerRef = useRef<HTMLDivElement>();
@@ -143,19 +144,21 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
 
     useEffect(() => {
       const file = files.find((f) => f.name === currentFile);
-      if (file.codeSlides) {
+      if (file.codeSlides && typingEffectReady) {
         setSlideStatus(SlideStatus.Active);
         const cursorDecoration =
           editorRef.current.createDecorationsCollection();
-        performCodeSlides(file.codeSlides, currentModel, cursorDecoration).then(
-          () => {
-            cursorDecoration.set([]);
-            editorRef.current.setPosition(getLastPosition(currentModel));
-            setSlideStatus(SlideStatus.Finished);
-          }
-        );
+        performTypingEffect(
+          file.codeSlides,
+          currentModel,
+          cursorDecoration
+        ).then(() => {
+          cursorDecoration.set([]);
+          editorRef.current.setPosition(getLastPosition(currentModel));
+          setSlideStatus(SlideStatus.Finished);
+        });
       }
-    }, [currentFile, currentModel, files]);
+    }, [currentFile, currentModel, files, typingEffectReady]);
 
     useEffect(() => {
       switch (slideStatus) {
@@ -193,7 +196,7 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
   }
 );
 
-async function performCodeSlides(
+async function performTypingEffect(
   codeSlides: string[],
   model: monaco.editor.ITextModel,
   cursorDecoration: monaco.editor.IEditorDecorationsCollection
