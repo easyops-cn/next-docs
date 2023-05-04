@@ -1,10 +1,9 @@
 import React from "react";
 import Link from "@docusaurus/Link";
+import { translate } from "@docusaurus/Translate";
 import clsx from "clsx";
 import type { FileInfo } from "../../interfaces";
 import NextExample from "../NextExample";
-// import * as MyTodos1 from "../../examples/my-todos-1";
-// import * as MyTodos2 from "../../examples/my-todos-2";
 import * as MyTodos3 from "../../examples/my-todos-3";
 import * as WeatherShenzhen from "../../examples/weather-shenzhen";
 import * as WeatherApp from "../../examples/weather-app";
@@ -31,20 +30,67 @@ type HomepageButtonType =
 export default function HomepageExamples(): JSX.Element {
   return (
     <>
-      {/* <HomepageExample {...MyTodos1} /> */}
-      {/* <HomepageExample {...MyTodos2} /> */}
-      <HomepageExample button="learn-more-about-context" {...MyTodos3} />
-      <HomepageExample {...WeatherShenzhen} />
+      <HomepageExample
+        button="learn-more-about-context"
+        {...MyTodos3}
+        title={translate({
+          id: "homepage.examples.1.title",
+          message: "Create interactive user interfaces",
+        })}
+        description={translate({
+          id: "homepage.examples.1.description",
+          message:
+            "While bricks with properties describe the UI, you can define actions in response to events triggered by user interactions, and manage page states by simple JavaScript expressions.",
+        })}
+        postDescription={translate({
+          id: "homepage.examples.1.postDescription",
+          message:
+            "Contexts are global states that can be shared across bricks on the page. The typical data flow in Brick Next is: properties → UI → events → actions → states → properties.",
+        })}
+      />
+      <HomepageExample
+        {...WeatherShenzhen}
+        title={translate({
+          id: "homepage.examples.2.title",
+          message: "Connect to backend services",
+        })}
+        description={translate({
+          id: "homepage.examples.2.description",
+          message:
+            "You can easily combine page states with any remote HTTP APIs.",
+        })}
+        postDescription={translate({
+          id: "homepage.examples.2.postDescription",
+          message:
+            "Context can be initialized with a static value, or from a backend service.",
+        })}
+      />
       <HomepageExample
         button="learn-more-about-templates"
         large
         {...WeatherApp}
+        title={translate({
+          id: "homepage.examples.3.title",
+          message: "Break the UI into a brick hierarchy",
+        })}
+        description={translate({
+          id: "homepage.examples.3.description",
+          message:
+            "Split up the UI as it grows, you can make templates to encapsulate parts of your UI, and reuse them just like other bricks.",
+        })}
       />
       <HomepageExample
-        title="Empower with a visual IDE"
-        description="Even better, build your app storyboards in a visual IDE, with minimal programming experience."
         image={visualBuilderImage}
         button="contact-us"
+        title={translate({
+          id: "homepage.examples.4.title",
+          message: "Empower with a visual IDE",
+        })}
+        description={translate({
+          id: "homepage.examples.4.description",
+          message:
+            "Even better, build your app storyboards in a visual IDE, with minimal programming experience.",
+        })}
       />
     </>
   );
