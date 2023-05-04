@@ -27,6 +27,14 @@
   gap: 2rem;
 }
 
+.buttons :global(.button) {
+  border-radius: 9999px;
+}
+
+.buttons :global(.button--outline) {
+  border-color: var(--ifm-color-emphasis-500);
+}
+
 @media screen and (max-width: 996px) {
   .description {
     text-align: initial;
