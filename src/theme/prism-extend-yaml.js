@@ -17,7 +17,7 @@ Prism.languages.insertBefore("yaml", "scalar", {
 Prism.languages.yaml.string = {
   ...yamlString,
   pattern: new RegExp(
-    yamlString.pattern.source.replace(/(\(\?:"|"\|')/, "$1(?!<%\\s+)"),
+    yamlString.pattern.source.replace(/(\(\?:"|"\|')/g, "$1(?!<%\\s+)"),
     yamlString.pattern.flags
   ),
 };
