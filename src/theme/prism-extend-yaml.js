@@ -3,9 +3,10 @@ const yamlString = Prism.languages.yaml.string;
 
 Prism.languages.insertBefore("yaml", "scalar", {
   "expression-string": {
-    pattern: /<%\s+[\s\S]*?\s+%>/,
+    pattern: /["']?<%~?\s+[\s\S]*?\s+%>["']?/,
     inside: {
-      punctuation: /^<%|%>$/,
+      string: /^["']|["']$/,
+      punctuation: /<%~?|%>/,
       expression: {
         pattern: /[\s\S]+/,
         inside: Prism.languages.javascript,
@@ -17,9 +18,7 @@ Prism.languages.insertBefore("yaml", "scalar", {
 Prism.languages.yaml.string = {
   ...yamlString,
   pattern: new RegExp(
-    yamlString.pattern.source.replace(/(\(\?:"|"\|')/g, "$1(?!<%\\s+)"),
+    yamlString.pattern.source.replace(/(\(\?:"|"\|')/g, "$1(?!<%~?\\s+)"),
     yamlString.pattern.flags
   ),
 };
-
-console.log(Prism.languages.yaml);

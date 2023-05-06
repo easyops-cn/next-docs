@@ -193,7 +193,7 @@ export const language = <monaco.languages.IMonarchLanguage>{
     // First line of a Block Style
     multiString: [
       [
-        /^( +)(<%(?:\s|$))/,
+        /^( +)(<%~?(?:\s|$))/,
         ["string", { token: "@rematch", next: "@multiExpression.$1" }],
       ],
       [/^( +).+$/, "string", "@multiStringContinued.$1"],
@@ -293,7 +293,7 @@ export const language = <monaco.languages.IMonarchLanguage>{
 
     expressionStart: [
       [
-        /(\s*)(<%)(\s+)/,
+        /(\s*)(<%~?)(\s+)/,
         [
           "white",
           { token: "delimiter", bracket: "@open" },
@@ -308,7 +308,7 @@ export const language = <monaco.languages.IMonarchLanguage>{
 
     multiExpression: [
       [
-        /(<%)/,
+        /(<%~?)/,
         {
           token: "white",
           next: "@expressionEmbedded",
