@@ -1,0 +1,136 @@
+---
+title: "Quick Start"
+---
+
+import NextExample from "@site/src/components/NextExample";
+
+## Nesting bricks
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`brick: div
+children:
+- brick: h1
+  properties:
+    textContent: Welcome to my app
+- brick: button
+  properties:
+    textContent: I'm a button`
+    }
+  ]}
+/>
+
+## Responding to events
+
+```yaml
+brick: button
+properties:
+  textContent: Click me
+// highlight-start
+events:
+  click:
+    action: console.log
+    args:
+    - You clicked me
+// highlight-end
+```
+
+## Displaying data
+
+```yaml
+brick: div
+properties:
+// highlight-next-line
+  textContent: <% CTX.user.name %>
+```
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`brick: button
+properties:
+  textContent: |
+    <%
+      "track context",
+      \`Clicked \${CTX.count} times\`
+    %>
+events:
+  click:
+    action: context.replace
+    args:
+    - count
+    - <% CTX.count + 1 %>`
+    },
+    {
+      name: "Context",
+      code:
+`- name: count
+  value: 0`
+    }
+  ]}
+/>
+
+## Conditional rendering
+
+```yaml
+- if: <% CTX.isAdmin %>
+  brick: admin-panel
+- if: <% !CTX.isAdmin %>
+  brick: user-panel
+```
+
+```yaml
+brick: ':if'
+dataSource: <% FN.check('my', 'complex', 'expression') %>
+children:
+- brick: admin-panel-a
+- brick: admin-panel-b
+- brick: user-panel-x
+  slot: else
+- brick: user-panel-y
+  slot: else
+```
+
+## Rendering list
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`brick: ul
+children:
+- brick: ':forEach'
+  dataSource: <% CTX.products %>
+  children:
+  - brick: li
+    properties:
+      textContent: <% ITEM.title %>
+      style:
+        color: |
+          <%
+            ITEM.isFruit ? 'magenta' : 'green'
+          %>`
+    },
+    {
+      name: "Context",
+      code:
+`- name: products
+  value:
+  - title: Cabbage
+    isFruit: false
+    id: 1
+  - title: Garlic
+    isFruit: false
+    id: 2
+  - title: Apple
+    isFruit: true
+    id: 3`
+    }
+  ]}
+/>

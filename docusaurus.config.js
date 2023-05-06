@@ -86,7 +86,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/easyops-cn/next-docs/tree/master/",
+          // editUrl: "https://github.com/easyops-cn/next-docs/tree/master/",
         },
         blog: {
           showReadingTime: true,
@@ -113,6 +113,12 @@ const config = {
           src: "img/logo.svg",
         },
         items: [
+          {
+            type: "docSidebar",
+            sidebarId: "learnSidebar",
+            position: "left",
+            label: "Learn",
+          },
           {
             type: "docSidebar",
             sidebarId: "conceptsSidebar",

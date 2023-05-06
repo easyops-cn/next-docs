@@ -111,6 +111,10 @@ events:
         action: history.unblock
 ```
 
+### onPageLeave
+
+当页面离开时触发。
+
 ### onMount
 
 当页面初始渲染、或[控制节点]因自动追踪变更而重新渲染时、或 `useBrick` 每次渲染时，触发。
@@ -157,7 +161,7 @@ lifeCycle:
             dataSource: "<% EVENT.detail %>"
 ```
 
-### OnScrollIntoView
+### onScrollIntoView
 
 构件在页面渲染完成后，给对应的构件绑定监听事件，当目标构件与当前视图交集大小超过阈值（threshold）时执行（适用于懒加载场景）。
 
@@ -194,12 +198,6 @@ lifeCycle:
 ```
 
 其他信息可以参考[媒体查询](media-query.md)。
-
-## 变更历史 {#history}
-
-| 组件       | 版本  | 变更                                           |
-| ---------- | ----- | ---------------------------------------------- |
-| brick_next | 3.0.0 | 新增 `onMount` `onUnmount`；移除 `useResolves` |
 
 [主题和模式]: theme-and-mode.md
 [事件的配置方式]: events.md
