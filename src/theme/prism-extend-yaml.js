@@ -1,0 +1,25 @@
+/* global Prism */
+const yamlString = Prism.languages.yaml.string;
+
+Prism.languages.insertBefore("yaml", "scalar", {
+  "expression-string": {
+    pattern: /<%\s+[\s\S]*?\s+%>/,
+    inside: {
+      punctuation: /^<%|%>$/,
+      expression: {
+        pattern: /[\s\S]+/,
+        inside: Prism.languages.javascript,
+      },
+    },
+  },
+});
+
+Prism.languages.yaml.string = {
+  ...yamlString,
+  pattern: new RegExp(
+    yamlString.pattern.source.replace(/(\(\?:"|"\|')/, "$1(?!<%\\s+)"),
+    yamlString.pattern.flags
+  ),
+};
+
+console.log(Prism.languages.yaml);
