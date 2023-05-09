@@ -3,10 +3,10 @@ const yamlString = Prism.languages.yaml.string;
 
 Prism.languages.insertBefore("yaml", "scalar", {
   "expression-string": {
-    pattern: /["']?<%~?\s+[\s\S]*?\s+%>["']?/,
+    pattern: /["']?<%[~=]?\s+[\s\S]*?\s+%>["']?/,
     inside: {
       string: /^["']|["']$/,
-      punctuation: /<%~?|%>/,
+      punctuation: /<%[~=]?|%>/,
       expression: {
         pattern: /[\s\S]+/,
         inside: Prism.languages.javascript,

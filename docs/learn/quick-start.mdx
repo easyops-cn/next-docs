@@ -54,11 +54,7 @@ properties:
       code:
 `brick: button
 properties:
-  textContent: |
-    <%
-      "track context",
-      \`Clicked \${CTX.count} times\`
-    %>
+  textContent: <%= \`Clicked \${CTX.count} times\` %>
 events:
   click:
     action: context.replace
