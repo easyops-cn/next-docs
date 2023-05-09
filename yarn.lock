@@ -1801,10 +1801,10 @@
   resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.2.2.tgz#0c000ef528b08225c95a5e0aa0fd101f5f47b177"
   integrity sha512-5V0s5As25OWlS3ku6iALLe9xVPfLEGytJXHTs6NtWBvb5hTVl5Z+DYmSPnL7v5mSwGu3slo0/LbiWRaHEjC0BQ==
 
-"@next-core/brick-playground@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@next-core/brick-playground/-/brick-playground-1.8.0.tgz#4606b069bb11e01732e440801ba971de4b76eb44"
-  integrity sha512-yhuCVZC3yIyFu5ma/yyhUA4FqQyMBOhEjYs+G+nXLnghVDQrAsLocD2VtGUYy3WONnFWZUI6PdzfQ4w9KmnryA==
+"@next-core/brick-playground@^1.8.10":
+  version "1.8.10"
+  resolved "https://registry.yarnpkg.com/@next-core/brick-playground/-/brick-playground-1.8.10.tgz#67ff62dc3912372705d761c134c7e866aaef6075"
+  integrity sha512-L5bpy+7rAbPJ/n9K9bG4mRlQAFO1wvUSCyplWmFjN7dzf2qawlTr9F4v5CKyIqGJo/tYls7Eg3LG548+fMSBnA==
   dependencies:
     "@next-core/serve-helpers" "^1.0.6"
     compression "^1.7.4"
