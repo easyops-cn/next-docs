@@ -11,7 +11,7 @@ children:
       - city
       - <% EVENT.detail %>
 - brick: ':if'
-  dataSource: <% "track context", !!CTX.weather %>
+  dataSource: <%= !!CTX.weather %>
   children:
   - brick: div
     properties:

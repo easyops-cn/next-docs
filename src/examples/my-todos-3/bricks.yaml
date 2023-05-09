@@ -19,7 +19,7 @@ children:
       properties:
         value: ''
 - brick: ':forEach'
-  dataSource: <% 'track context', CTX.todos %>
+  dataSource: <%= CTX.todos %>
   children:
   - brick: sl-checkbox
     properties:
