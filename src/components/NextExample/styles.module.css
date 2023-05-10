@@ -6,7 +6,7 @@
 
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: var(--ifm-leading);
+  margin: 2rem 0;
   box-shadow: var(--example-boxy-shadow-1), var(--example-boxy-shadow-2);
   border-radius: var(--example-border-radius);
   background-color: #fffffe;

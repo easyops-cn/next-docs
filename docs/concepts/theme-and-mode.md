@@ -1,5 +1,5 @@
 ---
-title: "Theme & Mode 页面主题和模式"
+title: "Theme & Mode"
 ---
 
 :::note

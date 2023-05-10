@@ -1,5 +1,5 @@
 ---
-title: "Provider 构件"
+title: "Provider Bricks"
 ---
 
 Provider 构件是一种特殊类型的构件，它不提供任何界面展示的能力，仅提供数据获取和处理的能力。配合 [Context] 或 [State] 可以实现页面依赖数据的定义，配合 [Events 事件]可以实现动态的数据处理。

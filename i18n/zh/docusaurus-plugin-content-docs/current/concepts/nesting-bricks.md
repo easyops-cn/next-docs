@@ -1,5 +1,5 @@
 ---
-title: "Nesting Bricks 构件嵌套"
+title: "构件嵌套"
 ---
 
 构件即 Custom Elements，通常情况下，构件应像普通的 HTML 元素那样去嵌套和组合使用：

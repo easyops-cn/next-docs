@@ -115,15 +115,9 @@ const config = {
         items: [
           {
             type: "docSidebar",
-            sidebarId: "learnSidebar",
+            sidebarId: "docsSidebar",
             position: "left",
-            label: "Learn",
-          },
-          {
-            type: "docSidebar",
-            sidebarId: "conceptsSidebar",
-            position: "left",
-            label: "Concepts",
+            label: "Docs",
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
@@ -132,8 +126,9 @@ const config = {
           },
           {
             href: "https://github.com/easyops-cn/next-core",
-            label: "GitHub",
             position: "right",
+            className: "header-github-link",
+            "aria-label": "GitHub repository",
           },
         ],
       },
@@ -144,8 +139,12 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "Tutorial",
-                to: "/docs/intro",
+                label: "Learn",
+                to: "/docs/learn/quick-start",
+              },
+              {
+                label: "Concepts",
+                to: "/docs/concepts/brick-life-cycle",
               },
             ],
           },

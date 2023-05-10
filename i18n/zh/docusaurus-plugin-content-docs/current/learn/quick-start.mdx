@@ -1,0 +1,216 @@
+---
+title: "快速开始"
+---
+
+import NextExample from "@site/src/components/NextExample";
+
+欢迎使用 Brick Next 文档！本文将向您介绍覆盖 80% 日常场景会用到的 Brick Next 的概念。
+
+## 构件嵌套
+
+Storyboards 由_构件_组成，构件就是 HTML 元素，也包括[自定义元素](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_components)。定义构件及其属性，并通过嵌套组成一个树状的结构。
+
+Storyboards 被定义为声明式的结构化数据。在我们的文档中的大多数示例中，我们将使用 [YAML](https://zh.wikipedia.org/wiki/YAML) 来定义 Storyboards，因为它与 JSON 或其他语言相比，语法更简单，同时更容易阅读。但请记住，它们只是结构化的数据。
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`brick: div
+children:
+- brick: h1
+  properties:
+    textContent: Welcome to my app
+- brick: button
+  properties:
+    textContent: I'm a button`
+    }
+  ]}
+/>
+
+在上述示例中，我们定义了一个等同于以下 HTML 结构的 Storyboard：
+
+```html
+<div>
+  <h1>Welcome to my app</h1>
+  <button>I'm a button</button>
+</div>
+```
+
+在本文示例中，为简单起见，我们都将使用原生 HTML 元素作为构件。但我们也提供了内置的构件库，包含许多开箱即用的、带有良好设计的自定义元素。
+
+## 事件响应
+
+您可以通过声明[_事件处理器_](../concepts/events.md)来响应事件。
+
+```yaml
+brick: button
+properties:
+  textContent: Click me
+// highlight-start
+events:
+  click:
+    action: console.log
+    args:
+    - You clicked me
+// highlight-end
+```
+
+## 数据展示
+
+嵌入 JavaScript [_表达式_](../concepts/expressions.md) 来展示动态数据。
+
+```yaml
+brick: div
+properties:
+// highlight-next-line
+  textContent: <% CTX.user.name %>
+```
+
+注意在我们的文档中，表达式有自己的语法高亮，但其实它们只是字符串。
+
+通常您应该通过定义 [_context_](../concepts/context.md) 来管理页面状态，并使用表达式将状态绑定到构件属性。您还可以设置当发生特定事件时更新这些状态，一旦状态更改，绑定的属性将自动更新。
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`brick: button
+properties:
+  textContent: <%= \`Clicked \${CTX.count} times\` %>
+events:
+  click:
+    action: context.replace
+    args:
+    - count
+    - <% CTX.count + 1 %>`
+    },
+    {
+      name: "Context",
+      code:
+`- name: count
+  value: 0`
+    }
+  ]}
+/>
+
+注意我们使用 `<%= %>` 替代 `<% %>` 来激活绑定模式。
+
+## 条件渲染
+
+有两种方式来实现[按条件渲染构件](../concepts/conditional-rendering.md)。
+
+第一种方式是定义 `if` 字段：
+
+```yaml
+- if: <% CTX.isAdmin %>
+  brick: admin-panel
+- if: <% !CTX.isAdmin %>
+  brick: user-panel
+```
+
+第二种是使用[_控制节点_]((../concepts/control-nodes.md)) `:if`。如果您的条件判断很复杂或者有多个构件需要渲染，这种方式更方便。
+
+定义条件字段 `dataSource`（通常是一个表达式），并定义要渲染的构件列表 `children`。如果条件满足，那些没有指定 `slot` 的构件将被渲染，否则 `slot` 为 `else` 的构件将被渲染。
+
+```yaml
+brick: ':if'
+dataSource: <% FN.check('my', 'complex', 'expression') %>
+children:
+- brick: admin-panel-a
+- brick: admin-panel-b
+- brick: user-panel-x
+  slot: else
+- brick: user-panel-y
+  slot: else
+```
+
+## 列表渲染
+
+您可以使用控制节点 `:forEach` 来渲染构件列表。
+
+和 `:if` 节点类似，您需要声明一个 `dataSource` 和 `children`。对于列表中的每个元素，`children` 将被渲染一次。您可以在表达式中使用 `ITEM` 来访问当前循环的数据项。
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`brick: ul
+children:
+- brick: ':forEach'
+  dataSource: <% CTX.products %>
+  children:
+  - brick: li
+    properties:
+      textContent: <% ITEM.title %>
+      style:
+        color: |
+          <%
+            ITEM.isFruit ? 'magenta' : 'green'
+          %>`
+    },
+    {
+      name: "Context",
+      code:
+`- name: products
+  value:
+  - title: Cabbage
+    isFruit: false
+    id: 1
+  - title: Garlic
+    isFruit: false
+    id: 2
+  - title: Apple
+    isFruit: true
+    id: 3`
+    }
+  ]}
+/>
+
+## 模板制作
+
+您可以创建[_模板_](../concepts/custom-templates.md)来封装部分 UI，并且像其它构件那样复用它们。
+
+模板可以有自己的限定作用域的、和 context 类似的状态数据。这些数据可以是内部的状态，也可以对外暴露作为该模板的属性。
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`- brick: tpl-description
+  properties:
+    label: Name
+    content: Harry Potter
+- brick: tpl-description
+  properties:
+    label: Gender
+    content: Male
+- brick: tpl-description
+  properties:
+    label: Age
+    content: 17`
+    },
+    {
+      name: "tpl-description",
+      defaultActive: true,
+      code:
+`state:
+- name: label
+  expose: true
+- name: content
+  expose: true
+bricks:
+- brick: strong
+  properties:
+    textContent: <%= STATE.label %>
+- brick: p
+  properties:
+    textContent: <%= STATE.content %>
+  `
+    }
+  ]}
+/>

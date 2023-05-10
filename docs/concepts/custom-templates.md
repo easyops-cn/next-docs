@@ -1,5 +1,5 @@
 ---
-title: "Custom Templates 自定义模板"
+title: "Templates"
 ---
 
 ## 背景 {#background}

@@ -4,7 +4,13 @@ title: "Quick Start"
 
 import NextExample from "@site/src/components/NextExample";
 
+Welcome to the Brick Next documentation! This page will give you an introduction to the 80% of Brick Next concepts that you will use on a daily basis.
+
 ## Nesting bricks
+
+Storyboards are made out of _bricks_. Bricks are just HTML elements, including [custom elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components). Define bricks as well as their properties, and nest them in a tree-like structure.
+
+Storyboards are defined as declarative structural data. In most examples through our documentation, we will use [YAML](https://en.wikipedia.org/wiki/YAML) to define storyboards, since it has a minimal syntax, and is more human-readable at the same time, compared to JSON or others. But keep in mind that they are just structural data.
 
 <NextExample
   files={[
@@ -23,7 +29,20 @@ children:
   ]}
 />
 
+In the above example, we defined a storyboard that is pretty the same as the following HTML:
+
+```html
+<div>
+  <h1>Welcome to my app</h1>
+  <button>I'm a button</button>
+</div>
+```
+
+In the examples on this page, we will use native HTML elements as bricks for simplicity. But we also provide a built-in brick library, containing lots of custom elements, with decent design, out of the box.
+
 ## Responding to events
+
+You can respond to events by declaring [_event handlers_](../concepts/events.md).
 
 ```yaml
 brick: button
@@ -40,12 +59,18 @@ events:
 
 ## Displaying data
 
+Embed JavaScript [_expressions_](../concepts/expressions.md) to display dynamic data.
+
 ```yaml
 brick: div
 properties:
 // highlight-next-line
   textContent: <% CTX.user.name %>
 ```
+
+Notice that the expressions have their own syntax highlighting through our documentation, but they are just _strings_.
+
+Usually you should define some [_contexts_](../concepts/context.md) to manage page states, and use expressions to bind the states to brick properties. You can also updating these states in response to events, thus the bound properties will be updated automatically once the states changed.
 
 <NextExample
   files={[
@@ -71,7 +96,13 @@ events:
   ]}
 />
 
+Notice that we use `<%= %>` instead of `<% %>` to enable binding mode.
+
 ## Conditional rendering
+
+There are two ways to [conditionally render bricks](../concepts/conditional-rendering.md).
+
+The first approach is to define a `if` field along with your brick.
 
 ```yaml
 - if: <% CTX.isAdmin %>
@@ -79,6 +110,10 @@ events:
 - if: <% !CTX.isAdmin %>
   brick: user-panel
 ```
+
+The second one is to use a *control node* of `:if`. It is more convenient if your condition is complex or you have multiple bricks to render.
+
+Specify the condition `dataSource` which is usually an expression, and define the bricks to render in `children`. If the condition is met, those children with an empty slot will be rendered, otherwise those children with slot of `else` will be rendered.
 
 ```yaml
 brick: ':if'
@@ -92,7 +127,11 @@ children:
   slot: else
 ```
 
-## Rendering list
+## Rendering lists
+
+You can use a control node of `:forEach` to render lists of bricks.
+
+Like the `:if` node, you should also specify a `dataSource` as well as `children`. For each item in the list (`dataSource`), the children will be rendered once. You can use `ITEM` in expressions to access the current item of each loop.
 
 <NextExample
   files={[
@@ -127,6 +166,53 @@ children:
   - title: Apple
     isFruit: true
     id: 3`
+    }
+  ]}
+/>
+
+Learn more about [control nodes](../concepts/control-nodes.md).
+
+## Making templates
+
+You can make [_templates_](../concepts/custom-templates.md) to encapsulate parts of your UI, and reuse them just like other bricks.
+
+A template can have its own scoped states which is very similar with contexts. Template states can be internal states, or exposed as properties of the template.
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`- brick: tpl-description
+  properties:
+    label: Name
+    content: Harry Potter
+- brick: tpl-description
+  properties:
+    label: Gender
+    content: Male
+- brick: tpl-description
+  properties:
+    label: Age
+    content: 17`
+    },
+    {
+      name: "tpl-description",
+      defaultActive: true,
+      code:
+`state:
+- name: label
+  expose: true
+- name: content
+  expose: true
+bricks:
+- brick: strong
+  properties:
+    textContent: <%= STATE.label %>
+- brick: p
+  properties:
+    textContent: <%= STATE.content %>
+  `
     }
   ]}
 />

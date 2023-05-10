@@ -148,21 +148,21 @@ export function HomepageExample({
               {button === "get-started" ? (
                 <Link
                   className="button button--outline button--secondary"
-                  to="/docs/intro"
+                  to="/docs/learn/quick-start"
                 >
                   Get started
                 </Link>
               ) : button == "learn-more-about-context" ? (
                 <Link
                   className="button button--outline button--secondary"
-                  to="/docs/intro"
+                  to="/docs/concepts/context"
                 >
                   Learn more about context
                 </Link>
               ) : button == "learn-more-about-templates" ? (
                 <Link
                   className="button button--outline button--secondary"
-                  to="/docs/intro"
+                  to="/docs/concepts/custom-templates"
                 >
                   Learn more about templates
                 </Link>

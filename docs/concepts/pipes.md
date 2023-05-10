@@ -1,5 +1,5 @@
 ---
-title: "Pipes 管道"
+title: "Pipes"
 ---
 
 在 [placeholders 占位符](placeholders.md) `"${ ... }"` 和 `"@{ ... }"`中可以配置管道列表，管道提供了连续处理数据的能力，相当于由框架统一提供的全局数据加工函数。

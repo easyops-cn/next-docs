@@ -1,5 +1,5 @@
 ---
-title: "Placeholders 占位符"
+title: "Placeholders"
 ---
 
 > 现在推荐使用 [Expressions 表达式]。

@@ -70,3 +70,16 @@ button {
 .button--primary:not(.button--outline) {
   color: #fff;
 }
+
+.header-github-link::before {
+  content: "";
+  display: flex;
+  width: 24px;
+  height: 24px;
+  background: url(../../static/img/github-mark.svg) no-repeat;
+  background-size: 100% 100%;
+}
+
+html[data-theme="dark"] .header-github-link::before {
+  background-image: url(../../static/img/github-mark-white.svg);
+}

@@ -1,5 +1,5 @@
 ---
-title: "Storyboard Functions 微应用函数"
+title: "函数"
 ---
 
 ## 背景 {#background}

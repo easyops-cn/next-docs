@@ -1,5 +1,5 @@
 ---
-title: "History 会话历史"
+title: "Browser History"
 ---
 
 在 Brick Next 中，`History` 概念不同于[浏览器原生的 History]，而是指的是一个[第三方库 history]，它和原生 History 的能力类似，但提供了更丰富的能力，另外我们又在它的基础上扩展了更多能力。

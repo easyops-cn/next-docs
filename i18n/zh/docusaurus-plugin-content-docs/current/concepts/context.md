@@ -1,5 +1,5 @@
 ---
-title: "Context 上下文"
+title: "Context"
 ---
 
 有时候我们需要在多个构件之间交换数据。在 React 中，我们通常使用 [Context](https://reactjs.org/docs/context.md) 来解决这样的问题。在 Storyboard 中我们也可以使用类似的机制来解决编排时处理构件间的数据交换问题。

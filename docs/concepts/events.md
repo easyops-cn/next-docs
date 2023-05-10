@@ -1,5 +1,5 @@
 ---
-title: "Events 事件"
+title: "Events"
 ---
 
 在 Storyboard 中可以为构件配置事件的处理，例如：
