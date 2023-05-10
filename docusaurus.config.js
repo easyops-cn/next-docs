@@ -7,7 +7,11 @@ const { createHash } = require("crypto");
 const MonacoEditorWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 const baseUrl = "/next-docs/";
-const brickPackages = ["@next-bricks/shoelace", "@next-bricks/basic"];
+const brickPackages = [
+  "@next-bricks/shoelace",
+  "@next-bricks/basic",
+  "@next-bricks/icons",
+];
 
 const bootstrapJson = {
   brickPackages: brickPackages
