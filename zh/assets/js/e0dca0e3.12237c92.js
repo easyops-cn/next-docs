@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknext_docs=self.webpackChunknext_docs||[]).push([[4498],{8454:e=>{e.exports=JSON.parse('{"permalink":"/next-docs/zh/blog/tags/hello","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

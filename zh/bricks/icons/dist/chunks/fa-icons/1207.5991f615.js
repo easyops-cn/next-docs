@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_next_bricks_icons=self.webpackChunk_next_bricks_icons||[]).push([[15622],{55980:e=>{e.exports=JSON.parse('{"prefix":"fas","iconName":"genderless","icon":[384,512,[],"f22d","M176 144a112 112 0 1 1 0 224 112 112 0 1 1 0-224zm0 288a176 176 0 1 0 0-352 176 176 0 1 0 0 352z"]}')}}]);

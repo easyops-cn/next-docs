@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_next_bricks_icons=self.webpackChunk_next_bricks_icons||[]).push([[99805],{50261:s=>{s.exports=JSON.parse('{"prefix":"fas","iconName":"ellipsis","icon":[448,512,["ellipsis-h"],"f141","M0 256a56 56 0 1 1 112 0A56 56 0 1 1 0 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"]}')}}]);

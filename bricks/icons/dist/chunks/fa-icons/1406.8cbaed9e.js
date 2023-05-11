@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_next_bricks_icons=self.webpackChunk_next_bricks_icons||[]).push([[64360],{11979:c=>{c.exports=JSON.parse('{"prefix":"fas","iconName":"location-pin","icon":[384,512,["map-marker"],"f041","M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"]}')}}]);

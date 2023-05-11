@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_next_bricks_icons=self.webpackChunk_next_bricks_icons||[]).push([[48351],{31065:s=>{s.exports=JSON.parse('{"prefix":"fas","iconName":"toggle-on","icon":[576,512,[],"f205","M192 64C86 64 0 150 0 256S86 448 192 448H384c106 0 192-86 192-192s-86-192-192-192H192zm192 96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"]}')}}]);

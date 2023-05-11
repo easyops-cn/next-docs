@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_next_core_brick_playground=self.webpackChunk_next_core_brick_playground||[]).push([[595],{595:(e,r,_)=>{_.r(r)}}]);

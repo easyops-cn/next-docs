@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_next_bricks_icons=self.webpackChunk_next_bricks_icons||[]).push([[92301],{74758:c=>{c.exports=JSON.parse('{"prefix":"fas","iconName":"circle-dot","icon":[512,512,[128280,"dot-circle"],"f192","M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-160c-53 0-96-43-96-96s43-96 96-96s96 43 96 96s-43 96-96 96z"]}')}}]);

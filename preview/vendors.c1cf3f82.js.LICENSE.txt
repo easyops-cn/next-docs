@@ -1,0 +1,24 @@
+/*! (c) Andrea Giammarchi - ISC */
+
+/**
+ * @license
+ * Lodash <https://lodash.com/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/**! @contract easyops.api.api_gateway.contract.SearchSingleContract@1.0.0 */
+
+/**! @contract easyops.api.cmdb.instance.GetDetail@1.0.0 */
+
+/**! @contract easyops.api.cmdb.instance.PostSearch@1.1.0 */
+
+/**! @contract easyops.api.micro_app.permission.ValidatePermissions@1.0.0 */
+
+/**! @contract easyops.api.micro_app_standalone.runtime.SearchMicroAppStandalone@1.0.1 */
+
+//! moment.js
+
+//! moment.js locale configuration
