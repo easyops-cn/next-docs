@@ -6,7 +6,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const { createHash } = require("crypto");
 const MonacoEditorWebpackPlugin = require("monaco-editor-webpack-plugin");
 
-const baseUrl = "/next-docs/";
+const baseUrl = "/brick-next/";
 const brickPackages = [
   "@next-bricks/shoelace",
   "@next-bricks/basic",
@@ -70,7 +70,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "easyops-cn", // Usually your GitHub org/user name.
-  projectName: "next-core", // Usually your repo name.
+  projectName: "brick-next", // Usually your repo name.
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
