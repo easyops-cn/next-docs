@@ -34,7 +34,7 @@ Provider 构件一般用于 [Context]、[State] 和 [Events 事件]。
 Provider 构件本质上是将任意一个函数包裹而成的自定义元素，如果我们期望这个函数能像一个普通的 libs 包中的函数一样对外共享，可以使用 `unwrapProvider`：
 
 ```tsx
-import { unwrapProvider } from "@next-core/utils/storyboard";
+import { unwrapProvider } from "@next-core/utils/general";
 // 引入类型以便获得类型提示
 import type { getIllustration } from "@next-bricks/illustrations/data-providers/get-illustration";
 

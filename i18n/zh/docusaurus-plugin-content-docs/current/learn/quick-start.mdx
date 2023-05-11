@@ -38,7 +38,7 @@ children:
 </div>
 ```
 
-在本文示例中，为简单起见，我们都将使用原生 HTML 元素作为构件。但我们也提供了内置的构件库，包含许多开箱即用的、带有良好设计的自定义元素。
+在本文示例中，为简单起见，我们都将使用原生 HTML 元素作为构件。但我们也提供了内置的构件库，包含许多开箱即用的、带有良好设计的自定义元素。此外，您还可以创建自己的构件，即自定义元素。
 
 ## 事件响应 {#responding-to-events}
 
@@ -209,8 +209,66 @@ bricks:
     textContent: <%= STATE.label %>
 - brick: p
   properties:
-    textContent: <%= STATE.content %>
-  `
+    textContent: <%= STATE.content %>`
     }
   ]}
 />
+
+## 数据获取 {#fetching-data}
+
+您可以将页面数据设置为从远端 HTTP 接口拉取，并将这些状态数据绑定到任意构件的属性。
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`- brick: h1
+  properties:
+    textContent: <% \`Weather in \${CTX.city}\` %>
+- brick: div
+  properties:
+    style:
+      display: grid
+      gridTemplateColumns: 24px 1fr
+      gap: 10px
+  children:
+  - brick: img
+    properties:
+      src: <% CTX.weather.current.condition.icon %>
+      style:
+        width: 24px
+  - brick: span
+    properties:
+      textContent: <% CTX.weather.current.condition.text %>
+  - brick: img
+    properties:
+      src: ../img/thermometer-half.svg
+      style:
+        width: 24px
+  - brick: span
+    properties:
+      textContent: |
+        <% \`\${Math.round(CTX.weather.current.temp_c)}°C\` %>`
+    },
+    {
+      name: "Context",
+      defaultActive: true,
+      code:
+`- name: city
+  value: Shenzhen
+- name: weather
+  resolve:
+    useProvider: basic.http-request
+    args:
+    - |
+      <%
+        \`//api.weatherapi.com/v1/current.json?q=\${
+          CTX.city
+        }&key=\${MISC.weather_api_key}\`
+      %>`
+    }
+  ]}
+/>
+
+如果您获取和处理数据的逻辑比较复杂，您还可以创建自己的 [_provider 构件_](../concepts/provider-bricks.md)，这将涉及到专业代码。

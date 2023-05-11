@@ -38,7 +38,7 @@ In the above example, we defined a storyboard that is pretty the same as the fol
 </div>
 ```
 
-In the examples on this page, we will use native HTML elements as bricks for simplicity. But we also provide a built-in brick library, containing lots of custom elements, with decent design, out of the box.
+In the examples on this page, we will use native HTML elements as bricks for simplicity. But we also provide a built-in brick library, containing lots of custom elements, with decent design, out of the box. Additionally, you can also create your own bricks, a.k.a custom elements.
 
 ## Responding to events
 
@@ -209,8 +209,66 @@ bricks:
     textContent: <%= STATE.label %>
 - brick: p
   properties:
-    textContent: <%= STATE.content %>
-  `
+    textContent: <%= STATE.content %>`
     }
   ]}
 />
+
+## Fetching data
+
+You can combine page states with remote HTTP APIs, and then bind these states with any brick properties.
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`- brick: h1
+  properties:
+    textContent: <% \`Weather in \${CTX.city}\` %>
+- brick: div
+  properties:
+    style:
+      display: grid
+      gridTemplateColumns: 24px 1fr
+      gap: 10px
+  children:
+  - brick: img
+    properties:
+      src: <% CTX.weather.current.condition.icon %>
+      style:
+        width: 24px
+  - brick: span
+    properties:
+      textContent: <% CTX.weather.current.condition.text %>
+  - brick: img
+    properties:
+      src: ../img/thermometer-half.svg
+      style:
+        width: 24px
+  - brick: span
+    properties:
+      textContent: |
+        <% \`\${Math.round(CTX.weather.current.temp_c)}°C\` %>`
+    },
+    {
+      name: "Context",
+      defaultActive: true,
+      code:
+`- name: city
+  value: Shenzhen
+- name: weather
+  resolve:
+    useProvider: basic.http-request
+    args:
+    - |
+      <%
+        \`//api.weatherapi.com/v1/current.json?q=\${
+          CTX.city
+        }&key=\${MISC.weather_api_key}\`
+      %>`
+    }
+  ]}
+/>
+
+You can also create your own [_provider bricks_](../concepts/provider-bricks.md) if you have complex logical to fetch and process data, which involves pro code.
