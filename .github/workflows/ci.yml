@@ -48,6 +48,7 @@ jobs:
       with:
         personal_token: ${{ secrets.GH_TOKEN_EVE }}
         external_repository: easyops-cn/brick-next
+        cname: brick-next.js.org
         publish_dir: ./build
         publish_branch: gh-pages
         force_orphan: true
