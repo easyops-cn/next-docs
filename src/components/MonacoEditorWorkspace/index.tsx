@@ -117,6 +117,19 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
           mouseWheelScrollSensitivity: 0.5,
           renderLineHighlight: "none",
         });
+
+        // Monaco editor will stop keyboard event propagation, thus the
+        // search-bar shortcut won't work, so we manually dispatch an event.
+        editorRef.current.onKeyDown((e) => {
+          if (e.equals(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK)) {
+            const keydown = new KeyboardEvent("keydown", {
+              ctrlKey: e.ctrlKey,
+              metaKey: e.metaKey,
+              key: "k",
+            });
+            document.dispatchEvent(keydown);
+          }
+        });
       }
     }, [currentModel]);
 

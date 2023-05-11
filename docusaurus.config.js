@@ -188,6 +188,19 @@ const config = {
       prism: {},
     }),
 
+  themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      // /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      {
+        hashed: true,
+        language: ["en", "zh"],
+        removeDefaultStopWordFilter: true,
+        explicitSearchResultPath: true,
+      },
+    ],
+  ],
+
   plugins: [
     () => ({
       name: "docusaurus-next-runtime",

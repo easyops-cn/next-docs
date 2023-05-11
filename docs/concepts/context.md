@@ -146,20 +146,20 @@ properties:
 
 ## 构件属性追踪 Context 变更 {#brick-properties-track-context-change}
 
-如果希望构件的属性能跟随 Context 的变化而变化，可以在表达式前面添加一句 `"track context",` （[逗号运算符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comma_Operator)），可以激活 Context 追踪模式，当表达式中引用的 Context 变化时，该属性将自动重新计算并赋值。
+如果希望构件的属性能跟随 Context 的变化而变化，可以为表达式添加标记位 `=`，使用 `<%= %>` 来激活绑定模式，当表达式中引用的 Context 变化时，该属性将自动重新计算并赋值。
 
 例如：
 
 ```yaml
 brick: my.any-brick
 properties:
-  anyProp: "<% 'track context', CTX.myContext + CTX.myAnotherContext %>"
+  anyProp: "<%= CTX.myContext + CTX.myAnotherContext %>"
 ```
 
-当 `myContext` 或 `myAnotherContext` 任一值改变时，`my.any-brick` 将重新计算并赋值给属性 `anyProp`。`"track context"` 可以用于自定义模板和 `useBrick` 的构件属性，但注意，它仅适用于构件的第一层属性赋值。
+当 `myContext` 或 `myAnotherContext` 任一值改变时，`my.any-brick` 将重新计算并赋值给属性 `anyProp`。绑定模式也可以用于自定义模板和 `useBrick` 的构件属性，但注意，它仅适用于构件的第一层属性赋值。
 
 :::note
-这里参考了 [`"use strict";`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) 的用法，并利用了[逗号运算符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comma_Operator)返回最后一个运算对象的特性。
+我们还支持使用类似 `<% "track context", CTX.myData %>` 的形式来激活绑定模式。
 :::
 
 ## 懒加载 {#lazy}
@@ -179,7 +179,7 @@ context:
 ```yaml {6-8}
 brick: "my-brick"
 properties:
-  dataSource: '<% "track context", CTX.myLazyData %>'
+  dataSource: "<%= CTX.myLazyData %>"
 events:
   button.click:
     action: "context.load"
@@ -231,7 +231,7 @@ events:
 
 ## 依赖追踪 {#track-deps}
 
-前面我们提到了 `"track context"` 用于构件属性自动追踪 Context 的更新，另一方面，我们还提供了让 Context 可以追踪其自身依赖的 Context 的能力。
+前面我们提到了 `<%= %>` 用于构件属性自动追踪 Context 的更新，另一方面，我们还提供了让 Context 可以追踪其自身依赖的 Context 的能力。
 
 例如：
 

@@ -4,9 +4,9 @@ title: "快速开始"
 
 import NextExample from "@site/src/components/NextExample";
 
-欢迎使用 Brick Next 文档！本文将向您介绍覆盖 80% 日常场景会用到的 Brick Next 的概念。
+欢迎使用 Brick Next 文档！本文将向您介绍覆盖 80% 日常场景会用到的 Brick Next 相关概念。
 
-## 构件嵌套
+## 构件嵌套 {#nesting-bricks}
 
 Storyboards 由_构件_组成，构件就是 HTML 元素，也包括[自定义元素](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_components)。定义构件及其属性，并通过嵌套组成一个树状的结构。
 
@@ -40,7 +40,7 @@ children:
 
 在本文示例中，为简单起见，我们都将使用原生 HTML 元素作为构件。但我们也提供了内置的构件库，包含许多开箱即用的、带有良好设计的自定义元素。
 
-## 事件响应
+## 事件响应 {#responding-to-events}
 
 您可以通过声明[_事件处理器_](../concepts/events.md)来响应事件。
 
@@ -57,7 +57,7 @@ events:
 // highlight-end
 ```
 
-## 数据展示
+## 数据展示 {#displaying-data}
 
 嵌入 JavaScript [_表达式_](../concepts/expressions.md) 来展示动态数据。
 
@@ -98,7 +98,7 @@ events:
 
 注意我们使用 `<%= %>` 替代 `<% %>` 来激活绑定模式。
 
-## 条件渲染
+## 条件渲染 {#conditional-rendering}
 
 有两种方式来实现[按条件渲染构件](../concepts/conditional-rendering.md)。
 
@@ -111,7 +111,7 @@ events:
   brick: user-panel
 ```
 
-第二种是使用[_控制节点_]((../concepts/control-nodes.md)) `:if`。如果您的条件判断很复杂或者有多个构件需要渲染，这种方式更方便。
+第二种是使用[_控制节点_](../concepts/control-nodes.md) `:if`。如果您的条件判断很复杂或者有多个构件需要渲染，这种方式更方便。
 
 定义条件字段 `dataSource`（通常是一个表达式），并定义要渲染的构件列表 `children`。如果条件满足，那些没有指定 `slot` 的构件将被渲染，否则 `slot` 为 `else` 的构件将被渲染。
 
@@ -127,9 +127,9 @@ children:
   slot: else
 ```
 
-## 列表渲染
+## 列表渲染 {#rendering-lists}
 
-您可以使用控制节点 `:forEach` 来渲染构件列表。
+您可以使用[_控制节点_](../concepts/control-nodes.md) `:forEach` 来渲染构件列表。
 
 和 `:if` 节点类似，您需要声明一个 `dataSource` 和 `children`。对于列表中的每个元素，`children` 将被渲染一次。您可以在表达式中使用 `ITEM` 来访问当前循环的数据项。
 
@@ -170,7 +170,7 @@ children:
   ]}
 />
 
-## 模板制作
+## 模板制作 {#making-templates}
 
 您可以创建[_模板_](../concepts/custom-templates.md)来封装部分 UI，并且像其它构件那样复用它们。
 

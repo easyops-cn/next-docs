@@ -41,7 +41,7 @@ const sidebars = {
         "concepts/i18n",
         "concepts/placeholders",
         "concepts/pipes",
-        "concepts/theme-and-mode",
+        // "concepts/theme-and-mode",
         "concepts/media-query",
       ],
     },

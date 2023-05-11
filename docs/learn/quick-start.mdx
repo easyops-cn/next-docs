@@ -111,7 +111,7 @@ The first approach is to define a `if` field along with your brick.
   brick: user-panel
 ```
 
-The second one is to use a *control node* of `:if`. It is more convenient if your condition is complex or you have multiple bricks to render.
+The second one is to use a [_control node_](../concepts/control-nodes.md) of `:if`. It is more convenient if your condition is complex or you have multiple bricks to render.
 
 Specify the condition `dataSource` which is usually an expression, and define the bricks to render in `children`. If the condition is met, those children with an empty slot will be rendered, otherwise those children with slot of `else` will be rendered.
 
@@ -129,7 +129,7 @@ children:
 
 ## Rendering lists
 
-You can use a control node of `:forEach` to render lists of bricks.
+You can use a [_control node_](../concepts/control-nodes.md) of `:forEach` to render lists of bricks.
 
 Like the `:if` node, you should also specify a `dataSource` as well as `children`. For each item in the list (`dataSource`), the children will be rendered once. You can use `ITEM` in expressions to access the current item of each loop.
 
@@ -169,8 +169,6 @@ children:
     }
   ]}
 />
-
-Learn more about [control nodes](../concepts/control-nodes.md).
 
 ## Making templates
 
