@@ -1,0 +1,5 @@
+- name: todos
+  resolve:
+    useProvider: basic.http-request
+    args:
+    - ./todos.json

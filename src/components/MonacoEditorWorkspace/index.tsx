@@ -65,6 +65,7 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
     const [slideStatus, setSlideStatus] = useState<SlideStatus>(
       SlideStatus.None
     );
+    const changedFiles = useMemo(() => new Set<string>(), []);
 
     const currentModel = useMemo(() => {
       let model = modelsMap.get(currentFile);
@@ -133,6 +134,32 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
       }
     }, [currentModel]);
 
+    const decorationsRef = useRef<monaco.editor.IEditorDecorationsCollection>();
+
+    useEffect(() => {
+      if (changedFiles.has(currentFile)) {
+        // Do not create decorations if the file content has been changed.
+        return;
+      }
+      const file = files.find((f) => f.name === currentFile);
+      if (file.highlightRanges) {
+        editorRef.current?.revealLineNearTop(
+          file.highlightRanges[0][0],
+          monaco.editor.ScrollType.Immediate
+        );
+        decorationsRef.current = editorRef.current?.createDecorationsCollection(
+          file.highlightRanges.map(([start, end, type]) => ({
+            range: new monaco.Range(start, 1, end, 1),
+            options: {
+              isWholeLine: true,
+              linesDecorationsClassName:
+                type === "modified" ? styles.modified : styles.added,
+            },
+          }))
+        );
+      }
+    }, [changedFiles, currentFile, files]);
+
     useImperativeHandle(
       ref,
       () => ({
@@ -148,12 +175,15 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
 
     useEffect(() => {
       const listener = currentModel.onDidChangeContent(() => {
+        // Clear the decorations once the file content is changed.
+        decorationsRef.current?.clear();
+        changedFiles.add(currentFile);
         onChange?.(currentModel.getValue(), currentFile);
       });
       return () => {
         listener.dispose();
       };
-    }, [currentFile, currentModel, onChange]);
+    }, [changedFiles, currentFile, currentModel, onChange]);
 
     useEffect(() => {
       const file = files.find((f) => f.name === currentFile);

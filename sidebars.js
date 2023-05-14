@@ -19,7 +19,7 @@ const sidebars = {
     {
       type: "category",
       label: "Learn",
-      items: ["learn/quick-start"],
+      items: ["learn/quick-start", "learn/tutorial"],
     },
     {
       type: "category",

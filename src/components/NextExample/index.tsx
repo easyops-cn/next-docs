@@ -23,14 +23,14 @@ import styles from "./styles.module.css";
 
 export interface NextExampleProps {
   files: FileInfo[];
-  styleText?: string;
+  hiddenFiles?: Record<string, string>;
   condensed?: boolean;
   className?: string;
 }
 
 export default function NextExample({
   files,
-  styleText,
+  hiddenFiles,
   condensed,
   className,
 }: NextExampleProps): JSX.Element {
@@ -84,8 +84,12 @@ export default function NextExample({
       Functions,
       Templates,
       I18N,
+      Style,
       templatesAreArrayOfYaml,
-    } = getNormalizedFiles(deferredFiles);
+    } = getNormalizedFiles({
+      ...hiddenFiles,
+      ...deferredFiles,
+    });
     render(
       "yaml",
       {
@@ -97,11 +101,11 @@ export default function NextExample({
         functions: Functions,
         templates: Templates,
         i18n: I18N,
-        styleText,
+        styleText: Style,
         templatesAreArrayOfYaml: templatesAreArrayOfYaml,
       }
     );
-  }, [ready, colorMode, deferredFiles, styleText]);
+  }, [ready, colorMode, deferredFiles, hiddenFiles]);
 
   useEffect(() => {
     if (!ready) {
@@ -299,6 +303,8 @@ function getNormalizedFiles(files: Record<string, string>) {
         name: filename,
         yaml: content,
       });
+    } else if (filename === "style.css") {
+      normalized.Style = content;
     } else {
       normalized[filename] = content;
     }

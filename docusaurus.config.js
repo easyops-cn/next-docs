@@ -47,6 +47,24 @@ class EmitBootstrapJsonPlugin {
             const { RawSource } = compiler.webpack.sources;
             const source = new RawSource(bootstrapJsonContent);
             compilation.emitAsset(`preview/${bootstrapJsonPath}`, source);
+
+            const todos = [
+              {
+                title: "Hard work",
+                done: true,
+              },
+              {
+                title: "Have launch",
+                done: false,
+              },
+              {
+                title: "Go on vacation",
+                done: false,
+              },
+            ];
+            const todosSource = new RawSource(JSON.stringify(todos, null, 2));
+            compilation.emitAsset("preview/todos.json", todosSource);
+
             callback();
           }
         );
@@ -254,7 +272,7 @@ const config = {
             }),
             new EmitBootstrapJsonPlugin(),
             new MonacoEditorWebpackPlugin({
-              languages: ["javascript", "typescript" /* , 'yaml' */],
+              languages: ["javascript", "typescript", "css" /* , 'yaml' */],
               features: [
                 "!accessibilityHelp",
                 "!codelens",

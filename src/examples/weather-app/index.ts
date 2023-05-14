@@ -24,4 +24,6 @@ export const files = [
   },
 ] as FileInfo[];
 
-export { styleText };
+export const hiddenFiles = {
+  "style.css": styleText,
+};

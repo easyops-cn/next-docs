@@ -5,7 +5,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import Translate from "@docusaurus/Translate";
 import HomepageExamples from "../components/HomepageExamples";
-import { files, styleText } from "../examples/my-todos-1";
+import { files, hiddenFiles } from "../examples/my-todos-1";
 import NextExample from "../components/NextExample";
 import styles from "./index.module.css";
 
@@ -39,7 +39,7 @@ function HomepageHeader() {
       <div className="container">
         <NextExample
           files={files}
-          styleText={styleText}
+          hiddenFiles={hiddenFiles}
           className={styles.heroExample}
           condensed
         />

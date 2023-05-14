@@ -6,13 +6,17 @@ import NextExample from "@site/src/components/NextExample";
 
 欢迎使用 Brick Next 文档！本文将向您介绍覆盖 80% 日常场景会用到的 Brick Next 相关概念。
 
-为简单起见，在本页的大多数示例中，我们将使用原生 HTML 元素来构建用户界面。然而，Brick Next 的全部潜力只有结合使用[自定义元素](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_components)时才能发挥出来。我们提供了一个第一方[构件库](https://github.com/easyops-cn/next-bricks)，包含许多开箱即用的、设计得体的自定义元素。市面上也有许多免费、现成的第三方 web components 库，可以轻松集成到 Brick Next 中。此外，您还可以创建自己的构件库。
+为简单起见，在本页的大多数示例中，我们将使用原生 HTML 元素来构建用户界面。
+
+然而，Brick Next 的全部潜力只有结合使用[自定义元素](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_components)时才能发挥出来。我们提供了一个第一方[构件库](https://github.com/easyops-cn/next-bricks)，包含许多开箱即用的、设计得体的自定义元素。市面上也有许多免费、现成的第三方 web components 库，可以轻松集成到 Brick Next 中。此外，您还可以创建自己的构件库。
 
 ## 构件嵌套 {#nesting-bricks}
 
-Storyboards 由_构件_组成，构件就是 HTML 元素，也包括自定义元素。定义构件及其属性，并通过嵌套组成一个树状的结构。
+Storyboards 被定义为声明式的结构化数据，由_构件_组成。
 
-Storyboards 被定义为声明式的结构化数据。在我们的文档中的大多数示例中，我们将使用 [YAML](https://zh.wikipedia.org/wiki/YAML) 来定义 Storyboards，因为它与 JSON 或其他语言相比，语法更简单，同时更容易阅读。但请记住，它们只是结构化的数据。
+:::info
+在我们的文档中的大多数示例中，我们将使用 [YAML](https://zh.wikipedia.org/wiki/YAML) 来定义 Storyboards，因为它与 JSON 或其他语言相比，语法更简单，同时更容易阅读。但请记住，它们只是结构化的数据。
+:::
 
 <NextExample
   files={[
@@ -31,7 +35,7 @@ children:
   ]}
 />
 
-在上述示例中，我们定义了一个等同于以下 HTML 结构的 Storyboard：
+在上述示例中，我们定义了一个等同于以下 HTML 结构的页面：
 
 ```html
 <div>
@@ -131,7 +135,7 @@ children:
 
 您可以使用[_控制节点_](../concepts/control-nodes.md) `:forEach` 来渲染构件列表。
 
-和 `:if` 节点类似，您需要声明一个 `dataSource` 和 `children`。对于列表中的每个元素，`children` 将被渲染一次。您可以在表达式中使用 `ITEM` 来访问当前循环的数据项。
+和 `:if` 节点类似，您需要声明一个 `dataSource` 和 `children`。对于列表中的每个元素，`children` 将被渲染一次。您可以在 `children` 内部的表达式中使用 `ITEM` 来访问当前循环的数据项。
 
 <NextExample
   files={[
@@ -148,9 +152,7 @@ children:
       textContent: <% ITEM.title %>
       style:
         color: |
-          <%
-            ITEM.isFruit ? 'magenta' : 'green'
-          %>`
+          <% ITEM.isFruit ? 'magenta' : 'green' %>`
     },
     {
       name: "Context",
