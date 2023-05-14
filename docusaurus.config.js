@@ -13,12 +13,14 @@ const brickPackages = [
   "@next-bricks/icons",
 ];
 
+const locale = process.env.DOCUSAURUS_CURRENT_LOCALE;
+
 const bootstrapJson = {
   brickPackages: brickPackages
     .map((pkg) => require(`${pkg}/dist/bricks.json`))
     .map((pkg) => ({
       ...pkg,
-      filePath: `${baseUrl}${pkg.filePath}`,
+      filePath: `${baseUrl}${locale ? `${locale}/` : ""}${pkg.filePath}`,
     })),
   settings: {
     misc: {

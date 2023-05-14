@@ -1,5 +1,5 @@
 ---
-title: "Tutorial"
+title: "教程"
 ---
 
 import NextExample from "@site/src/components/NextExample";
@@ -20,39 +20,40 @@ import {
   Context,
   hiddenFiles,
 } from "@site/src/examples/tutorial-my-todos";
+import MyTodosLightPng from "@site/static/img/docs/my-todos-light.png";
 
-You will build a small *My Todos* app during this tutorial. The techniques you’ll learn in the tutorial are fundamental to building any Brick Next app, and fully understanding it will give you a deep understanding of Brick Next.
+本教程将让您搭建一个小型的 *My Todos* 应用。在本教程中您将学习到的技术是构建任何 Brick Next 应用的基础，完全理解它将让您对 Brick Next 有深刻的理解。
 
-You can see what it will look like when you’re finished here:
+您可以先看看最终的效果：
 
 <img
-  src="/img/docs/my-todos-light.png"
+  src={MyTodosLightPng}
   width={309}
   alt="Screen shot of My Todos app"
   style={{display: "block", margin: "var(--ifm-leading) auto"}}
 />
 
-## Setup for the tutorial
+## 设置 {#setup-for-the-tutorial}
 
-[Fork this tutorial project](https://stackblitz.com/edit/brick-next-tutorial-my-todos?file=bootstrap.js,context.yml,storyboard.yml) on StackBlitz. StackBlitz lets you do development in your browser and preview how your users will see the app you’ve created.
+在 StackBlitz 上 [Fork 本教程项目](https://stackblitz.com/edit/brick-next-tutorial-my-todos?file=bootstrap.js,context.yml,storyboard.yml)。StackBlitz 可以让您在浏览器中进行开发，并预览您的用户将看到的应用程序。
 
 :::tip
 
-You can also follow this tutorial using your local development environment. To do this, you need to:
+您也可以使用本地开发环境来学习本教程。要做到这一点，您需要：
 
-1. Install [Node.js](https://nodejs.org/en/)
-2. In the StackBlitz tab you opened earlier, on the Project panel, press the download button to download an archive of the files locally
-3. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
-4. Install the dependencies with `npm install`
-5. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+1. 安装 [Node.js](https://nodejs.org/zh-cn/)
+2. 在您之前打开的 StackBlitz 标签页中，在 Project 面包上，找到下载按钮并点击它，下载项目文件到本地
+3. 解压下载的文件，然后打开一个终端，`cd` 到解压后的目录
+4. 使用 `npm install` 安装依赖
+5. 执行 `npm start` 启动本地服务器，按照提示在浏览器中查看代码运行效果
 
-If you get stuck, don’t let this stop you! Follow along online instead and try a local setup again later.
+如果您遇到了问题，不要就此打住！跟着在线教程继续学习，稍后再尝试本地开发环境。
 
 :::
 
-## Starting with a static storyboard
+## 以静态 storyboard 开始 {#starting-with-a-static-storyboard}
 
-In the starter project, a static storyboard has been created for you:
+在该入门项目中，已经为您创建了一个静态 storyboard：
 
 <NextExample
   files={[
@@ -64,7 +65,7 @@ In the starter project, a static storyboard has been created for you:
   hiddenFiles={hiddenFiles}
 />
 
-It defines a page that is pretty the same as the following HTML:
+它定义了一个与以下 HTML 几乎相同的页面：
 
 ```html
 <sl-card>
@@ -75,13 +76,13 @@ It defines a page that is pretty the same as the following HTML:
 </sl-card>
 ```
 
-[`sl-card`](https://shoelace.style/components/card) and [`sl-checkbox`](https://shoelace.style/components/checkbox) are web components from a third-party library [Shoelace](https://shoelace.style/), which has been integrated to our built-in brick library. You can check more details on their website.
+其中，[`sl-card`](https://shoelace.style/components/card) 和 [`sl-checkbox`](https://shoelace.style/components/checkbox) 是来自第三方库 [Shoelace](https://shoelace.style/) 的 web components，它们已经被集成到了 Brick Next 的内置 brick 库中。您可以在 Shoelace 的网站上查看更多细节。
 
-## Fetching data
+## 获取数据 {#fetching-data}
 
-Next step you'll want to make the todo list from remote instead of static specified.
+接下来您会希望从远端获取待办列表数据，而不是使用静态指定的。
 
-First assume that you have a RESTful API to fetch todos data, which will return the following JSON:
+首先，假设您有一个 RESTful API 来获取待办列表数据，它将返回以下 JSON：
 
 ```json
 [
@@ -100,7 +101,7 @@ First assume that you have a RESTful API to fetch todos data, which will return 
 ]
 ```
 
-Then you'll define a context that will be resolved by your API:
+然后，您将定义一个来自 API 请求返回数据得到的 context：
 
 <NextExample
   files={[
@@ -118,13 +119,13 @@ Then you'll define a context that will be resolved by your API:
   hiddenFiles={hiddenFiles}
 />
 
-Here you're using a built-in [provider brick](../concepts/provider-bricks.md) `basic.http-request` which can fetch arbitrary HTTP API. It accepts a URL as its first argument. For simplicity, a static JSON file is used in this tutorial.
+这里您使用了一个内置的 [provider 构件](../concepts/provider-bricks.md) `basic.http-request`，它可以调用任意 HTTP API。它接受一个 URL 作为第一个参数。为了简单起见，在本教程中使用了一个静态的 JSON 文件。
 
-## Passing data
+## 传递数据 {#passing-data}
 
-You have fetched the todo list from an API, but how to render it on the page?
+您已经获取了来自 API 的待办列表数据，但是如何将它传递给页面呢？
 
-In order to render a list of todos, you can define a [control node](../concepts/control-nodes.md) of `:forEach`, set its `dataSource` to the context you defined before by using an [expression](../concepts/expressions.md), and set its `children` to a list of bricks that will be rendered for each item in the data source.
+为了能渲染待办列表，您可以定义一个[控制节点](../concepts/control-nodes.md) `:forEach`，使用[表达式](../concepts/expressions.md)将它的 `dataSource` 设置为之前定义的 context，并将它的 `children` 设置为一个构件列表，对于数据源中的每一项，这些构件都将被渲染一次。
 
 <NextExample
   files={[
@@ -141,13 +142,13 @@ In order to render a list of todos, you can define a [control node](../concepts/
   hiddenFiles={hiddenFiles}
 />
 
-You can use `ITEM` in expressions inside the children, to access the current item of each loop.
+您可以在 `children` 内部的表达式中使用 `ITEM` 来访问每次循环的当前项数据。
 
-## Responding to events
+## 响应事件 {#responding-to-events}
 
-Let's add an input box so that users can add todos as they wish.
+让我们添加一个输入框，以便用户可以添加待办事项。
 
-Add a brick [sl-input](https://shoelace.style/components/input), listen on its [`keydown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event) event, push a todo item into the list when the user pressed *Enter*.
+添加一个构件 [sl-input](https://shoelace.style/components/input)，监听它的 [`keydown`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/keydown_event) 事件，当用户按下 *Enter* 键时，将一个待办事项推入列表中。
 
 <NextExample
   files={[
@@ -164,9 +165,9 @@ Add a brick [sl-input](https://shoelace.style/components/input), listen on its [
   hiddenFiles={hiddenFiles}
 />
 
-Note that you should also update the expression of `dataSource` to enable binding mode with `<%= %>` instead of `<% %>`, otherwise the list will not be refreshed when the context gets updated.
+注意，您还需要使用 `<%= %>` 更新 `dataSource` 的表达式，以启用绑定模式，而不是 `<% %>`，否则当 context 更新时，列表将不会刷新。
 
-Next you'll add a feature that allows the user to clear completed todos.
+接下来您将添加一个功能，允许用户清除已完成的待办事项。
 
 <NextExample
   files={[
@@ -183,9 +184,9 @@ Next you'll add a feature that allows the user to clear completed todos.
   hiddenFiles={hiddenFiles}
 />
 
-But the clear button is not working as you expected, it will only clear `Hard work` which is initialized with `done: true`. If the user clicked other todos as done, they will not get cleared though.
+但是，clear 按钮并不会按照您的预期工作，它只会清除初始时 `done: true` 的 `Hard work`。如果用户点击完成了其他待办事项，再点击 clear 按钮它们将不会被清除。
 
-That's because the done states of the todos don't get updated when the user clicked the checkboxes. You need to update the context when the user clicked the checkboxes.
+这是因为当用户点击复选框时，待办事项的 `done` 状态并没有被更新。您需要在用户点击复选框时更新 context。
 
 <NextExample
   files={[
@@ -202,11 +203,11 @@ That's because the done states of the todos don't get updated when the user clic
   hiddenFiles={hiddenFiles}
 />
 
-## Conditional rendering
+## 条件渲染 {#conditional-rendering}
 
-Finally, let's make the clear button only appear when there are completed todos.
+最后，让我们只在有已完成的待办事项时才显示 clear 按钮。
 
-To do that, you can add a [`if` condition](../concepts/conditional-rendering.md) for the clear button:
+为此，您可以给 clear 按钮添加一个  [`if` 条件](../concepts/conditional-rendering.md)：
 
 <NextExample
   files={[

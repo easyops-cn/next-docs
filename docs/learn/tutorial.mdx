@@ -20,13 +20,14 @@ import {
   Context,
   hiddenFiles,
 } from "@site/src/examples/tutorial-my-todos";
+import MyTodosLightPng from "@site/static/img/docs/my-todos-light.png";
 
 You will build a small *My Todos* app during this tutorial. The techniques you’ll learn in the tutorial are fundamental to building any Brick Next app, and fully understanding it will give you a deep understanding of Brick Next.
 
 You can see what it will look like when you’re finished here:
 
 <img
-  src="/img/docs/my-todos-light.png"
+  src={MyTodosLightPng}
   width={309}
   alt="Screen shot of My Todos app"
   style={{display: "block", margin: "var(--ifm-leading) auto"}}
@@ -118,7 +119,7 @@ Then you'll define a context that will be resolved by your API:
   hiddenFiles={hiddenFiles}
 />
 
-Here you're using a built-in [provider brick](../concepts/provider-bricks.md) `basic.http-request` which can fetch arbitrary HTTP API. It accepts a URL as its first argument. For simplicity, a static JSON file is used in this tutorial.
+Here you're using a built-in [provider brick](../concepts/provider-bricks.md) `basic.http-request` which can call arbitrary HTTP API. It accepts a URL as its first argument. For simplicity, a static JSON file is used in this tutorial.
 
 ## Passing data
 
@@ -183,7 +184,7 @@ Next you'll add a feature that allows the user to clear completed todos.
   hiddenFiles={hiddenFiles}
 />
 
-But the clear button is not working as you expected, it will only clear `Hard work` which is initialized with `done: true`. If the user clicked other todos as done, they will not get cleared though.
+But the clear button is not working as you expected, it will only clear `Hard work` which is initialized with `done: true`. If the user clicked other todos as done, they will not get cleared when user clicked the clear button.
 
 That's because the done states of the todos don't get updated when the user clicked the checkboxes. You need to update the context when the user clicked the checkboxes.
 
