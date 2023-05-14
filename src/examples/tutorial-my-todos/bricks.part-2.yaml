@@ -1,0 +1,12 @@
+    events:
+      sl-change:
+        action: context.replace
+        args:
+        - todos
+        - |
+          <%
+            CTX.todos.map(item => ({
+              ...item,
+              done: item === ITEM ? !item.done : item.done
+            }))
+          %>

@@ -5,7 +5,14 @@ export interface FileInfo {
   minLines?: number;
   lang?: string;
   defaultActive?: boolean;
+  highlightRanges?: HighlightRange[];
 }
+
+export type HighlightRange = [
+  start: number,
+  end: number,
+  type?: "added" | "modified"
+];
 
 export type ExampleFileName =
   | "Bricks"

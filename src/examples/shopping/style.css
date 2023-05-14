@@ -1,0 +1,18 @@
+.flex-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+sl-input::part(form-control) {
+  display: grid;
+  grid: auto / min-content 1fr;
+  gap: 0.1em 0.5em;
+  align-items: center;
+}
+
+.product-list {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}

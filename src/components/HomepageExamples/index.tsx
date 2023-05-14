@@ -12,6 +12,7 @@ import visualBuilderImage from "../../../static/img/weather-app.png";
 
 interface ExampleInfo {
   files?: FileInfo[];
+  hiddenFiles?: Record<string, string>;
   image?: string;
   title?: string | JSX.Element;
   description?: string | JSX.Element;
@@ -98,11 +99,11 @@ export default function HomepageExamples(): JSX.Element {
 
 export function HomepageExample({
   files,
+  hiddenFiles,
   image,
   title,
   description,
   postDescription,
-  styleText,
   button,
   large,
 }: ExampleInfo): JSX.Element {
@@ -122,7 +123,7 @@ export function HomepageExample({
         {files && (
           <NextExample
             files={files}
-            styleText={styleText}
+            hiddenFiles={hiddenFiles}
             condensed
             className={clsx(styles.homeExample, {
               [styles.homeExampleLarge]: large,

@@ -1,0 +1,11 @@
+- brick: sl-button
+  slot: footer
+  properties:
+    textContent: Clear completed
+    size: small
+  events:
+    click:
+      action: context.replace
+      args:
+      - todos
+      - <% CTX.todos.filter(t => !t.done) %>

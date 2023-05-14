@@ -1831,15 +1831,15 @@
   resolved "https://registry.yarnpkg.com/@next-bricks/icons/-/icons-0.1.4.tgz#dd44942fe9c0304a0fcdb145ffb1d14f653813c3"
   integrity sha512-1fJt+0uz6XqTymIonUNT147ivjFPzWTnS6eCn4i4DJ24y8tZxDeWrRsC1uCQBlU8eZRcNT1Fj7VQhuom/r+/kA==
 
-"@next-bricks/shoelace@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.2.4.tgz#6e3e40848da100b6e8aa06916aa087a429322620"
-  integrity sha512-wa6jbjg1oWQO04Eg2jgBd8sXs8RKRwBKoLog/aFctliWU3wySPHhVM1Zzu9DraGRWJaJm5Ip7O3FB+yp8p/4Hw==
+"@next-bricks/shoelace@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.3.0.tgz#dcc0f4889159135517b03eb2c3515edcec406d3f"
+  integrity sha512-ErWqVhKUiAIQQ1GEYoHhfxmq4BhyVAOWD8WWQ0W3Ud3AmXZEz8X+zSdT67xF9G/KZvhOEJhucw/fb9XgR7M8sA==
 
-"@next-core/brick-playground@^1.8.12":
-  version "1.8.12"
-  resolved "https://registry.yarnpkg.com/@next-core/brick-playground/-/brick-playground-1.8.12.tgz#5d01520d1b7e4bf40f32d0fc724569aa8210b853"
-  integrity sha512-DxPRFR4E5HZd/4umlE8fN4ktOW8UtaGRniN5WFhQ91YUUwy4tn+OxH9Jon/8CZW30cZgbpUxCpS+DNtFQ+o8dA==
+"@next-core/brick-playground@^1.8.14":
+  version "1.8.14"
+  resolved "https://registry.yarnpkg.com/@next-core/brick-playground/-/brick-playground-1.8.14.tgz#0ab67ed2e7a9539cd3bb92d18ca6a25018ab80ad"
+  integrity sha512-mN9NXShgXoQt32RapJ2SSgOi0/wH6CRCQcmjnwcWp7wQhe8zEJFSmdKYbfBftDA+44+ujEYb72Rwiy8bEkokQQ==
   dependencies:
     "@next-core/serve-helpers" "^1.0.7"
     compression "^1.7.4"

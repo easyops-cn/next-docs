@@ -13,7 +13,13 @@ children:
       action: context.replace
       args:
       - todos
-      - <% [EVENT.target.value].concat(CTX.todos) %>
+      - |
+        <%
+          CTX.todos.concat({
+            title: EVENT.target.value,
+            done: false,
+          })
+        %>
     - if: <% EVENT.code === 'Enter' %>
       target: _self
       properties:
@@ -23,4 +29,5 @@ children:
   children:
   - brick: sl-checkbox
     properties:
-      textContent: <% ITEM %>
+      textContent: <% ITEM.title %>
+      checked: <% ITEM.done %>

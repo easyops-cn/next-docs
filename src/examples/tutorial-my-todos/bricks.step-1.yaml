@@ -1,0 +1,15 @@
+brick: sl-card
+children:
+- brick: strong
+  slot: header
+  properties:
+    textContent: My Todos
+- brick: sl-checkbox
+  properties:
+    textContent: Hard work
+- brick: sl-checkbox
+  properties:
+    textContent: Have lunch
+- brick: sl-checkbox
+  properties:
+    textContent: Go on vacation
