@@ -1,25 +1,25 @@
 brick: sl-card
 children:
-- brick: strong
-  slot: header
-  properties:
-    textContent: My Todos
-- brick: sl-checkbox
-  properties:
-    textContent: Hard work
+  - brick: strong
+    slot: header
+    properties:
+      textContent: My Todos
+  - brick: sl-checkbox
+    properties:
+      textContent: Hard work
 # slide
-    checked: true
+      checked: true
 # slide
-- brick: sl-checkbox
+  - brick: sl-checkbox
 # slide
-  properties:
-    textContent: Try it now
+    properties:
+      textContent: Try it now
 # slide
-- brick: sl-button
+  - brick: sl-button
 # slide
-  properties:
-    textContent: Have fun
+    properties:
+      textContent: Have fun
 # slide
-    size: small
+      size: small
 # slide
-  slot: footer
+    slot: footer
