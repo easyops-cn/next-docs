@@ -1,4 +1,3 @@
-# Storyboard.yaml
 brick: sl-card
 children:
 - brick: strong
@@ -16,6 +15,11 @@ children:
   properties:
     textContent: Try it now
 # slide
-- brick: sl-checkbox
+- brick: sl-button
+# slide
   properties:
     textContent: Have fun
+# slide
+    size: small
+# slide
+  slot: footer

@@ -13,25 +13,24 @@ import {
   EDITOR_PADDING_TOP,
   EDITOR_SCROLLBAR_SIZE,
   EXAMPLE_CODE_LINE_HEIGHT,
-  EXAMPLE_IFRAME_MARGIN,
   EXAMPLE_IFRAME_MIN_HEIGHT,
   EXAMPLE_MIN_HEIGHT,
 } from "@site/src/constants";
 import type { FileInfo } from "@site/src/interfaces";
 import LoadingRing from "../LoadingRing";
-import SimpleEditorWorkspace from "../SimpleEditorWorkspace";
-import styles from "./styles.module.css";
 import { ContextHeroReady } from "../HomepageExamples";
+import HeroEditor from "../HeroEditor";
+import styles from "./styles.module.css";
 
 export interface HeroExampleProps {
-  files: FileInfo[];
+  file?: FileInfo;
   hiddenFiles?: Record<string, string>;
   expectBrick?: string;
   className?: string;
 }
 
 export default function HeroExample({
-  files,
+  file,
   hiddenFiles,
   expectBrick,
   className,
@@ -40,16 +39,13 @@ export default function HeroExample({
   const { colorMode } = useColorMode();
   const previewSrc = useBaseUrl("/preview/");
   const iframeRef = useRef<HTMLIFrameElement>();
-  const [iframeHeight, setIframeHeight] = useState(EXAMPLE_IFRAME_MIN_HEIGHT);
   const [iframeReady, setIframeReady] = useState(false);
-  const [currentFile, setCurrentFile] = useState(
-    () => (files.find((f) => f.defaultActive) ?? files[0]).name
+  const [code, setCode] = useState(() =>
+    file.codeSlides ? file.codeSlides[0] : file.code
   );
-  const [codeLines, setCodeLines] = useState(() =>
-    getCodeLines(files, currentFile)
-  );
+  const [codeLines, setCodeLines] = useState(() => getFileLines(file));
   const [contentMaxHeight, setContentMaxHeight] = useState(() =>
-    getContentMaxHeight(codeLines, iframeHeight)
+    getContentMaxHeight(codeLines)
   );
   const [expectBrickReady, setExpectBrickReady] = useState(!expectBrick);
   const { setHeroReady } = useContext(ContextHeroReady);
@@ -89,11 +85,7 @@ export default function HeroExample({
     }
   }, [expectBrickReady, iframeReady, setHeroReady]);
 
-  const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>
-    Object.fromEntries(files.map((f) => [f.name, f.codeSlides?.[0] ?? f.code]))
-  );
-
-  const deferredFiles = useDeferredValue(codeByFile);
+  const deferredCode = useDeferredValue(code);
 
   useEffect(() => {
     if (!iframeReady) {
@@ -114,7 +106,7 @@ export default function HeroExample({
       templatesAreArrayOfYaml,
     } = getNormalizedFiles({
       ...hiddenFiles,
-      ...deferredFiles,
+      [file.name]: deferredCode,
     });
     render(
       "yaml",
@@ -131,129 +123,73 @@ export default function HeroExample({
         templatesAreArrayOfYaml: templatesAreArrayOfYaml,
       }
     );
-  }, [iframeReady, colorMode, deferredFiles, hiddenFiles]);
-
-  useEffect(() => {
-    if (!iframeReady) {
-      return;
-    }
-    const ro = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setIframeHeight(
-          Math.max(
-            EXAMPLE_IFRAME_MIN_HEIGHT,
-            entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height
-          )
-        );
-      }
-    });
-    ro.observe(iframeRef.current.contentDocument.body, {
-      box: "border-box",
-    });
-    return () => {
-      ro.disconnect();
-    };
-  }, [iframeReady]);
+  }, [iframeReady, colorMode, deferredCode, hiddenFiles, file]);
 
   const handleCodeChange = useCallback(
-    (code: string, filename: string) => {
-      setCodeByFile((prev) => ({
-        ...prev,
-        [filename]: code,
-      }));
-      const file = getFile(files, filename);
+    (code: string) => {
+      setCode(code);
       if (!file.minLines) {
         setCodeLines(code.split("\n").length);
       }
     },
-    [files]
+    [file]
   );
 
   useEffect(() => {
-    setCodeLines(getCodeLines(files, currentFile));
-  }, [files, currentFile]);
-
-  useEffect(() => {
-    setContentMaxHeight(getContentMaxHeight(codeLines, iframeHeight));
-  }, [codeLines, iframeHeight]);
+    setContentMaxHeight(getContentMaxHeight(codeLines));
+  }, [codeLines]);
 
   const columnStyle = {
     height: Math.max(contentMaxHeight, EXAMPLE_MIN_HEIGHT),
   };
 
   return (
-    <div
-      className={clsx(styles.example, className, styles.condensed)}
-      ref={containerRef}
-    >
-      <div className={styles.tabs}>
-        {files.map((file) => (
-          <button
-            className={clsx(styles.tab, {
-              [styles.active]: file.name === currentFile,
-            })}
-            key={file.name}
-            onClick={() => {
-              setCurrentFile(file.name);
-            }}
-          >
-            {file.name === "Bricks" ? "Storyboard" : file.name}
-          </button>
-        ))}
+    <div className={clsx(styles.heroExample, className)} ref={containerRef}>
+      <div className={styles.window}>
+        <div className={styles.windowHeader}>
+          <div className={styles.dot} />
+          <div className={styles.dot} />
+          <div className={styles.dot} />
+          <div className={styles.windowTitle}>Storyboard.yaml</div>
+        </div>
+        <div className={styles.editorPanel} style={columnStyle}>
+          <HeroEditor
+            file={file}
+            theme={colorMode === "dark" ? "vs-dark" : "vs"}
+            showLineNumbers
+            typingEffectReady={iframeReady && expectBrickReady}
+            className={styles.editorContainer}
+            onChange={handleCodeChange}
+          />
+        </div>
       </div>
-      <div className={styles.editorColumn} style={columnStyle}>
-        <SimpleEditorWorkspace
-          files={files}
-          currentFile={currentFile}
-          theme={colorMode === "dark" ? "vs-dark" : "vs"}
-          showLineNumbers
-          typingEffectReady={iframeReady && expectBrickReady}
-          className={styles.editorContainer}
-          onChange={handleCodeChange}
-        />
-      </div>
-      <div
-        className={clsx(styles.previewColumn, styles.collapsed)}
-        style={{
-          padding: EXAMPLE_IFRAME_MARGIN,
-        }}
-      >
-        {
-          <div
-            className={clsx(styles.preview, {
+      <div className={clsx(styles.previewPanel)}>
+        <div className={styles.preview}>
+          <iframe
+            ref={iframeRef}
+            src={previewSrc}
+            loading="lazy"
+            onLoad={handleIframeLoad}
+            className={clsx({
               [styles.ready]: iframeReady && expectBrickReady,
             })}
-          >
-            <iframe
-              ref={iframeRef}
-              src={previewSrc}
-              loading="lazy"
-              onLoad={handleIframeLoad}
-              style={{ height: iframeHeight }}
-            />
-          </div>
-        }
+          />
+        </div>
         {!(iframeReady && expectBrickReady) && <LoadingRing />}
       </div>
     </div>
   );
 }
 
-function getContentMaxHeight(codeLines: number, iframeHeight: number): number {
-  const previewHeight = iframeHeight + EXAMPLE_IFRAME_MARGIN * 2;
+function getContentMaxHeight(codeLines: number): number {
   const codeHeight =
     codeLines * EXAMPLE_CODE_LINE_HEIGHT +
     EDITOR_SCROLLBAR_SIZE +
     EDITOR_PADDING_TOP;
-  return Math.max(previewHeight, codeHeight);
+  return codeHeight;
 }
 
-function getFile(files: FileInfo[], currentFile: string) {
-  return files.find((f) => f.name === currentFile);
-}
-
-function getCodeLines(files: FileInfo[], currentFile: string): number {
-  const file = getFile(files, currentFile);
+function getFileLines(file: FileInfo): number {
   return file.minLines ?? file.code.split("\n").length;
 }
 

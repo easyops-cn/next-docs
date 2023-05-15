@@ -5,7 +5,7 @@ import BricksPart1 from "./bricks.part-1.yaml";
 import BricksPart2 from "./bricks.part-2.yaml";
 import BricksPart3 from "./bricks.part-3.yaml";
 import Context from "./context.yaml";
-import styleText from "!!raw-loader!../my-todos-1/style.raw.css";
+import styleText from "!!raw-loader!../my-todos-2/style.raw.css";
 
 const hiddenFiles = { "style.css": styleText };
 

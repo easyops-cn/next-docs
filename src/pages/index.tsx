@@ -31,7 +31,7 @@ function HomepageHeader() {
           </Link>
           <Link
             className="button button--secondary button--outline button--lg"
-            href="https://stackblitz.com/edit/brick-next-renderer?file=storyboard.yml"
+            href="https://stackblitz.com/edit/brick-next-renderer?file=bootstrap.js,context.yml,storyboard.yml"
             target="_blank"
           >
             <Translate>Try a Demo</Translate>
@@ -40,7 +40,7 @@ function HomepageHeader() {
       </div>
       <div className="container">
         <HeroExample
-          files={files}
+          file={files[0]}
           hiddenFiles={hiddenFiles}
           className={styles.heroExample}
           expectBrick="sl-card"

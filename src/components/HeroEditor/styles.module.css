@@ -1,0 +1,57 @@
+.editor {
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.editor,
+.editor :global(.prism-code) {
+  border-radius: 0;
+}
+
+.editor :global(.prism-code) > code {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.editor [class^="codeLineNumber"] {
+  min-width: 48px;
+}
+
+.editor [class^="buttonGroup"] {
+  display: none;
+}
+
+.editor :global(.token.plain),
+.editor :global(.token.plain):not(:empty) + :global(.token.punctuation) {
+  color: #0451a5 !important;
+}
+
+.showCursor :global(.token-line):last-child :global(.token):last-child {
+  position: relative;
+}
+
+.showCursor :global(.token-line):last-child :global(.token):last-child::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: -3px;
+  width: 2px;
+  height: 22px;
+  background-color: #000000;
+}
+
+html[data-theme="dark"]
+  .showCursor
+  :global(.token-line):last-child
+  :global(.token):last-child::after {
+  background-color: #aeafad;
+}
+
+html[data-theme="dark"] .editor :global(.token.plain),
+html[data-theme="dark"]
+  .editor
+  :global(.token.plain):not(:empty)
+  + :global(.token.punctuation) {
+  color: #ce9178 !important;
+}
