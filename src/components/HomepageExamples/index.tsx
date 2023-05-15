@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import Link from "@docusaurus/Link";
 import { translate } from "@docusaurus/Translate";
 import clsx from "clsx";
@@ -28,11 +28,12 @@ type HomepageButtonType =
   | "learn-more-about-templates"
   | "contact-us";
 
-export default function HomepageExamples({
-  heroReady,
-}: {
+export const ContextHeroReady = createContext<{
   heroReady?: boolean;
-}): JSX.Element {
+  setHeroReady?: React.Dispatch<React.SetStateAction<boolean>>;
+}>({});
+
+export default function HomepageExamples(): JSX.Element {
   return (
     <>
       <HomepageExample
@@ -101,7 +102,7 @@ export default function HomepageExamples({
   );
 }
 
-export function HomepageExample({
+function HomepageExample({
   files,
   hiddenFiles,
   image,
@@ -111,6 +112,7 @@ export function HomepageExample({
   button,
   large,
 }: ExampleInfo): JSX.Element {
+  const { heroReady } = useContext(ContextHeroReady);
   return (
     <section className={styles.homeContainer}>
       <div className="container">
@@ -129,6 +131,7 @@ export function HomepageExample({
             files={files}
             hiddenFiles={hiddenFiles}
             condensed
+            wait={!heroReady}
             className={clsx(styles.homeExample, {
               [styles.homeExampleLarge]: large,
             })}

@@ -19,15 +19,13 @@ import ChevronUp from "./chevron-up.svg";
 import ChevronDown from "./chevron-down.svg";
 import type { MonacoEditorWorkspaceRef } from "../MonacoEditorWorkspace";
 import LoadingRing from "../LoadingRing";
-import SimpleEditorWorkspace from "../SimpleEditorWorkspace";
 import styles from "./styles.module.css";
 
 export interface NextExampleProps {
   files: FileInfo[];
   hiddenFiles?: Record<string, string>;
   condensed?: boolean;
-  lightweight?: boolean;
-  expectBrick?: string;
+  wait?: boolean;
   className?: string;
 }
 
@@ -35,8 +33,7 @@ export default function NextExample({
   files,
   hiddenFiles,
   condensed,
-  lightweight,
-  expectBrick,
+  wait,
   className,
 }: NextExampleProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
@@ -56,36 +53,17 @@ export default function NextExample({
     getContentMaxHeight(codeLines, iframeHeight)
   );
   const [expanded, setExpanded] = useState(false);
-  const [expectBrickReady, setExpectBrickReady] = useState(!expectBrick);
 
   const handleIframeLoad = useCallback(() => {
     const check = () => {
       if ((iframeRef.current?.contentWindow as any)?._preview_only_render) {
         setReady(true);
-        // Set iframe visible only after the expected brick appears.
-        if (expectBrick) {
-          const iframeDocument = iframeRef.current.contentDocument;
-          if (iframeDocument.querySelector(expectBrick)) {
-            setExpectBrickReady(true);
-          } else {
-            const observer = new MutationObserver(() => {
-              if (iframeDocument.querySelector(expectBrick)) {
-                setExpectBrickReady(true);
-                observer.disconnect();
-              }
-            });
-            observer.observe(iframeDocument.body, {
-              subtree: true,
-              childList: true,
-            });
-          }
-        }
       } else {
         setTimeout(check, 100);
       }
     };
     check();
-  }, [expectBrick]);
+  }, []);
 
   const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>
     Object.fromEntries(files.map((f) => [f.name, f.codeSlides?.[0] ?? f.code]))
@@ -229,13 +207,8 @@ export default function NextExample({
         ))}
       </div>
       <div className={styles.editorColumn} style={columnStyle}>
-        {lightweight ? (
-          <SimpleEditorWorkspace
-            files={files}
-            currentFile={currentFile}
-            theme={colorMode === "dark" ? "vs-dark" : "vs"}
-            showLineNumbers
-          />
+        {wait ? (
+          <LoadingRing />
         ) : (
           <BrowserOnly fallback={<LoadingRing />}>
             {() => {
@@ -246,7 +219,7 @@ export default function NextExample({
                   currentFile={currentFile}
                   theme={colorMode === "dark" ? "vs-dark" : "vs"}
                   className={styles.editorContainer}
-                  typingEffectReady={ready && expectBrickReady}
+                  typingEffectReady={ready}
                   onChange={handleCodeChange}
                   ref={editorRef}
                 />
@@ -265,20 +238,22 @@ export default function NextExample({
           padding: EXAMPLE_IFRAME_MARGIN,
         }}
       >
-        <div
-          className={clsx(styles.preview, {
-            [styles.ready]: ready && expectBrickReady,
-          })}
-        >
-          <iframe
-            ref={iframeRef}
-            src={previewSrc}
-            loading="lazy"
-            onLoad={handleIframeLoad}
-            style={{ height: iframeHeight }}
-          />
-        </div>
-        {!(ready && expectBrickReady) && <LoadingRing />}
+        {wait || (
+          <div
+            className={clsx(styles.preview, {
+              [styles.ready]: ready,
+            })}
+          >
+            <iframe
+              ref={iframeRef}
+              src={previewSrc}
+              loading="lazy"
+              onLoad={handleIframeLoad}
+              style={{ height: iframeHeight }}
+            />
+          </div>
+        )}
+        {(wait || !ready) && <LoadingRing />}
       </div>
       {expandable && (
         <button

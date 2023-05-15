@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { useColorMode } from "@docusaurus/theme-common";
 import clsx from "clsx";
@@ -15,13 +21,13 @@ import type { FileInfo } from "@site/src/interfaces";
 import LoadingRing from "../LoadingRing";
 import SimpleEditorWorkspace from "../SimpleEditorWorkspace";
 import styles from "./styles.module.css";
+import { ContextHeroReady } from "../HomepageExamples";
 
 export interface HeroExampleProps {
   files: FileInfo[];
   hiddenFiles?: Record<string, string>;
   expectBrick?: string;
   className?: string;
-  onReady?(): void;
 }
 
 export default function HeroExample({
@@ -29,7 +35,6 @@ export default function HeroExample({
   hiddenFiles,
   expectBrick,
   className,
-  onReady,
 }: HeroExampleProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
   const { colorMode } = useColorMode();
@@ -47,6 +52,7 @@ export default function HeroExample({
     getContentMaxHeight(codeLines, iframeHeight)
   );
   const [expectBrickReady, setExpectBrickReady] = useState(!expectBrick);
+  const { setHeroReady } = useContext(ContextHeroReady);
 
   const handleIframeLoad = useCallback(() => {
     const check = () => {
@@ -79,9 +85,9 @@ export default function HeroExample({
 
   useEffect(() => {
     if (iframeReady && expectBrickReady) {
-      onReady?.();
+      setHeroReady(true);
     }
-  }, [expectBrickReady, onReady, iframeReady]);
+  }, [expectBrickReady, iframeReady, setHeroReady]);
 
   const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>
     Object.fromEntries(files.map((f) => [f.name, f.codeSlides?.[0] ?? f.code]))

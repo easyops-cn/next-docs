@@ -1,15 +1,17 @@
-import React, { useCallback, useState } from "react";
+import React, { useState, useMemo } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import Translate from "@docusaurus/Translate";
-import HomepageExamples from "../components/HomepageExamples";
+import HomepageExamples, {
+  ContextHeroReady,
+} from "../components/HomepageExamples";
 import { files, hiddenFiles } from "../examples/my-todos-1";
 import HeroExample from "../components/HeroExample";
 import styles from "./index.module.css";
 
-function HomepageHeader({ onReady }: { onReady?(): void }) {
+function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx("hero", styles.heroBanner)}>
@@ -41,10 +43,7 @@ function HomepageHeader({ onReady }: { onReady?(): void }) {
           files={files}
           hiddenFiles={hiddenFiles}
           className={styles.heroExample}
-          // condensed
-          // lightweight
           expectBrick="sl-card"
-          onReady={onReady}
         />
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -78,15 +77,18 @@ function HomepageHeader({ onReady }: { onReady?(): void }) {
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const [heroReady, setHeroReady] = useState(false);
-  const onReady = useCallback(() => {
-    setHeroReady(true);
-  }, []);
+  const heroReadyCtx = useMemo(
+    () => ({ heroReady, setHeroReady }),
+    [heroReady]
+  );
   return (
     <Layout description={siteConfig.tagline}>
-      <HomepageHeader onReady={onReady} />
-      <main>
-        <HomepageExamples heroReady={heroReady} />
-      </main>
+      <ContextHeroReady.Provider value={heroReadyCtx}>
+        <HomepageHeader />
+        <main>
+          <HomepageExamples />
+        </main>
+      </ContextHeroReady.Provider>
     </Layout>
   );
 }
