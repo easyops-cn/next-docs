@@ -28,7 +28,11 @@ type HomepageButtonType =
   | "learn-more-about-templates"
   | "contact-us";
 
-export default function HomepageExamples(): JSX.Element {
+export default function HomepageExamples({
+  heroReady,
+}: {
+  heroReady?: boolean;
+}): JSX.Element {
   return (
     <>
       <HomepageExample

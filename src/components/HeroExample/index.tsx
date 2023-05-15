@@ -1,51 +1,42 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { flushSync } from "react-dom";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { useColorMode } from "@docusaurus/theme-common";
-import BrowserOnly from "@docusaurus/BrowserOnly";
 import clsx from "clsx";
 import useDeferredValue from "@site/src/hooks/useDeferredValue";
 import {
   EDITOR_PADDING_TOP,
   EDITOR_SCROLLBAR_SIZE,
   EXAMPLE_CODE_LINE_HEIGHT,
-  EXAMPLE_MAX_HEIGHT,
   EXAMPLE_IFRAME_MARGIN,
   EXAMPLE_IFRAME_MIN_HEIGHT,
   EXAMPLE_MIN_HEIGHT,
 } from "@site/src/constants";
 import type { FileInfo } from "@site/src/interfaces";
-import ChevronUp from "./chevron-up.svg";
-import ChevronDown from "./chevron-down.svg";
-import type { MonacoEditorWorkspaceRef } from "../MonacoEditorWorkspace";
 import LoadingRing from "../LoadingRing";
 import SimpleEditorWorkspace from "../SimpleEditorWorkspace";
 import styles from "./styles.module.css";
 
-export interface NextExampleProps {
+export interface HeroExampleProps {
   files: FileInfo[];
   hiddenFiles?: Record<string, string>;
-  condensed?: boolean;
-  lightweight?: boolean;
   expectBrick?: string;
   className?: string;
+  onReady?(): void;
 }
 
-export default function NextExample({
+export default function HeroExample({
   files,
   hiddenFiles,
-  condensed,
-  lightweight,
   expectBrick,
   className,
-}: NextExampleProps): JSX.Element {
+  onReady,
+}: HeroExampleProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>();
-  const editorRef = useRef<MonacoEditorWorkspaceRef>();
   const { colorMode } = useColorMode();
   const previewSrc = useBaseUrl("/preview/");
   const iframeRef = useRef<HTMLIFrameElement>();
   const [iframeHeight, setIframeHeight] = useState(EXAMPLE_IFRAME_MIN_HEIGHT);
-  const [ready, setReady] = useState(false);
+  const [iframeReady, setIframeReady] = useState(false);
   const [currentFile, setCurrentFile] = useState(
     () => (files.find((f) => f.defaultActive) ?? files[0]).name
   );
@@ -55,13 +46,12 @@ export default function NextExample({
   const [contentMaxHeight, setContentMaxHeight] = useState(() =>
     getContentMaxHeight(codeLines, iframeHeight)
   );
-  const [expanded, setExpanded] = useState(false);
   const [expectBrickReady, setExpectBrickReady] = useState(!expectBrick);
 
   const handleIframeLoad = useCallback(() => {
     const check = () => {
       if ((iframeRef.current?.contentWindow as any)?._preview_only_render) {
-        setReady(true);
+        setIframeReady(true);
         // Set iframe visible only after the expected brick appears.
         if (expectBrick) {
           const iframeDocument = iframeRef.current.contentDocument;
@@ -87,6 +77,12 @@ export default function NextExample({
     check();
   }, [expectBrick]);
 
+  useEffect(() => {
+    if (iframeReady && expectBrickReady) {
+      onReady?.();
+    }
+  }, [expectBrickReady, onReady, iframeReady]);
+
   const [codeByFile, setCodeByFile] = useState<Record<string, string>>(() =>
     Object.fromEntries(files.map((f) => [f.name, f.codeSlides?.[0] ?? f.code]))
   );
@@ -94,7 +90,7 @@ export default function NextExample({
   const deferredFiles = useDeferredValue(codeByFile);
 
   useEffect(() => {
-    if (!ready) {
+    if (!iframeReady) {
       return;
     }
     const render = (iframeRef.current?.contentWindow as any)
@@ -129,10 +125,10 @@ export default function NextExample({
         templatesAreArrayOfYaml: templatesAreArrayOfYaml,
       }
     );
-  }, [ready, colorMode, deferredFiles, hiddenFiles]);
+  }, [iframeReady, colorMode, deferredFiles, hiddenFiles]);
 
   useEffect(() => {
-    if (!ready) {
+    if (!iframeReady) {
       return;
     }
     const ro = new ResizeObserver((entries) => {
@@ -151,7 +147,7 @@ export default function NextExample({
     return () => {
       ro.disconnect();
     };
-  }, [ready]);
+  }, [iframeReady]);
 
   const handleCodeChange = useCallback(
     (code: string, filename: string) => {
@@ -175,42 +171,13 @@ export default function NextExample({
     setContentMaxHeight(getContentMaxHeight(codeLines, iframeHeight));
   }, [codeLines, iframeHeight]);
 
-  const toggleShowMore = useCallback(() => {
-    const nextExpanded = !expanded;
-    flushSync(() => {
-      setExpanded(nextExpanded);
-    });
-    if (!nextExpanded) {
-      editorRef.current?.resetScrollTop();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      if (containerRef.current.scrollIntoViewIfNeeded) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        containerRef.current.scrollIntoViewIfNeeded();
-      } else {
-        containerRef.current.scrollIntoView({
-          block: "nearest",
-          inline: "nearest",
-        });
-      }
-    }
-  }, [expanded]);
-
-  const expandable = contentMaxHeight > EXAMPLE_MAX_HEIGHT;
   const columnStyle = {
-    height:
-      expandable && !expanded
-        ? EXAMPLE_MAX_HEIGHT
-        : Math.max(contentMaxHeight, EXAMPLE_MIN_HEIGHT),
+    height: Math.max(contentMaxHeight, EXAMPLE_MIN_HEIGHT),
   };
 
   return (
     <div
-      className={clsx(styles.example, className, {
-        [styles.expandable]: expandable,
-        [styles.condensed]: condensed,
-      })}
+      className={clsx(styles.example, className, styles.condensed)}
       ref={containerRef}
     >
       <div className={styles.tabs}>
@@ -229,67 +196,39 @@ export default function NextExample({
         ))}
       </div>
       <div className={styles.editorColumn} style={columnStyle}>
-        {lightweight ? (
-          <SimpleEditorWorkspace
-            files={files}
-            currentFile={currentFile}
-            theme={colorMode === "dark" ? "vs-dark" : "vs"}
-            showLineNumbers
-          />
-        ) : (
-          <BrowserOnly fallback={<LoadingRing />}>
-            {() => {
-              const MixedEditor = require("../MixedEditor").default;
-              return (
-                <MixedEditor
-                  files={files}
-                  currentFile={currentFile}
-                  theme={colorMode === "dark" ? "vs-dark" : "vs"}
-                  className={styles.editorContainer}
-                  typingEffectReady={ready && expectBrickReady}
-                  onChange={handleCodeChange}
-                  ref={editorRef}
-                />
-              );
-            }}
-          </BrowserOnly>
-        )}
+        <SimpleEditorWorkspace
+          files={files}
+          currentFile={currentFile}
+          theme={colorMode === "dark" ? "vs-dark" : "vs"}
+          showLineNumbers
+          typingEffectReady={iframeReady && expectBrickReady}
+          className={styles.editorContainer}
+          onChange={handleCodeChange}
+        />
       </div>
       <div
-        className={clsx(
-          styles.previewColumn,
-          expanded ? styles.expanded : styles.collapsed
-        )}
+        className={clsx(styles.previewColumn, styles.collapsed)}
         style={{
-          maxHeight: expandable && !expanded ? EXAMPLE_MAX_HEIGHT : "unset",
           padding: EXAMPLE_IFRAME_MARGIN,
         }}
       >
-        <div
-          className={clsx(styles.preview, {
-            [styles.ready]: ready && expectBrickReady,
-          })}
-        >
-          <iframe
-            ref={iframeRef}
-            src={previewSrc}
-            loading="lazy"
-            onLoad={handleIframeLoad}
-            style={{ height: iframeHeight }}
-          />
-        </div>
-        {!(ready && expectBrickReady) && <LoadingRing />}
+        {
+          <div
+            className={clsx(styles.preview, {
+              [styles.ready]: iframeReady && expectBrickReady,
+            })}
+          >
+            <iframe
+              ref={iframeRef}
+              src={previewSrc}
+              loading="lazy"
+              onLoad={handleIframeLoad}
+              style={{ height: iframeHeight }}
+            />
+          </div>
+        }
+        {!(iframeReady && expectBrickReady) && <LoadingRing />}
       </div>
-      {expandable && (
-        <button
-          className={styles.buttonToggleShowMore}
-          role="button"
-          onClick={toggleShowMore}
-        >
-          {expanded ? <ChevronUp /> : <ChevronDown />}
-          <span>{expanded ? "Show less" : "Show more"}</span>
-        </button>
-      )}
     </div>
   );
 }

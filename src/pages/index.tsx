@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -6,10 +6,10 @@ import Layout from "@theme/Layout";
 import Translate from "@docusaurus/Translate";
 import HomepageExamples from "../components/HomepageExamples";
 import { files, hiddenFiles } from "../examples/my-todos-1";
-import NextExample from "../components/NextExample";
+import HeroExample from "../components/HeroExample";
 import styles from "./index.module.css";
 
-function HomepageHeader() {
+function HomepageHeader({ onReady }: { onReady?(): void }) {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx("hero", styles.heroBanner)}>
@@ -37,11 +37,14 @@ function HomepageHeader() {
         </div>
       </div>
       <div className="container">
-        <NextExample
+        <HeroExample
           files={files}
           hiddenFiles={hiddenFiles}
           className={styles.heroExample}
-          condensed
+          // condensed
+          // lightweight
+          expectBrick="sl-card"
+          onReady={onReady}
         />
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -74,11 +77,15 @@ function HomepageHeader() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
+  const [heroReady, setHeroReady] = useState(false);
+  const onReady = useCallback(() => {
+    setHeroReady(true);
+  }, []);
   return (
     <Layout description={siteConfig.tagline}>
-      <HomepageHeader />
+      <HomepageHeader onReady={onReady} />
       <main>
-        <HomepageExamples />
+        <HomepageExamples heroReady={heroReady} />
       </main>
     </Layout>
   );

@@ -15,15 +15,17 @@ const brickPackages = [
 
 const defaultLocale = "en";
 const locale = process.env.DOCUSAURUS_CURRENT_LOCALE || defaultLocale;
+// When running `yarn start`, the `DOCUSAURUS_CURRENT_LOCALE` is `"undefined"`
+const baseUrlWithLocale = `${baseUrl}${
+  locale === defaultLocale || locale === "undefined" ? "" : `${locale}/`
+}`;
 
 const bootstrapJson = {
   brickPackages: brickPackages
     .map((pkg) => require(`${pkg}/dist/bricks.json`))
     .map((pkg) => ({
       ...pkg,
-      filePath: `${baseUrl}${locale === defaultLocale ? "" : `${locale}/`}${
-        pkg.filePath
-      }`,
+      filePath: `${baseUrlWithLocale}preview/${pkg.filePath}`,
     })),
   settings: {
     misc: {
@@ -269,7 +271,7 @@ const config = {
                     require.resolve(`${pkg}/package.json`),
                     "../dist"
                   ),
-                  to: path.join("bricks", pkg.split("/").pop(), "dist"),
+                  to: path.join("preview/bricks", pkg.split("/").pop(), "dist"),
                   // Terser skip this file for minimization
                   info: { minimized: true },
                 })),
