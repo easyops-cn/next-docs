@@ -1,0 +1,95 @@
+---
+title: "安装"
+---
+
+import NextExample from "@site/src/components/NextExample";
+
+Brick Next 被设计为可以逐步采用。您可以根据需要，尽可能少或尽可能多地使用 Brick Next 渲染用户界面。无论您是想体验 Brick Next，还是想在 HTML 页面中添加一些低代码能力，或者是启动一个复杂的基于 Brick Next 的应用，本节都将帮助您入门。
+
+## 试用 Brick Next {#try-brick-next}
+
+您不需要安装任何东西就可以试用 Brick Next。试试编辑下面的示例！
+
+<NextExample
+  files={[
+    {
+      name: "Bricks",
+      code:
+`- brick: h1
+  properties:
+    textContent: <%= \`Hello, \${CTX.who}\` %>`,
+    },
+    {
+      name: "Context",
+      code:
+`- name: who
+  value: world`
+    }
+  ]}
+/>
+
+您可以直接编辑它，或者 [Fork 一个 StackBlitz 上的项目](https://stackblitz.com/edit/brick-next-try?file=bootstrap.js,context.yml,storyboard.yml)。
+
+## 在本地试用 Brick Next {#try-brick-next-locally}
+
+如果您想在本地计算机上试用 Brick Next：
+
+1. 安装 [Node.js](https://nodejs.org/zh-cn/)
+2. 打开 [StackBlitz 上的入门项目](https://stackblitz.com/edit/brick-next-try?file=bootstrap.js,context.yml,storyboard.yml)，在 Project 面板上，找到下载按钮并点击它，下载项目文件到本地
+3. 解压下载的文件，然后打开一个终端，`cd` 到解压后的目录
+4. 使用 `npm install` 安装依赖
+5. 执行 `npm start` 启动本地服务器，按照提示在浏览器中查看代码运行效果
+
+## 开始新的 Brick Next 项目 {#start-a-new-brick-next-project}
+
+如果您想开始一个新的 Brick Next 项目，您可以参考上面的步骤，但是下载[这个项目](https://stackblitz.com/edit/brick-next-container?file=bootstrap.js)。
+
+这将激活 Brick Next 的完整功能，例如多应用和路由。
+
+## 添加 Brick Next 到已有的项目 {#add-brick-next-to-an-existing-project}
+
+如果您希望在已有的项目中添加一些低代码能力，您不需要将其重写为 Brick Next。只需将 Brick Next 添加到您的现有技术栈中，然后以低代码的形式在任何地方渲染由构件组成的 storyboards。
+
+```bash
+# First install the main packages
+npm install --save @next-core/runtime @next-core/webpack
+
+# Then install the brick packages you want to use
+npm install --save @next-bricks/shoelace
+npm install --save @next-bricks/basic @next-bricks/icons
+```
+
+```js title="webpack.config.js"
+// highlight-next-line
+const { RuntimePlugin } = require('@next-core/webpack');
+
+module.exports = {
+  // ...
+  plugins: [
+// highlight-start
+    new RuntimePlugin({
+      brickPackages: [
+        '@next-bricks/icons',
+        '@next-bricks/basic',
+        '@next-bricks/shoelace',
+      ],
+// highlight-end
+    }),
+  ]
+};
+```
+
+```js title="index.js"
+import('./bootstrap.js');
+```
+
+```js title="bootstrap.js"
+import { unstable_createRoot } from '@next-core/runtime';
+
+const container = document.querySelector('#app');
+const root = unstable_createRoot(container);
+
+root.render(storyboard, {
+  context,
+});
+```

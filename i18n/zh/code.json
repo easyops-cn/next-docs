@@ -5,6 +5,12 @@
   "Try a Demo": {
     "message": "试用一下"
   },
+  "Get started": {
+    "message": "开始入门"
+  },
+  "Checkout the tutorial": {
+    "message": "查看教程"
+  },
   "theme.ErrorPageContent.title": {
     "message": "页面已崩溃。",
     "description": "The title of the fallback page when the page crashed"

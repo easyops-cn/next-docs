@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 import Link from "@docusaurus/Link";
-import { translate } from "@docusaurus/Translate";
+import Translate, { translate } from "@docusaurus/Translate";
 import clsx from "clsx";
 import type { FileInfo } from "../../interfaces";
 import NextExample from "../NextExample";
@@ -22,11 +22,7 @@ interface ExampleInfo {
   large?: boolean;
 }
 
-type HomepageButtonType =
-  | "get-started"
-  | "learn-more-about-context"
-  | "learn-more-about-templates"
-  | "contact-us";
+type HomepageButtonType = "get-started" | "take-a-tutorial" | "contact-us";
 
 export const ContextHeroReady = createContext<{
   heroReady?: boolean;
@@ -37,7 +33,7 @@ export default function HomepageExamples(): JSX.Element {
   return (
     <>
       <HomepageExample
-        button="learn-more-about-context"
+        button="take-a-tutorial"
         {...MyTodos3}
         title={translate({
           id: "homepage.examples.1.title",
@@ -72,7 +68,7 @@ export default function HomepageExamples(): JSX.Element {
         })}
       />
       <HomepageExample
-        button="learn-more-about-templates"
+        button="take-a-tutorial"
         large
         {...WeatherApp}
         title={translate({
@@ -158,21 +154,14 @@ function HomepageExample({
                   className="button button--outline button--secondary"
                   to="/docs/learn/quick-start"
                 >
-                  Get started
+                  <Translate>Get started</Translate>
                 </Link>
-              ) : button == "learn-more-about-context" ? (
+              ) : button == "take-a-tutorial" ? (
                 <Link
                   className="button button--outline button--secondary"
-                  to="/docs/concepts/context"
+                  to="/docs/learn/tutorial"
                 >
-                  Learn more about context
-                </Link>
-              ) : button == "learn-more-about-templates" ? (
-                <Link
-                  className="button button--outline button--secondary"
-                  to="/docs/concepts/custom-templates"
-                >
-                  Learn more about templates
+                  <Translate>Checkout the tutorial</Translate>
                 </Link>
               ) : (
                 <Link
