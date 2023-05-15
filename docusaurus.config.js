@@ -13,14 +13,17 @@ const brickPackages = [
   "@next-bricks/icons",
 ];
 
-const locale = process.env.DOCUSAURUS_CURRENT_LOCALE;
+const defaultLocale = "en";
+const locale = process.env.DOCUSAURUS_CURRENT_LOCALE || defaultLocale;
 
 const bootstrapJson = {
   brickPackages: brickPackages
     .map((pkg) => require(`${pkg}/dist/bricks.json`))
     .map((pkg) => ({
       ...pkg,
-      filePath: `${baseUrl}${locale ? `${locale}/` : ""}${pkg.filePath}`,
+      filePath: `${baseUrl}${locale === defaultLocale ? "" : `${locale}/`}${
+        pkg.filePath
+      }`,
     })),
   settings: {
     misc: {
@@ -99,7 +102,7 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "en",
+    defaultLocale: defaultLocale,
     locales: ["en", "zh"],
   },
 
