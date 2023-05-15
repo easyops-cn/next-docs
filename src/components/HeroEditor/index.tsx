@@ -68,7 +68,7 @@ function performTypingEffect(
       i++;
       setTimeout(run, delay);
     } else {
-      setTimeout(resolve, 1000);
+      setTimeout(resolve, 2000);
     }
   };
 
@@ -78,7 +78,7 @@ function performTypingEffect(
 function getTransitions(codeSlides: string[]) {
   return transitionJoin(
     codeSlides.slice(1).map((line) => transitionJoin(line.split(""), 20)),
-    1000
+    2000
   );
 }
 
