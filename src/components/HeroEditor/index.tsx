@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import CodeBlock from "@theme/CodeBlock";
 import type { FileInfo } from "@site/src/interfaces";
 import clsx from "clsx";
@@ -39,16 +39,36 @@ export default function HeroEditor({
     }
   }, [code, file, onChange]);
 
+  const [cursorPosition, setCursorPosition] = useState<{
+    left?: number;
+    top?: number;
+  }>({});
+  const ref = useRef<HTMLDivElement>();
+  useLayoutEffect(() => {
+    const lastToken = ref.current.querySelector(
+      ".token-line:last-child .token:last-child"
+    );
+    const containerRect = ref.current.getBoundingClientRect();
+    const lastTokenRect = lastToken.getBoundingClientRect();
+    setCursorPosition({
+      left: lastTokenRect.right - containerRect.left,
+      top: lastTokenRect.top - containerRect.top - 3,
+    });
+  }, [code]);
+
   return (
-    <CodeBlock
-      className={clsx(classNameProp, styles.editor, {
-        [styles.showCursor]: typingEffectReady && !typingEffectDone,
-      })}
-      language={file.lang ?? "yaml"}
-      showLineNumbers={showLineNumbers}
-    >
-      {code}
-    </CodeBlock>
+    <div className={styles.container} ref={ref}>
+      <CodeBlock
+        className={clsx(classNameProp, styles.editor)}
+        language={file.lang ?? "yaml"}
+        showLineNumbers={showLineNumbers}
+      >
+        {code}
+      </CodeBlock>
+      {typingEffectReady && !typingEffectDone && (
+        <div className={styles.cursor} style={cursorPosition}></div>
+      )}
+    </div>
   );
 }
 
