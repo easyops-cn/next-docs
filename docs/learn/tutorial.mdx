@@ -66,7 +66,7 @@ In the starter project, a static storyboard has been created for you:
 />
 
 :::info
-Here we're using [YAML](https://en.wikipedia.org/wiki/YAML) to define storyboards, since it has a minimal syntax, and is more human-readable at the same time, compared to JSON or others. But keep in mind that storyboards are just tree-like structure data.
+Here we’re using [YAML](https://en.wikipedia.org/wiki/YAML) to define storyboards, since it has a minimal syntax, and is more human-readable at the same time, compared to JSON or others. But keep in mind that storyboards are just tree-like structure data.
 :::
 
 It defines a page that is pretty the same as the following HTML:
@@ -84,7 +84,7 @@ It defines a page that is pretty the same as the following HTML:
 
 ## Fetching data
 
-Next step you'll want to make the todo list from remote instead of static specified.
+Next step you’ll want to make the todo list from remote instead of static specified.
 
 First assume that you have a RESTful API to fetch todos data, which will return the following JSON:
 
@@ -105,7 +105,7 @@ First assume that you have a RESTful API to fetch todos data, which will return 
 ]
 ```
 
-Then you'll define a context that will be resolved by your API:
+Then you’ll define a context that will be resolved by your API:
 
 <NextExample
   files={[
@@ -123,7 +123,7 @@ Then you'll define a context that will be resolved by your API:
   hiddenFiles={hiddenFiles}
 />
 
-Here you're using a built-in [provider brick](../concepts/provider-bricks.md) `basic.http-request` which can call arbitrary HTTP API. It accepts a URL as its first argument. For simplicity, a static JSON file is used in this tutorial.
+Here you’re using a built-in [provider brick](../concepts/provider-bricks.md) `basic.http-request` which can call arbitrary HTTP API. It accepts a URL as its first argument. For simplicity, a static JSON file is used in this tutorial.
 
 ## Passing data
 
@@ -150,7 +150,7 @@ You can use `ITEM` in expressions inside the children, to access the current ite
 
 ## Responding to events
 
-Let's add an input box so that users can add todos as they wish.
+Let’s add an input box so that users can add todos as they wish.
 
 Add a brick [sl-input](https://shoelace.style/components/input), listen on its [`keydown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event) event, push a todo item into the list when the user pressed *Enter*.
 
@@ -171,7 +171,7 @@ Add a brick [sl-input](https://shoelace.style/components/input), listen on its [
 
 Note that you should also update the expression of `dataSource` to enable binding mode with `<%= %>` instead of `<% %>`, otherwise the list will not be refreshed when the context gets updated.
 
-Next you'll add a feature that allows the user to clear completed todos.
+Next you’ll add a feature that allows the user to clear completed todos.
 
 <NextExample
   files={[
@@ -190,7 +190,7 @@ Next you'll add a feature that allows the user to clear completed todos.
 
 But the clear button is not working as you expected, it will only clear `Hard work` which is initialized with `done: true`. If the user clicked other todos as done, they will not get cleared when user clicked the clear button.
 
-That's because the done states of the todos don't get updated when the user clicked the checkboxes. You need to update the context when the user clicked the checkboxes.
+That’s because the done states of the todos don't get updated when the user clicked the checkboxes. You need to update the context when the user clicked the checkboxes.
 
 <NextExample
   files={[
@@ -209,7 +209,7 @@ That's because the done states of the todos don't get updated when the user clic
 
 ## Conditional rendering
 
-Finally, let's make the clear button only appear when there are completed todos.
+Finally, let’s make the clear button only appear when there are completed todos.
 
 To do that, you can add a [`if` condition](../concepts/conditional-rendering.md) for the clear button:
 

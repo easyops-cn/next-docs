@@ -62,7 +62,7 @@ proxy:
   properties:
     pageName:
       ref: "micro-vew"
-      # You can omit `refProperty` if it's the same as the referring name.
+      # You can omit `refProperty` if it’s the same as the referring name.
       # The same applies to `refEvent/refMethod/refSlot`.
       refProperty: "pageTitle"
   events:
