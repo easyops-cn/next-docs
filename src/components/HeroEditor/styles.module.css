@@ -23,7 +23,9 @@
 }
 
 .editor :global(.token.plain),
-.editor :global(.token.plain):not(:empty) + :global(.token.punctuation) {
+.editor
+  :global(.token.plain):not(:empty):not(:first-child)
+  + :global(.token.punctuation) {
   color: #0451a5 !important;
 }
 
@@ -51,7 +53,7 @@ html[data-theme="dark"]
 html[data-theme="dark"] .editor :global(.token.plain),
 html[data-theme="dark"]
   .editor
-  :global(.token.plain):not(:empty)
+  :global(.token.plain):not(:empty):not(:first-child)
   + :global(.token.punctuation) {
   color: #ce9178 !important;
 }

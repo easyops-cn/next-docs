@@ -90,7 +90,7 @@ html[data-theme="dark"] .preview {
   background-color: #29292d;
 }
 
-@media screen and (max-width: 996px) {
+@media screen and (max-width: 719px) {
   .heroExample {
     flex-wrap: wrap;
   }

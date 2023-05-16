@@ -13,7 +13,6 @@ import {
   EDITOR_PADDING_TOP,
   EDITOR_SCROLLBAR_SIZE,
   EXAMPLE_CODE_LINE_HEIGHT,
-  EXAMPLE_IFRAME_MIN_HEIGHT,
   EXAMPLE_MIN_HEIGHT,
 } from "@site/src/constants";
 import type { FileInfo } from "@site/src/interfaces";
@@ -152,7 +151,7 @@ export default function HeroExample({
           <div className={styles.dot} />
           <div className={styles.windowTitle}>Storyboard.yaml</div>
         </div>
-        <div className={styles.editorPanel} style={columnStyle}>
+        <div style={columnStyle}>
           <HeroEditor
             file={file}
             theme={colorMode === "dark" ? "vs-dark" : "vs"}
