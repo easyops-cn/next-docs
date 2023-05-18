@@ -1836,6 +1836,11 @@
   resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.3.0.tgz#dcc0f4889159135517b03eb2c3515edcec406d3f"
   integrity sha512-ErWqVhKUiAIQQ1GEYoHhfxmq4BhyVAOWD8WWQ0W3Ud3AmXZEz8X+zSdT67xF9G/KZvhOEJhucw/fb9XgR7M8sA==
 
+"@next-core/monaco-contributions@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.1.0.tgz#fb329d954cf6caa277e60868f76c84d868165a6a"
+  integrity sha512-ZEhPZ4vNIeewNTssGu5iRgl3z7QNgqzK3l9rvIDJmiEn8TjK9LDtcKKNrD3z9dXuuFU8RjV7iaVPuQgY2FZ8kg==
+
 "@next-core/preview@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.1.0.tgz#13d67ddb4bd6b215788c6ecd7f19885c777fae02"

@@ -14,8 +14,14 @@ import {
 } from "@site/src/constants";
 import clsx from "clsx";
 import type { FileInfo } from "@site/src/interfaces";
-import "./register";
+import { register as registerJavaScript } from "@next-core/monaco-contributions/javascript";
+import { register as registerTypeScript } from "@next-core/monaco-contributions/typescript";
+import { register as registerYaml } from "@next-core/monaco-contributions/yaml";
 import styles from "./styles.module.css";
+
+registerJavaScript();
+registerTypeScript();
+registerYaml();
 
 export interface MonacoEditorWorkspaceProps {
   files: FileInfo[];
