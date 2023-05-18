@@ -231,8 +231,8 @@ const config = {
       name: "docusaurus-next-runtime",
       configureWebpack(config, isServer, utils) {
         const previewDir = path.join(
-          require.resolve("@next-core/brick-playground/package.json"),
-          "../dist-preview"
+          require.resolve("@next-core/preview/package.json"),
+          "../dist"
         );
         return {
           mergeStrategy: { "module.rules": "prepend" },
