@@ -1821,30 +1821,30 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.22.tgz#219dfd89ae5b97a8801f015323ffa4b62f45718b"
   integrity sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==
 
-"@next-bricks/basic@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@next-bricks/basic/-/basic-0.4.1.tgz#982e4bceb515b373d6b2749b30d706615756ad85"
-  integrity sha512-zhM95Iu6YU1fQEal9BNzBwW0tz1x2JA1g6bYYD++SbcUa6yCq2pTUtF3mfUhZ4z0BqmPM+82YJ+bmDGo8XG7og==
+"@next-bricks/basic@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@next-bricks/basic/-/basic-0.5.2.tgz#cf6649e4b5f4eb5b0e9b7d2892db7a002f558b89"
+  integrity sha512-9/saApx4IlF8dospnaXuOFpQUeAz8jDK9k68HZH/zhEkFK0tx1Fq9KPlC+etKUFKL39CQ/gtvDDYkv6ewRPMBQ==
 
-"@next-bricks/icons@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@next-bricks/icons/-/icons-0.1.4.tgz#dd44942fe9c0304a0fcdb145ffb1d14f653813c3"
-  integrity sha512-1fJt+0uz6XqTymIonUNT147ivjFPzWTnS6eCn4i4DJ24y8tZxDeWrRsC1uCQBlU8eZRcNT1Fj7VQhuom/r+/kA==
+"@next-bricks/icons@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@next-bricks/icons/-/icons-0.1.6.tgz#b8df722c8ffb8eaec011e962fa78ffdc93a87efd"
+  integrity sha512-VWJD7GRJ9K9RF6+lVcjvUp5iAgSTereSy4d6J/mHZ2yLZSqTXnBdLPHniB16mjBbJ/cr8yq9QnjjivzceDeBAQ==
 
-"@next-bricks/shoelace@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.3.0.tgz#dcc0f4889159135517b03eb2c3515edcec406d3f"
-  integrity sha512-ErWqVhKUiAIQQ1GEYoHhfxmq4BhyVAOWD8WWQ0W3Ud3AmXZEz8X+zSdT67xF9G/KZvhOEJhucw/fb9XgR7M8sA==
+"@next-bricks/shoelace@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.3.1.tgz#fd5702f291ea3795b01cd3abf690f8df97735355"
+  integrity sha512-7RD+lqpkujQns47wcdD4Cf2jjl/HeE1uvt0W5NG8Df5Zxn+piHKoYWxtGFqiLPmkJsxYXDKQdAnITmdFgN1J4w==
 
 "@next-core/monaco-contributions@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.1.0.tgz#fb329d954cf6caa277e60868f76c84d868165a6a"
   integrity sha512-ZEhPZ4vNIeewNTssGu5iRgl3z7QNgqzK3l9rvIDJmiEn8TjK9LDtcKKNrD3z9dXuuFU8RjV7iaVPuQgY2FZ8kg==
 
-"@next-core/preview@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.1.0.tgz#13d67ddb4bd6b215788c6ecd7f19885c777fae02"
-  integrity sha512-uSUtNMZxFNs26f7WXPyuh+2B+pI007A/YSY6CGmxLBhQ4ST9Sw+wfflnSSlV6JAftUnqqji6N/VTvU/ggHGASA==
+"@next-core/preview@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.1.1.tgz#ab247f947666c182932403525868f34a8a767e0e"
+  integrity sha512-g9bBGJvA948FJToJzZIPXzv1OeftnaemRYiZx/d2gEiSTTHp0Uw/41aGm4HmmOO9rq8wwlE6t/wMeelXZGOUYA==
 
 "@node-rs/jieba-android-arm-eabi@1.7.0":
   version "1.7.0"
