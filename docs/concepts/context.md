@@ -220,7 +220,7 @@ events:
 
 ```yaml {5}
 context:
-  - name: "myLazyData"
+  - name: "myAsyncData"
     resolve:
       useProvider: "my-provider"
       async: true
@@ -232,7 +232,7 @@ context:
 brick: "my-brick"
 properties:
   # 在构件属性定义中使用异步加载的数据时，通常应该设置追踪绑定标记
-  dataSource: "<%= CTX.myLazyData %>"
+  dataSource: "<%= CTX.myAsyncData %>"
 ```
 
 注意 `async` 与 `lazy` 的不同：
