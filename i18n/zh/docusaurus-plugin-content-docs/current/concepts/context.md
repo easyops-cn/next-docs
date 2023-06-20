@@ -214,6 +214,36 @@ events:
         action: console.info
 ```
 
+## 异步加载 {#async}
+
+设置 `resolve.async: true` 可以将一个 Context 标记为异步加载，该数据请求不会阻塞渲染。与 `lazy` 类似，页面会先以该 Context 的默认值进行渲染，在页面完成 Mount 后，当数据加载完成后会触发其数据变更事件，设置了追踪标记的相关构件属性将自动更新。
+
+```yaml {5}
+context:
+  - name: "myLazyData"
+    resolve:
+      useProvider: "my-provider"
+      async: true
+    # 可以为异步加载的数据配置一个初始值，默认为 `undefined`
+    value: "Initial"
+```
+
+```yaml {4}
+brick: "my-brick"
+properties:
+  # 在构件属性定义中使用异步加载的数据时，通常应该设置追踪绑定标记
+  dataSource: "<%= CTX.myLazyData %>"
+```
+
+注意 `async` 与 `lazy` 的不同：
+
+- `lazy` 使得一个 Context 的请求不会自动发起，需要主动调用 `context.load`，其最早只能发生在 page load 之后，因此适合将页面的次要数据设置为 `lazy`，这样可以使得其他更重要的数据优先被加载；
+- `async` 的 Context 也不会阻塞页面渲染，但仍会尽早地自动发起请求，因此对于页面的主要数据，适合设置为 `async`，这样使得页面既不被特定请求阻塞，又可以更早地将主要数据呈现给用户。
+
+:::note
+如果 `async` 的数据加载在页面 Mount 之前就已完成，其数据变更仍会延迟到 Mount 之后再触发。
+:::
+
 ## 主动强制更新 {#force-refresh}
 
 内置事件 `context.refresh` 可以强制更新一个设置了异步请求的 Context。
@@ -265,6 +295,7 @@ context:
 
 | 组件       | 版本  | 变更                                                                           |
 | ---------- | ----- | ------------------------------------------------------------------------------ |
-| brick_next | 3.0.0 | 不可以定义重复的 Context（使用 `if` 进行判断除外），不可以引用未定义的 Context |
+| brick_next | 3.4.1 | 支持 `async`                                                                   |
+| -          | 3.0.0 | 不可以定义重复的 Context（使用 `if` 进行判断除外），不可以引用未定义的 Context |
 
 [events 事件 > 内建处理器：context.*]: events.md#builtin-actions-context

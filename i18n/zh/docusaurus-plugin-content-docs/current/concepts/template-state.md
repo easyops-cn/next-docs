@@ -57,8 +57,9 @@ bricks:
 
 - 条件判断 `if`
 - 属性追踪 `"track state"`
-- 异步数据 `resolve`（仅限使用在普通编排中的模板。在 `useBrick` 中使用模板时，该模板不能定义 `resolve` 的数据）
+- 异步数据 `resolve`
 - 懒加载 `lazy` `state.load`
+- 异步加载 `async`
 - 主动更新 `state.refresh`
 - 追踪依赖 `track`
 
@@ -66,7 +67,8 @@ bricks:
 
 | 组件       | 版本  | 变更                                                                                 |
 | ---------- | ----- | ------------------------------------------------------------------------------------ |
-| brick_next | 3.0.0 | 需要主动指定 `expose: true` 的状态数据才可以作为模板的属性传递进来；其他同 [Context] |
+| brick_next | 3.4.1 | 支持 `async`                                                                         |
+| -          | 3.0.0 | 需要主动指定 `expose: true` 的状态数据才可以作为模板的属性传递进来；其他同 [Context] |
 
 [context 上下文]: context.md
 [context]: context.md
