@@ -150,6 +150,10 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
+            href: "https://bricks.js.org/",
+            label: "Bricks",
+          },
+          {
             type: "localeDropdown",
             position: "right",
           },
