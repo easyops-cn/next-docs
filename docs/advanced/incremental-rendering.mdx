@@ -1,0 +1,63 @@
+---
+title: "Incremental Rendering"
+---
+
+import NextExample from "@site/src/components/NextExample";
+import { files, hiddenFiles } from "@site/src/examples/tabs-1";
+
+增量渲染是指动态更新页面中的指定的部分内容，同时保留页面其他部分的 UI 及其状态。增量渲染可以让特定场景下的 UI 交互更加平滑顺畅，并减少资源的重复加载。
+
+例如一个页面通过选项卡列表来提供访问资源对象的不同分类的信息，使用增量渲染可以让页面在切换选项卡时，只需重新加载和渲染选项卡的内容部分，而选项卡外部的 UI 及其状态都会被保留。
+
+实现增量渲染主要有两种方式：*动态控制节点*、*构件下的子路由*。
+
+## 动态控制节点 {#dynamic-control-nodes}
+
+在以下示例中，我们将页面当前选中的选项卡设置到 context 中，并使用控制节点 `:switch` 动态选择渲染不同的内容。
+
+<NextExample
+  files={files}
+  hiddenFiles={hiddenFiles}
+/>
+
+控制节点中未匹配的构件不会被加载，因此不会占用网络或计算资源，当其重新渲染时，新匹配的构件才会被加载。
+
+如果希望选项卡状态可以同步到 URL 中，可以绑定 context 的 `onChange` 事件，调用 `history.push` 并设置参数 `notify: false`，以便更新 URL 而不触发重新渲染：
+
+```yaml
+- name: activeTab
+  value: <% PATH.tab ?? 'basic' %>
+  onChange:
+    action: history.push
+    args:
+    - <% `${APP.homepage}/tabs/${CTX.activeTab}` %>
+    - notify: false
+```
+
+## 构件下的子路由 {#sub-routes-in-brick}
+
+构件下可以声明子路由，如果页面发生跳转并且目标地址与该子路由列表中的某个路由匹配，则页面不会发生整体重新渲染，而是仅增量渲染该子路由。其效果和使用动态控制节点类似，[查看在线示例](https://stackblitz.com/edit/brick-next-sub-routes?file=storyboards%2Fapp-tabs.yml)。
+
+:::info Important
+该特性仍在测试阶段，默认情况下，子路由跳转会整体重新渲染，可按需配置应用级特性开关 `incremental-sub-route-rendering` 体验该特性。
+
+需升级 `brick_next >= 3.5.19`。
+:::
+
+```yaml
+brick: div
+slots:
+  '':
+    type: routes
+    routes:
+    - path: ${APP.homepage}/basic
+      bricks:
+      - brick: div
+        properties:
+          textContent: This is the basic settings.
+    - path: ${APP.homepage}/advanced
+      bricks:
+      - brick: div
+        properties:
+          textContent: This is the advanced settings.
+```

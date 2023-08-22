@@ -1,0 +1,12 @@
+- name: tabs
+  value:
+    - basic
+    - advanced
+- name: activeTab
+  value: basic
+  # value: <% PATH.tab ?? 'basic' %>
+  # onChange:
+  #   action: history.push
+  #   args:
+  #   - <% `${APP.homepage}/tabs/${CTX.activeTab}` %>
+  #   - notify: false

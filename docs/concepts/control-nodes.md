@@ -62,11 +62,11 @@ slots:
 
 ## 追踪变更 {#track}
 
-使用 [Context] 或 [State] 时，控制节点的数据源 `dataSource` 也可以激活自动追踪变更并重新渲染。
+使用 [Context] 或 [State] 时，控制节点的数据源 `dataSource` 也可以激活自动追踪变更并自动重新渲染。
 
 ```yaml {2}
 brick: ":forEach"
-dataSource: "<% 'track context', CTX.dataList %>"
+dataSource: "<%= CTX.dataList %>"
 slots: ...
 ```
 

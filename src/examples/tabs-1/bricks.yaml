@@ -1,0 +1,38 @@
+- brick: sl-input
+  properties:
+    placeholder: Search...
+- brick: div
+  properties:
+    className: tabs
+  children:
+  - brick: :forEach
+    dataSource: <% CTX.tabs %>
+    children:
+    - brick: sl-tab
+      properties:
+        panel: <% ITEM %>
+        textContent: <% _.upperFirst(ITEM) %>
+        active: <%= CTX.activeTab === ITEM %>
+      events:
+        click:
+          action: context.replace
+          args:
+          - activeTab
+          - <% ITEM %>
+- brick: div
+  properties:
+    className: tab-panel
+  children:
+  - brick: :switch
+    dataSource: <%= CTX.activeTab %>
+    slots:
+      basic:
+        bricks:
+        - brick: div
+          properties:
+            textContent: This is the basic settings.
+      advanced:
+        bricks:
+        - brick: div
+          properties:
+            textContent: This is the advanced settings.

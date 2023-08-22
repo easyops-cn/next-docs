@@ -45,6 +45,11 @@ const sidebars = {
         "concepts/media-query",
       ],
     },
+    {
+      type: "category",
+      label: "Advanced",
+      items: ["advanced/incremental-rendering"],
+    },
   ],
 };
 

@@ -1821,30 +1821,40 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.22.tgz#219dfd89ae5b97a8801f015323ffa4b62f45718b"
   integrity sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==
 
-"@next-bricks/basic@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@next-bricks/basic/-/basic-0.5.2.tgz#cf6649e4b5f4eb5b0e9b7d2892db7a002f558b89"
-  integrity sha512-9/saApx4IlF8dospnaXuOFpQUeAz8jDK9k68HZH/zhEkFK0tx1Fq9KPlC+etKUFKL39CQ/gtvDDYkv6ewRPMBQ==
+"@next-bricks/basic@^0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@next-bricks/basic/-/basic-0.28.0.tgz#a7c17823c4544a5e5bbde559436206008b93db08"
+  integrity sha512-gTe7Ut0NyEPWCacGfMzDGRI0XLJUP526nzi0h37jmM8ZFTlAOSX9TMeOkRQz+EA52A4SjuUxMM1Tzb+FjbhqBw==
 
-"@next-bricks/icons@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@next-bricks/icons/-/icons-0.1.6.tgz#b8df722c8ffb8eaec011e962fa78ffdc93a87efd"
-  integrity sha512-VWJD7GRJ9K9RF6+lVcjvUp5iAgSTereSy4d6J/mHZ2yLZSqTXnBdLPHniB16mjBbJ/cr8yq9QnjjivzceDeBAQ==
+"@next-bricks/containers@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@next-bricks/containers/-/containers-0.14.0.tgz#46ea5e886739d95eb1def9b3037477a2c58a8186"
+  integrity sha512-x94HeyFlvYh87Y1Es+mAUvoEWQW/bRxwfAWeGkjnHxtU+DeoiN5dhVI3EJBw0fA8tD88Qm0AHaypZmySVB67aA==
 
-"@next-bricks/shoelace@^0.3.1":
+"@next-bricks/form@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@next-bricks/form/-/form-0.16.0.tgz#ae293d6634eac853a13048375811d4452b39e5f4"
+  integrity sha512-1XLlg4tEvIwF9aHXjCqAAZ+jOSxgKLzT/+BvLG79NLz5Dv/Sa+BFJbLeayOILcDMlwREFf+5TX7SDW90f8QRgg==
+
+"@next-bricks/icons@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@next-bricks/icons/-/icons-0.4.4.tgz#8bec0df0253e2ce0168c10b1dddd621acb11a8fa"
+  integrity sha512-AGhmV+Txc9M9E72CGGfXqiCNddA+x6RTsUXFH9oD6Blxsz8b6XWsEBWDiv1758+bxoNq2iKvd6glqQmecv0phg==
+
+"@next-bricks/shoelace@^0.4.10":
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.4.10.tgz#6a416ba822282919208f3d91fe179b3048d6bc03"
+  integrity sha512-7vIE0/s3AdU6b9JYrk6uJrOtzt1FSoEWxry7GoWwzNvu3Xw0fv56O8HjWqrZeKnENbhnG64Hg8FNkrp/fcdDig==
+
+"@next-core/monaco-contributions@^0.3.1":
   version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.3.1.tgz#fd5702f291ea3795b01cd3abf690f8df97735355"
-  integrity sha512-7RD+lqpkujQns47wcdD4Cf2jjl/HeE1uvt0W5NG8Df5Zxn+piHKoYWxtGFqiLPmkJsxYXDKQdAnITmdFgN1J4w==
+  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.3.1.tgz#cb6fc43aa2dcc8f9afd85827af079bc5394a31b1"
+  integrity sha512-ph7+AhO/Lw22husSyPwtyFRIrdMdR0F5ItINmkM3wlpjwgV68zJ15nOIFfJxVM+B1IFR3Gt76lWIkFbUDP33vg==
 
-"@next-core/monaco-contributions@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.1.0.tgz#fb329d954cf6caa277e60868f76c84d868165a6a"
-  integrity sha512-ZEhPZ4vNIeewNTssGu5iRgl3z7QNgqzK3l9rvIDJmiEn8TjK9LDtcKKNrD3z9dXuuFU8RjV7iaVPuQgY2FZ8kg==
-
-"@next-core/preview@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.1.4.tgz#d15c6d1ba58a25c9d68c197ba277ccd885232335"
-  integrity sha512-Sy6FuhS53wtRfEBZskGnof6j/eGgvPyiC+NPlGDxsnq0VZzBUtQtl5Fwt5ksNzJ/sAAwJwSkEI+SnfEsksrPXA==
+"@next-core/preview@^0.1.45":
+  version "0.1.45"
+  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.1.45.tgz#590895f58eaa91c835c19d20d7f811a50376fe83"
+  integrity sha512-N0ta/OokTBn8pI7gruWMxBShyltJJjemDshjkMcS6BLH1u0ctJChtTiM0v1d7xnpt+J5jpnoDkmQslA0v35ylg==
 
 "@node-rs/jieba-android-arm-eabi@1.7.0":
   version "1.7.0"
@@ -6062,10 +6072,10 @@ monaco-editor-webpack-plugin@^7.0.1:
   dependencies:
     loader-utils "^2.0.2"
 
-monaco-editor@^0.37.1:
-  version "0.37.1"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.37.1.tgz#d6f5ffb593e019e74e19bf8a2bdef5a691876f4e"
-  integrity sha512-jLXEEYSbqMkT/FuJLBZAVWGuhIb4JNwHE9kPTorAVmsdZ4UzHAfgWxLsVtD7pLRFaOwYPhNG9nUCpmFL1t/dIg==
+monaco-editor@^0.41.0:
+  version "0.41.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.41.0.tgz#2ba31e5af7e3ae93ac5d7467ec2772ef9b3d967f"
+  integrity sha512-1o4olnZJsiLmv5pwLEAmzHTE/5geLKQ07BrGxlF4Ri/AXAc2yyDGZwHjiTqD8D/ROKUZmwMA28A+yEowLNOEcA==
 
 mrmime@^1.0.0:
   version "1.0.1"

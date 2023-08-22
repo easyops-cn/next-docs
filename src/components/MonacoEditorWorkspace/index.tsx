@@ -19,9 +19,9 @@ import { register as registerTypeScript } from "@next-core/monaco-contributions/
 import { register as registerYaml } from "@next-core/monaco-contributions/yaml";
 import styles from "./styles.module.css";
 
-registerJavaScript();
-registerTypeScript();
-registerYaml();
+registerJavaScript(monaco);
+registerTypeScript(monaco);
+registerYaml(monaco);
 
 export interface MonacoEditorWorkspaceProps {
   files: FileInfo[];

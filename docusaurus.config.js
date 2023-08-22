@@ -8,9 +8,11 @@ const MonacoEditorWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 const baseUrl = "/";
 const brickPackages = [
-  "@next-bricks/shoelace",
   "@next-bricks/basic",
+  "@next-bricks/containers",
+  "@next-bricks/form",
   "@next-bricks/icons",
+  "@next-bricks/shoelace",
 ];
 
 const defaultLocale = "en";
@@ -285,7 +287,7 @@ const config = {
             new MonacoEditorWebpackPlugin({
               languages: ["javascript", "typescript", "css" /* , 'yaml' */],
               features: [
-                "!accessibilityHelp",
+                // "!accessibilityHelp",
                 "!codelens",
                 "!colorPicker",
                 "!documentSymbols",

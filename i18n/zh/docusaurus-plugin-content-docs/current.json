@@ -10,5 +10,9 @@
   "sidebar.docsSidebar.category.Concepts": {
     "message": "概念",
     "description": "The label for category Concepts in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Advanced": {
+    "message": "高级",
+    "description": "The label for category Advanced in sidebar docsSidebar"
   }
 }
