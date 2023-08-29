@@ -70,11 +70,34 @@ dataSource: "<%= CTX.dataList %>"
 slots: ...
 ```
 
+## 生命周期 {#life-cycle}
+
+控制节点支持两种生命周期：[`onMount`](brick-life-cycle.md#onmount) 和 [`onUnmount`](brick-life-cycle.md#onunmount)。
+
+除了和普通构件一样，当页面挂载和卸载时将触发对应的生命周期外，对于启用了追踪变更的控制节点，当其重新渲染时，也会依次触发 `onUnmount` 和 `onMount`，此时，对应的事件将设置 `detail: { rerender: true }`。
+
+```yaml {3-13}
+brick: ":forEach"
+dataSource: "<%= CTX.dataList %>"
+lifeCycle:
+  onMount:
+    action: console.log
+    args:
+      - :forEach mount
+      - <% EVENT.detail.rerender %>
+  onUnmount:
+    action: console.log
+    args:
+      - :forEach unmount
+      - <% EVENT.detail.rerender %>
+```
+
 ## 变更历史 {#history}
 
-| 组件       | 版本  | 变更             |
-| ---------- | ----- | ---------------- |
-| brick_next | 3.0.0 | 新增控制节点能力 |
+| 组件       | 版本   | 变更                                  |
+| ---------- | ------ | ------------------------------------- |
+| brick_next | 3.5.26 | 支持生命周期 `onMount` 和 `onUnmount` |
+| -          | 3.0.0  | 新增控制节点能力                      |
 
 [context]: context.md
 [state]: template-state.md
