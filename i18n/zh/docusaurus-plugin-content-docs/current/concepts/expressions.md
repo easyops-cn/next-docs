@@ -50,6 +50,8 @@ properties:
 | `I18N`            | `function`        | 使用 [`I18N(...)`](i18n.md#i18n-in-micro-apps) 显示应用预设的国际化内容。                                                                                                                                       |
 | `IMG`             | `object`          | 使用 `IMG.get(...)` 获取图像资源的 URL。                                                                                                                                                                        |
 | `INSTALLED_APPS`  | `object`          | 使用 `INSTALLED_APPS.has("your-app")` 来判断指定微应用是否已安装。也可以使用 `INSTALLED_APPS.has("your-app", ">=1.2.3")` 来判断指定微应用已安装并且版本满足指定规则（目前仅支持 `>=` `>` `=` `<` `<=`）         |
+| `ITEM`            | -                 | [控制节点] `:forEach` 内的子节点使用 `ITEM` 来访问对应的子项数据。                                                                                                                                              |
+| `INDEX`           | `number`          | [控制节点] `:forEach` 内的子节点使用 `INDEX` 来访问对应的子项的索引（从 `0` 开始计数）。                                                                                                                        |
 | `LOCAL_STORAGE`   | `object`          | localStorage 存储的信息，支持 `getItem` 方法获取 `localStorage` 项，例如 `LOCAL_STORAGE.getItem("your-key")`。需要写入或移除数据，请使用[内建处理器：localStorage.\*]。                                         |
 | `MEDIA`           | `object`          | [媒体查询全局对象]。                                                                                                                                                                                            |
 | `MISC`            | `object`          | 系统 Misc 设置。                                                                                                                                                                                                |
@@ -163,3 +165,4 @@ properties:
 [函数]: storyboard-functions.md
 [媒体查询全局对象]: media-query.md#media-global-object
 [tagged template]: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Template_literals#tagged_templates
+[控制节点]: control-nodes.md

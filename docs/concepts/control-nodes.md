@@ -20,6 +20,7 @@ slots:
         properties:
           label: "<% ITEM.label %>"
           value: "<% ITEM.value %>"
+          name: "<% `brick_${INDEX}` %>"
 ```
 
 条件判断：
@@ -94,10 +95,11 @@ lifeCycle:
 
 ## 变更历史 {#history}
 
-| 组件       | 版本   | 变更                                  |
-| ---------- | ------ | ------------------------------------- |
-| brick_next | 3.5.26 | 支持生命周期 `onMount` 和 `onUnmount` |
-| -          | 3.0.0  | 新增控制节点能力                      |
+| 组件       | 版本   | 变更                                    |
+| ---------- | ------ | --------------------------------------- |
+| brick_next | 3.6.2  | `:forEach` 的子节点支持使用变量 `INDEX` |
+| -          | 3.5.26 | 支持生命周期 `onMount` 和 `onUnmount`   |
+| -          | 3.0.0  | 新增控制节点能力                        |
 
 [context]: context.md
 [state]: template-state.md
