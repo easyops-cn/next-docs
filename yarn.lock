@@ -1821,30 +1821,30 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.22.tgz#219dfd89ae5b97a8801f015323ffa4b62f45718b"
   integrity sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==
 
-"@next-bricks/basic@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@next-bricks/basic/-/basic-0.28.0.tgz#a7c17823c4544a5e5bbde559436206008b93db08"
-  integrity sha512-gTe7Ut0NyEPWCacGfMzDGRI0XLJUP526nzi0h37jmM8ZFTlAOSX9TMeOkRQz+EA52A4SjuUxMM1Tzb+FjbhqBw==
+"@next-bricks/basic@^0.28.5":
+  version "0.28.5"
+  resolved "https://registry.yarnpkg.com/@next-bricks/basic/-/basic-0.28.5.tgz#baef6ef178f5a7381bb6ec6a6146120ea5baeb16"
+  integrity sha512-b4L6JhnBu15ev8WmMDtWwAtwygkJmCJ3BVTDVx1In06wS7dZ4MUtHe8YjPdySbsDjHbkJuMciL+Sk6MoNfbYgw==
 
-"@next-bricks/containers@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@next-bricks/containers/-/containers-0.14.0.tgz#46ea5e886739d95eb1def9b3037477a2c58a8186"
-  integrity sha512-x94HeyFlvYh87Y1Es+mAUvoEWQW/bRxwfAWeGkjnHxtU+DeoiN5dhVI3EJBw0fA8tD88Qm0AHaypZmySVB67aA==
+"@next-bricks/containers@^0.14.5":
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/@next-bricks/containers/-/containers-0.14.5.tgz#3d9fd33b93f74ec7a706b9e6daf3f2986fe8e109"
+  integrity sha512-Y7z02ERty0hw5IIu4uaR7eR2ydVhq4i6YprGkvEWbG3ABUvf/CD1wWGZqCHiULURzLxoVFfTf9Z0mTeCaQkBcQ==
 
-"@next-bricks/form@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@next-bricks/form/-/form-0.16.0.tgz#ae293d6634eac853a13048375811d4452b39e5f4"
-  integrity sha512-1XLlg4tEvIwF9aHXjCqAAZ+jOSxgKLzT/+BvLG79NLz5Dv/Sa+BFJbLeayOILcDMlwREFf+5TX7SDW90f8QRgg==
+"@next-bricks/form@^0.17.3":
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/@next-bricks/form/-/form-0.17.3.tgz#e74de64947c2767bc4d5d909546ebb5700955c8e"
+  integrity sha512-Lov3FyERI9HDu93SxblnOwNr+75g6Emo/M4iFVBzTVqe0hM6f3uo6KcHqVPQ3G309c5d1lu3l/tVYEp7t5JDRg==
 
-"@next-bricks/icons@^0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@next-bricks/icons/-/icons-0.4.4.tgz#8bec0df0253e2ce0168c10b1dddd621acb11a8fa"
-  integrity sha512-AGhmV+Txc9M9E72CGGfXqiCNddA+x6RTsUXFH9oD6Blxsz8b6XWsEBWDiv1758+bxoNq2iKvd6glqQmecv0phg==
+"@next-bricks/icons@^0.4.9":
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/@next-bricks/icons/-/icons-0.4.9.tgz#fb78e98de576e905b8ac7fa4537f59be898b061a"
+  integrity sha512-ZIhbW+9Ma16MC7iAtU3cjR68R1RBpSZNQ67UDljb2qmvaX6SeVxAoOWDd/iR269VXN+FZ2vctpA2UdWkF7NXiw==
 
-"@next-bricks/shoelace@^0.4.10":
-  version "0.4.10"
-  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.4.10.tgz#6a416ba822282919208f3d91fe179b3048d6bc03"
-  integrity sha512-7vIE0/s3AdU6b9JYrk6uJrOtzt1FSoEWxry7GoWwzNvu3Xw0fv56O8HjWqrZeKnENbhnG64Hg8FNkrp/fcdDig==
+"@next-bricks/shoelace@^0.4.14":
+  version "0.4.14"
+  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.4.14.tgz#8153c71482af42a914fa54240329dd6e2caab4da"
+  integrity sha512-jIVGAvSgPdB9dvVXSo+E1+uJUz8DC3XD0omgHXtfeW823JPkEi0JVcxGeeYsP/Rp9dB2aLwNyrxbgAfCh9vBnw==
 
 "@next-core/monaco-contributions@^0.3.2":
   version "0.3.2"
