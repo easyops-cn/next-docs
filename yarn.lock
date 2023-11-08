@@ -1846,15 +1846,15 @@
   resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-0.4.16.tgz#8592d45c9da7a8afbc4477479daeb5a44aa66df9"
   integrity sha512-XpeWh6XMjKsjCxo+3ALtXyT5Ij2wVkHybUyGNTWk77qwotJoqD3U5TGwCL2m/EQEFfSvb30Qy2XT8goCIwjoZg==
 
-"@next-core/monaco-contributions@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.3.2.tgz#dfa60030a1e154f7ce857ddf0a9a9756b5c6b305"
-  integrity sha512-+L8KkGBgvEMXl0NY3JjCghETgGg/s2clGB0xVZB5hrG4WLU87T0Vn8kyrxgtvHnR0nuZSGnYvPkctA3sJKyIRA==
+"@next-core/monaco-contributions@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.3.3.tgz#fc0d1a61e82843f56f72d7feb96706fd4aafefaa"
+  integrity sha512-VwRupqC935r81dd02G8gIyaQYdu+KYPmXNzNR8jAmgNMOErNWbjRqDPSIty0t1RhWC0HuvPfBRd8guOrwoJIDg==
 
-"@next-core/preview@^0.2.14":
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.2.14.tgz#4ad7d2e12dbf0eed9faa9a84fc3202078e5394ea"
-  integrity sha512-lk6rYBa6D9OFO8tYv72HrDZ8O1RMPcY2V1OFQ3pDYGdCWUEDUQh4woo53QXdSefw48dz0gfDiAleWHGchhzzAg==
+"@next-core/preview@^0.2.36":
+  version "0.2.36"
+  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.2.36.tgz#74f3906c2b5571e7bc25c3e317820e36904d1ad1"
+  integrity sha512-4J9jym0nFqB/YnvecLvTmefo11v200qAWoDYp1LfZCRJ8vJ3yh+uL5XfpFJ7hwjmip1I9ZN0OdGNIhO9uIzQGA==
 
 "@node-rs/jieba-android-arm-eabi@1.7.0":
   version "1.7.0"
