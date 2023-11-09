@@ -27,7 +27,7 @@
     "@next-bricks/icons": "^0.6.2",
     "@next-bricks/shoelace": "^0.4.16",
     "@next-core/monaco-contributions": "^0.3.3",
-    "@next-core/preview": "^0.2.36",
+    "@next-core/preview": "^0.2.38",
     "clsx": "^1.2.1",
     "monaco-editor": "^0.41.0",
     "monaco-editor-webpack-plugin": "^7.0.1",
