@@ -28,12 +28,12 @@ enum MediaBreakpoint {
 
 ## 断点
 
-| 断点   | 范围    |
-| ------ | ------- |
-| xLarge | ≥1920px |
-| large  | ≥1600px |
-| medium | ≥1280px |
-| small  | ≥1024px |
-| xSmall | <1024px |
+| 断点   | 范围     |
+| ------ | -------- |
+| xLarge | ≥1920px  |
+| large  | ≥1600px  |
+| medium | ≥1280px  |
+| small  | ≥1024px  |
+| xSmall | \<1024px |
 
 [onmediachange]: brick-life-cycle.md#on-media-change
