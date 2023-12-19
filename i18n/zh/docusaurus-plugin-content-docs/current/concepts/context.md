@@ -291,11 +291,33 @@ context:
 对于指定了 `track: true` 的异步 Context，追踪到依赖变化后，将重新计算相关参数，但如果计算得到的请求参数没有发生任何变化，此时将命中缓存，不会发起新的请求。如果业务上需要强制更新数据，应使用 `context.refresh`，该方法将忽略请求缓存。
 :::
 
+## 追踪带条件判断的 Resolve {#track-conditional-resolve}
+
+有些时候我们希望根据条件判断分别使用远端数据或静态数据、并且该条件是动态变化的，对于这种场景可以同时设置 `track`、`resolve.if` 和 `value`，即可激活追踪条件判断。
+
+当 `resolve.if` 解析为真时，将调用 Provider 获取远端数据；反之当其解析为假时，将使用静态值 `value`。另外注意此时 `resolve` 和 `value` 中使用到的任意其他 Context 数据变化时都将触发其重新计算。
+
+```yaml {5,7,8}
+context:
+  - name: "useRemote"
+  - name: "myConditionalData"
+    resolve:
+      if: "<% CTX.useRemote %>"
+      useProvider: "my-provider"
+    value: "My fallback value"
+    track: true
+```
+
+:::note
+追踪带条件判断的 Resolve 依赖 `brick_next: ^3.9.1 || ^2.91.1`。
+:::
+
 ## 变更历史 {#history}
 
 | 组件       | 版本  | 变更                                                                           |
 | ---------- | ----- | ------------------------------------------------------------------------------ |
-| brick_next | 3.4.1 | 支持 `async`                                                                   |
+| brick_next | 3.9.1 | 支持追踪带条件判断的 Resolve                                                   |
+| -          | 3.4.1 | 支持 `async`                                                                   |
 | -          | 3.0.0 | 不可以定义重复的 Context（使用 `if` 进行判断除外），不可以引用未定义的 Context |
 
 [events 事件 > 内建处理器：context.*]: events.md#builtin-actions-context
