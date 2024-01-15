@@ -1,6 +1,7 @@
-- brick: sl-input
+- brick: div
   properties:
-    placeholder: Search...
+    textContent: |
+      <% `Random: ${Math.random()} (will not be changed after switch sub-routes)` %>
 - brick: div
   properties:
     className: tabs
