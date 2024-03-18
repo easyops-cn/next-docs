@@ -8,8 +8,8 @@ export const files = [
     name: "Bricks",
     code: Bricks,
     highlightRanges: [
-      [16, 21],
-      [26, 27],
+      [17, 22],
+      [27, 28],
     ],
   },
   {

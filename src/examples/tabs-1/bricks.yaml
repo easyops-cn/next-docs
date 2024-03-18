@@ -1,7 +1,7 @@
 - brick: div
   properties:
     textContent: |
-      <% `Random: ${Math.random()} (will not be changed after switch sub-routes)` %>
+      <% `Random: ${Math.random()} (will not be changed after switch tabs)` %>
 - brick: div
   properties:
     className: tabs

@@ -53,14 +53,14 @@ routes:
   bricks:
     # 省略：在表格中将链接地址指向子路由
   - brick: eo-next-table
-    # 抽屉放在父路由中，以便正常实现抽屉打开和关闭的动画效果
+    # 抽屉容器放在父路由中，以便正常实现抽屉打开和关闭的动画效果
   - brick: eo-drawer
     properties:
       id: 'detail-drawer'
       customTitle: Detail
     slots:
       '':
-        # 在抽屉内声明子路由
+        # 抽屉内容放在子路由中
         type: routes
         routes:
         - path: '${APP.homepage}/list/detail/:id'
