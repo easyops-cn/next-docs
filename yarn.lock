@@ -1485,7 +1485,7 @@
     "@docusaurus/theme-search-algolia" "3.0.0"
     "@docusaurus/types" "3.0.0"
 
-"@docusaurus/react-loadable@5.5.2", "react-loadable@npm:@docusaurus/react-loadable@5.5.2":
+"@docusaurus/react-loadable@5.5.2":
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/@docusaurus/react-loadable/-/react-loadable-5.5.2.tgz#81aae0db81ecafbdaee3651f12804580868fa6ce"
   integrity sha512-A3dYjdBGuy0IGT+wyLIGIKLRE+sAk1iNk0f1HjNDysO7u8lhL4N3VEm+FAubmJbAztn94F7MxBTPmnixbiyFdQ==
@@ -1868,15 +1868,15 @@
   resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-1.0.4.tgz#063ca5974e59dac7641e6f336555396d24e22d5a"
   integrity sha512-R67cn5Z/eed0piRFmPosVSe6Rv7xpX8Cz14yDe82bod/c5V+ZLMh3ytFdmrk5Wmjl45jKf6k+4Kn4QzqGkq6dg==
 
-"@next-core/monaco-contributions@^0.3.4":
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.3.4.tgz#14a60e2ebf307cf0481f2e21e2da0636707b0bbf"
-  integrity sha512-m4ly26ZCqLsuophGpTDES4d+Y4k0AFElhsQzxajNay3CEDmc+ylfxr5r8MMp1bqyMGi+zEqEDcgqfF7MjzEZgg==
+"@next-core/monaco-contributions@^0.3.5":
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.3.5.tgz#a9647cb663492930e4ab0a04ff4f70609394412d"
+  integrity sha512-ZpHRHDsv1oHRLHPEyPZua01fVKShBj2NrxVe3aEcAxtdVNZGXp6i8DmxOJfmwgDwq+oOV5ymT4DxevQR4wn2aw==
 
-"@next-core/preview@^0.2.74":
-  version "0.2.74"
-  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.2.74.tgz#ddc1178efa7571e15030913ae47997f203a713c9"
-  integrity sha512-FhDRFRDL6C850DadKVJefVFz37wAa+D49yLS1kSvD7GqBxLmRLicrZ99AfaSHMYHJ561i67y2umRYDGXSK1TrQ==
+"@next-core/preview@^0.2.80":
+  version "0.2.80"
+  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.2.80.tgz#a87eb6fa8a7678038a6d67a2da0c119859f2b86d"
+  integrity sha512-bWA1+5a5zQdqcZv+56PFy5G2Xp7GKc2uzDrGDa5u4u1lEISKexlbvrA84h4ctk7EbijuKlb17clmkC0MHkDUag==
 
 "@node-rs/jieba-android-arm-eabi@1.7.0":
   version "1.7.0"
@@ -8024,6 +8024,14 @@ react-loadable-ssr-addon-v5-slorber@^1.0.1:
   integrity sha512-lq3Lyw1lGku8zUEJPDxsNm1AfYHBrO9Y1+olAYwpUJ2IGFBskM0DMKok97A6LWUpHm+o7IvQBOWu9MLenp9Z+A==
   dependencies:
     "@babel/runtime" "^7.10.3"
+
+"react-loadable@npm:@docusaurus/react-loadable@5.5.2":
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/@docusaurus/react-loadable/-/react-loadable-5.5.2.tgz#81aae0db81ecafbdaee3651f12804580868fa6ce"
+  integrity sha512-A3dYjdBGuy0IGT+wyLIGIKLRE+sAk1iNk0f1HjNDysO7u8lhL4N3VEm+FAubmJbAztn94F7MxBTPmnixbiyFdQ==
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.6.2"
 
 react-router-config@^5.1.1:
   version "5.1.1"
