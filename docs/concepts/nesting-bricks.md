@@ -78,15 +78,15 @@ import type { GeneralButton, GeneralButtonProps } from "../button/index.js";
 // 使用 `wrapBrick` 传入构件名称，得到一个 React 组件。
 // 通过指定相关类型，可以得到有效的 IDE 的属性类型提示。
 const WrappedIcon = wrapBrick<GeneralIcon, GeneralIconProps>(
-  "icons.general-icon"
+  "eo-icon"
 );
 
 // 传入的构件既可以是其他构件包的，也可以是当前构件包的。
 const WrappedButton = wrapBrick<GeneralButton, GeneralButtonProps>(
-  "basic.general-button"
+  "eo-button"
 );
 
-@defineElement("basic.button-with-icon")
+@defineElement("eo-button-with-icon")
 class ButtonWithIcon extends ReactNextElement {
   @property() accessor type: string;
   @property() accessor icon: string;
@@ -103,6 +103,41 @@ class ButtonWithIcon extends ReactNextElement {
 ```
 
 这种分层和组合的思想应贯穿我们所有构件的设计和实现的过程。
+
+## `asyncWrapBrick`
+
+在上述示例中，如果页面中使用到了 `eo-button-with-icon`，那么系统将始终先加载它的依赖 `eo-icon` 和 `eo-button` 构件，再加载 `eo-button-with-icon`。
+
+但有时候我们的构件可能需要依赖一些资源体积比较大的构件，并且这些构件可能是按条件渲染的，希望只在必要的时候加载这些依赖构件；或者这些构件可以异步渲染，希望页面主要内容不被这些依赖阻塞。
+
+针对这些场景，使用 `asyncWrapBrick` 并结合 React Suspense 即可实现异步组件。
+
+```jsx
+import { asyncWrapBrick } from "@next-core/react-runtime";
+
+const MyAsyncDep = React.lazy(async () => ({
+  default: await asyncWrapBrick("my-large-or-optional-dep"),
+}));
+
+function AsyncWrapComponent({ visible }) {
+  return (
+    <>
+      <h2>Async Wrapper</h2>
+      {visible && (
+        <React.Suspense fallback="Loading...">
+          <MyAsyncDep />
+        </React.Suspense>
+      )}
+    </>
+  );
+}
+```
+
+如上述示例，当 `visible` 为 `false` 时，构件 `my-large-or-optional-dep` 不会被加载。而当 `visible` 为 `true` 时，在加载依赖构件的过程中，页面其他部分也不会被阻塞。
+
+:::info Important
+依赖 `brick_next >= 3.13.7`。
+:::
 
 ## `useBrick`
 
