@@ -136,7 +136,7 @@ function AsyncWrapComponent({ visible }) {
 如上述示例，当 `visible` 为 `false` 时，构件 `my-large-or-optional-dep` 不会被加载。而当 `visible` 为 `true` 时，在加载依赖构件的过程中，页面其他部分也不会被阻塞。
 
 :::info Important
-依赖 `brick_next >= 3.13.7`。
+依赖 `basic-NB >= 1.11.1`。
 :::
 
 ## `useBrick`
