@@ -65,6 +65,7 @@ properties:
 | `QUERY`           | `object`          | URL query 参数，例如当 URL 为 `?a=1&b=2` 时，`QUERY.a` 可以得到 `"1"`                                                                                                                                           |
 | `SAFE_TAG_URL`    | `function`        | 类似于 `TAG_URL` 但会执行严格编码（会转换 `/` 为 `%2F`）。                                                                                                                                                      |
 | `SESSION_STORAGE` | `object`          | sessionStorage 存储的信息，支持 `getItem` 方法获取 `sessionStorage` 项，例如 `SESSION_STORAGE.getItem("your-key")`。需要写入或移除数据，请使用[内建处理器：sessionStorage.\*]。                                 |
+| `STATE`           | `object`          | [模板状态数据]                                                                                                                                                                                                  |
 | `SYS`             | `object`          | 系统信息，例如当前登录用户名： `SYS.username`, 当前登录用户实例 ID： `SYS.userInstanceId`                                                                                                                       |
 | `TAG_URL`         | `function`        | 使用 JavaScript 的 [Tagged Template] 来实现对 URL 参数的自动编码（会忽略 `/` 的编码）。例如 `` TAG_URL`${APP.homepage}?q=${q}` `` 可以得到 `/hello?q=a%26b` （假设 `APP.homepage` 为 `/hello`、`q` 为 `a&b`）。 |
 
@@ -166,3 +167,4 @@ properties:
 [媒体查询全局对象]: media-query.md#media-global-object
 [tagged template]: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Template_literals#tagged_templates
 [控制节点]: control-nodes.md
+[模板状态数据]: template-state.md
