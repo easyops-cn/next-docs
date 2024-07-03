@@ -20,6 +20,7 @@ const sidebars = {
       type: "category",
       label: "Learn",
       items: ["learn/quick-start", "learn/tutorial", "learn/installation"],
+      collapsed: false,
     },
     {
       type: "category",
@@ -44,11 +45,13 @@ const sidebars = {
         // "concepts/theme-and-mode",
         "concepts/media-query",
       ],
+      collapsed: false,
     },
     {
       type: "category",
       label: "Advanced",
       items: ["advanced/incremental-rendering"],
+      collapsed: false,
     },
   ],
 };
