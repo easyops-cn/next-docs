@@ -78,15 +78,15 @@ import type { GeneralButton, GeneralButtonProps } from "../button/index.js";
 // 使用 `wrapBrick` 传入构件名称，得到一个 React 组件。
 // 通过指定相关类型，可以得到有效的 IDE 的属性类型提示。
 const WrappedIcon = wrapBrick<GeneralIcon, GeneralIconProps>(
-  "icons.general-icon"
+  "eo-icon"
 );
 
 // 传入的构件既可以是其他构件包的，也可以是当前构件包的。
 const WrappedButton = wrapBrick<GeneralButton, GeneralButtonProps>(
-  "basic.general-button"
+  "eo-button"
 );
 
-@defineElement("basic.button-with-icon")
+@defineElement("eo-button-with-icon")
 class ButtonWithIcon extends ReactNextElement {
   @property() accessor type: string;
   @property() accessor icon: string;
