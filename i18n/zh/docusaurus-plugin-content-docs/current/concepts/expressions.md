@@ -29,7 +29,7 @@ properties:
 
 表达式中可以使用大部分 JavaScript 表达式语法和 API，以及 Brick Next 内置对象。
 
-## 内置对象 {#builtin-objects}
+## 内置 API {#builtin-api}
 
 表达式中支持的内置对象主要如下：
 
@@ -49,9 +49,9 @@ properties:
 | `I18N_TEXT`       | `function`        | 使用 [`I18N_TEXT(...)`](i18n.md#i18n-at-run-time) 根据当前语言设置转换带有国际化设置的字典为对应文本内容。                                                                                                      |
 | `I18N`            | `function`        | 使用 [`I18N(...)`](i18n.md#i18n-in-micro-apps) 显示应用预设的国际化内容。                                                                                                                                       |
 | `IMG`             | `object`          | 使用 `IMG.get(...)` 获取图像资源的 URL。                                                                                                                                                                        |
+| `INDEX`           | `number`          | [控制节点] `:forEach` 内的子节点使用 `INDEX` 来访问对应的子项的索引（从 `0` 开始计数）。                                                                                                                        |
 | `INSTALLED_APPS`  | `object`          | 使用 `INSTALLED_APPS.has("your-app")` 来判断指定微应用是否已安装。也可以使用 `INSTALLED_APPS.has("your-app", ">=1.2.3")` 来判断指定微应用已安装并且版本满足指定规则（目前仅支持 `>=` `>` `=` `<` `<=`）         |
 | `ITEM`            | -                 | [控制节点] `:forEach` 内的子节点使用 `ITEM` 来访问对应的子项数据。                                                                                                                                              |
-| `INDEX`           | `number`          | [控制节点] `:forEach` 内的子节点使用 `INDEX` 来访问对应的子项的索引（从 `0` 开始计数）。                                                                                                                        |
 | `LOCAL_STORAGE`   | `object`          | localStorage 存储的信息，支持 `getItem` 方法获取 `localStorage` 项，例如 `LOCAL_STORAGE.getItem("your-key")`。需要写入或移除数据，请使用[内建处理器：localStorage.\*]。                                         |
 | `MEDIA`           | `object`          | [媒体查询全局对象]。                                                                                                                                                                                            |
 | `MISC`            | `object`          | 系统 Misc 设置。                                                                                                                                                                                                |
@@ -65,6 +65,7 @@ properties:
 | `QUERY`           | `object`          | URL query 参数，例如当 URL 为 `?a=1&b=2` 时，`QUERY.a` 可以得到 `"1"`                                                                                                                                           |
 | `SAFE_TAG_URL`    | `function`        | 类似于 `TAG_URL` 但会执行严格编码（会转换 `/` 为 `%2F`）。                                                                                                                                                      |
 | `SESSION_STORAGE` | `object`          | sessionStorage 存储的信息，支持 `getItem` 方法获取 `sessionStorage` 项，例如 `SESSION_STORAGE.getItem("your-key")`。需要写入或移除数据，请使用[内建处理器：sessionStorage.\*]。                                 |
+| `SIZE`            | `number`          | [控制节点] `:forEach` 内的子节点使用 `SIZE` 来访问数据源的数量。                                                                                                                                                |
 | `STATE`           | `object`          | [模板状态数据]                                                                                                                                                                                                  |
 | `SYS`             | `object`          | 系统信息，例如当前登录用户名： `SYS.username`, 当前登录用户实例 ID： `SYS.userInstanceId`                                                                                                                       |
 | `TAG_URL`         | `function`        | 使用 JavaScript 的 [Tagged Template] 来实现对 URL 参数的自动编码（会忽略 `/` 的编码）。例如 `` TAG_URL`${APP.homepage}?q=${q}` `` 可以得到 `/hello?q=a%26b` （假设 `APP.homepage` 为 `/hello`、`q` 为 `a&b`）。 |
