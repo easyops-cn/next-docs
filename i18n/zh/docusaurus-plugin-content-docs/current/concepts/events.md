@@ -66,9 +66,10 @@ events:
 
 ### 内建处理器：window.\* {#builtin-actions-window}
 
-| Action        | Arguments                     | description                                       |
-| ------------- | ----------------------------- | ------------------------------------------------- |
-| `window.open` | `url: string, target: string` | 打开页面（注意：需要自行按需补上 `/next` 的前缀） |
+| Action               | Arguments                        | description                                                       |
+| -------------------- | -------------------------------- | ----------------------------------------------------------------- |
+| `window.open`        | `url: string, target: string`    | 打开页面（注意：需要自行按需使用 `BASE_URL` 补上 `/next` 的前缀） |
+| `window.postMessage` | `data: unknown, origin?: string` | 发送消息                                                          |
 
 ### 内建处理器：event.\* {#builtin-actions-event}
 
@@ -198,6 +199,10 @@ events:
 ```
 
 ## 变更历史 {#history}
+
+| 组件       | 版本   | 变更                      |
+| ---------- | ------ | ------------------------- |
+| brick_next | 3.18.9 | 支持 `window.postMessage` |
 
 [history 会话历史]: history.md
 [provider 异步回调]: provider-bricks.md#provider-async-callback
