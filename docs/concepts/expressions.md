@@ -69,6 +69,7 @@ properties:
 | `STATE`           | `object`          | [模板状态数据]                                                                                                                                                                                                  |
 | `SYS`             | `object`          | 系统信息，例如当前登录用户名： `SYS.username`, 当前登录用户实例 ID： `SYS.userInstanceId`                                                                                                                       |
 | `TAG_URL`         | `function`        | 使用 JavaScript 的 [Tagged Template] 来实现对 URL 参数的自动编码（会忽略 `/` 的编码）。例如 `` TAG_URL`${APP.homepage}?q=${q}` `` 可以得到 `/hello?q=a%26b` （假设 `APP.homepage` 为 `/hello`、`q` 为 `a&b`）。 |
+| `THEME`           | `object`          | 通过 `THEME.getTheme()` 获得当前主题（通常为 `"light"` 或 `"dark-v2"`）                                                                                                                                         |
 
 ## 递归标记 {#recursive-flag}
 
