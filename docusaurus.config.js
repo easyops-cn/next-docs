@@ -2,9 +2,16 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
 const { createHash } = require("crypto");
+const webpack = require("webpack");
+const _ = require("lodash");
+const CopyPlugin = require("copy-webpack-plugin");
 const MonacoEditorWebpackPlugin = require("monaco-editor-webpack-plugin");
+
+const originalFilePath = path.resolve(
+  require.resolve("monaco-editor/package.json"),
+  "../esm/vs/editor/common/services/findSectionHeaders.js"
+);
 
 const baseUrl = "/";
 const brickPackages = [
@@ -227,7 +234,7 @@ const config = {
   plugins: [
     () => ({
       name: "docusaurus-next-runtime",
-      configureWebpack(config, isServer, utils) {
+      configureWebpack() {
         const previewDir = path.join(
           require.resolve("@next-core/preview/package.json"),
           "../dist"
@@ -244,6 +251,14 @@ const config = {
               {
                 test: /\.yaml/,
                 type: "asset/source",
+              },
+              {
+                // This file contains static initialization blocks which are not supported until Chrome 94
+                test: /[\\/]node_modules[\\/]monaco-editor[\\/]esm[\\/]vs[\\/].+\.js$/,
+                loader: "babel-loader",
+                options: {
+                  rootMode: "upward",
+                },
               },
             ],
           },
@@ -269,7 +284,7 @@ const config = {
                     require.resolve(`${pkg}/package.json`),
                     "../dist"
                   ),
-                  to: path.join("preview/bricks", pkg.split("/").pop(), "dist"),
+                  to: path.join("preview/bricks", path.basename(pkg), "dist"),
                   // Terser skip this file for minimization
                   info: { minimized: true },
                 })),
@@ -294,6 +309,11 @@ const config = {
               ],
               filename: `workers/[name].[contenthash:8].worker.js`,
             }),
+            new webpack.NormalModuleReplacementPlugin(
+              new RegExp(`^${_.escapeRegExp(originalFilePath)}$`),
+              // Refactor without 'd' flag of RegExp
+              path.resolve(__dirname, "src/replaces/findSectionHeaders.js")
+            ),
           ],
         };
       },
