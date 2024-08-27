@@ -1857,10 +1857,10 @@
   resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-1.0.19.tgz#a2bf19fd7fa64dec016dfd30784fa8142069b0f9"
   integrity sha512-JXo/LE5Y/ttwjbSCbGUd8g5RA4LDdHAsXiP39j987RZf1xCljfUxb+r8sFrbMoK7V8Gp55E+LlIRVd+1KmgxPQ==
 
-"@next-core/monaco-contributions@^0.3.10":
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.3.10.tgz#637e549778ce2dfe4cdb3eafadf4b8822a90eafc"
-  integrity sha512-OpHqHoDQDAH/TjRSYdeJBV7LnW7ByJt0HhdBR1JFz6wCWcCxQ+7t3UqDeJ5mkGnjn86GBm8FHWFUTvEqZp7lUA==
+"@next-core/monaco-contributions@^0.3.11":
+  version "0.3.11"
+  resolved "https://registry.yarnpkg.com/@next-core/monaco-contributions/-/monaco-contributions-0.3.11.tgz#98292b44df89729ffb97cde6fef22e679ac82b4f"
+  integrity sha512-C7k3zeEGqLgIH67M7bz1foIbU7haI/ONv/EeK/pDbVslWMk2DjxpBXQ03SvurGneBxtw3h6tOx5CONPwN6Jolw==
 
 "@next-core/preview@^0.7.19":
   version "0.7.19"
