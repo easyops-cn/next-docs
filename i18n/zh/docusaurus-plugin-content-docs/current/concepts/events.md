@@ -60,9 +60,10 @@ events:
 
 ### 内建处理器：location.\* {#builtin-actions-location}
 
-| Action            | Arguments | description    |
-| ----------------- | --------- | -------------- |
-| `location.reload` | -         | 浏览器刷新页面 |
+| Action            | Arguments     | description                                                |
+| ----------------- | ------------- | ---------------------------------------------------------- |
+| `location.reload` | -             | 浏览器刷新页面                                             |
+| `location.assign` | `url: string` | 浏览器跳转页面，例如 `` `${BASE_URL}${PATH_NAME}?q=any` `` |
 
 ### 内建处理器：window.\* {#builtin-actions-window}
 
