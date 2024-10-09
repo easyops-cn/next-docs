@@ -8,7 +8,11 @@
   "ignorePresets": [":ignoreModulesAndTests"],
   "packageRules": [
     {
-      "excludePackagePatterns": ["^@next-core/", "^@next-bricks/"],
+      "excludePackagePatterns": [
+        "^@next-core/",
+        "^@next-bricks/",
+        "^@easyops-cn/"
+      ],
       "matchManagers": ["npm"],
       "enabled": false
     },
