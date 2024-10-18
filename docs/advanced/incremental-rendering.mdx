@@ -77,7 +77,14 @@ routes:
                 method: open
               onUnmount:
                 target: '#detail-drawer'
-                method: close
+                properties:
+                  visible: false
+                # 以上示例针对 v3 构件，对于 v2 的 drawer/modal 构件，没有 `visible` 属性，
+                # 需使用 `close` 方法并设置 `noEvent: true`:
+                # target: '#v2-drawer'
+                # method: close
+                # args:
+                #   - noEvent: true
             # highlight-end
     events:
       # 当抽屉关闭时，回到列表页
