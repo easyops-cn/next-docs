@@ -69,6 +69,7 @@ proxy:
     awesome.happen:
       ref: "awesome-brick"
       refEvent: "something.happen"
+  # Now we recommend to define `slot` element (since brick_next 3.19.13), instead of `proxy.slots`
   slots:
     tools:
       ref: "micro-view"
@@ -96,6 +97,10 @@ bricks:
                 # Use `targetRef` to point to another brick inside a custom template.
                 targetRef: "micro-view"
                 method: "updateView"
+          # Define a slot
+          - brick: slot
+            properties:
+              name: extra
 ```
 
 在 Storyboard 中使用：
@@ -127,9 +132,10 @@ slots:
 
 ## 变更历史 {#history}
 
-| 组件       | 版本  | 变更                                                                                             |
-| ---------- | ----- | ------------------------------------------------------------------------------------------------ |
-| brick_next | 3.0.0 | 移除废弃用法： `proxy.properties.{refTransform}` `extraOneWayRefs` `mergeProperty` `<% TPL.* %>` |
+| 组件       | 版本    | 变更                                                                                             |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------ |
+| brick_next | 3.19.13 | 支持在模板内部定义 slot 元素                                                                     |
+| -          | 3.0.0   | 移除废弃用法： `proxy.properties.{refTransform}` `extraOneWayRefs` `mergeProperty` `<% TPL.* %>` |
 
 [context 上下文]: context.md
 [template state 模板状态数据]: template-state.md
