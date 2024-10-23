@@ -101,6 +101,12 @@ bricks:
           - brick: slot
             properties:
               name: extra
+            # If no bricks is passed in for the slot, will use children of the slot instead
+            # (only children of the default empty-named slots).
+            children:
+              - brick: p
+                properties:
+                  textContent: I'm a default placeholder
 ```
 
 在 Storyboard 中使用：

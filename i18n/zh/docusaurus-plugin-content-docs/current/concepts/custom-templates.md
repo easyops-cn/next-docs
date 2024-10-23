@@ -101,6 +101,12 @@ bricks:
           - brick: slot
             properties:
               name: extra
+            # 如果该插槽没有构件传递进来，将使用该插槽的子构件作为替代
+            # （仅默认的名字为空的插槽的子构件）
+            children:
+              - brick: p
+                properties:
+                  textContent: I'm a default placeholder
 ```
 
 在 Storyboard 中使用：
