@@ -3,9 +3,7 @@
 
 const path = require("path");
 const { createHash } = require("crypto");
-const webpack = require("webpack");
 const _ = require("lodash");
-const CopyPlugin = require("copy-webpack-plugin");
 const MonacoEditorWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 const originalFilePath = path.resolve(
@@ -108,6 +106,10 @@ const config = {
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
+
+  future: {
+    experimental_faster: true,
+  },
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -234,7 +236,7 @@ const config = {
   plugins: [
     () => ({
       name: "docusaurus-next-runtime",
-      configureWebpack() {
+      configureWebpack(config, isServer, { currentBundler }) {
         const previewDir = path.join(
           require.resolve("@next-core/preview/package.json"),
           "../dist"
@@ -252,18 +254,10 @@ const config = {
                 test: /\.yaml/,
                 type: "asset/source",
               },
-              {
-                // This file contains static initialization blocks which are not supported until Chrome 94
-                test: /[\\/]node_modules[\\/]monaco-editor[\\/]esm[\\/]vs[\\/]language[\\/]typescript[\\/]tsMode\.js$/,
-                loader: "babel-loader",
-                options: {
-                  rootMode: "upward",
-                },
-              },
             ],
           },
           plugins: [
-            new CopyPlugin({
+            new currentBundler.instance.CopyRspackPlugin({
               patterns: [
                 {
                   from: previewDir,
@@ -309,7 +303,7 @@ const config = {
               ],
               filename: `workers/[name].[contenthash:8].worker.js`,
             }),
-            new webpack.NormalModuleReplacementPlugin(
+            new currentBundler.instance.NormalModuleReplacementPlugin(
               new RegExp(`^${_.escapeRegExp(originalFilePath)}$`),
               // Refactor without 'd' flag of RegExp
               path.resolve(__dirname, "src/replaces/findSectionHeaders.js")
