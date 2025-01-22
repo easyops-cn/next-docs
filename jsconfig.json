@@ -1,7 +1,13 @@
 {
-  "extends": "./tsconfig.json",
+  // This file is not used in compilation. It is here just for a nice editor experience.
+  "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "moduleResolution": "Node"
+    "baseUrl": ".",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strictNullChecks": false
   },
-  "include": ["**/*.js"]
+  "include": ["**/*.js"],
+  "exclude": ["node_modules", "build"]
 }

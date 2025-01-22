@@ -39,12 +39,12 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@docusaurus/faster": "^3.7.0",
     "@docusaurus/module-type-aliases": "3.7.0",
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "3.7.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
-    "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react": "^7.32.2",
