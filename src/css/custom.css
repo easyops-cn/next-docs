@@ -88,3 +88,7 @@ button {
 html[data-theme="dark"] .header-github-link::before {
   background-image: url(../../static/img/github-mark-white.svg);
 }
+
+.monaco-editor .find-widget .button {
+  color: inherit;
+}
