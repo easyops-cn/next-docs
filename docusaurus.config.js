@@ -4,7 +4,6 @@
 const path = require("path");
 const { createHash } = require("crypto");
 const _ = require("lodash");
-const MonacoEditorWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 const originalFilePath = path.resolve(
   require.resolve("monaco-editor/package.json"),
@@ -254,6 +253,13 @@ const config = {
                 test: /\.yaml/,
                 type: "asset/source",
               },
+              {
+                test: /\.wasm$/,
+                type: "asset/resource",
+                generator: {
+                  filename: "[name].[hash][ext]",
+                },
+              },
             ],
           },
           plugins: [
@@ -285,24 +291,6 @@ const config = {
               ],
             }),
             new EmitBootstrapJsonPlugin(),
-            new MonacoEditorWebpackPlugin({
-              languages: ["javascript", "typescript", "css" /* , 'yaml' */],
-              features: [
-                // "!accessibilityHelp",
-                "!codelens",
-                "!colorPicker",
-                "!documentSymbols",
-                "!fontZoom",
-                "!iPadShowKeyboard",
-                "!inspectTokens",
-                "!stickyScroll",
-                "!links",
-                "!inlayHints",
-                "!documentSymbols",
-                "!browser",
-              ],
-              filename: `workers/[name].[contenthash:8].worker.js`,
-            }),
             new currentBundler.instance.NormalModuleReplacementPlugin(
               new RegExp(`^${_.escapeRegExp(originalFilePath)}$`),
               // Refactor without 'd' flag of RegExp

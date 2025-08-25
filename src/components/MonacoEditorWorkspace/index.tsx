@@ -6,7 +6,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import * as monaco from "monaco-editor";
+import { initializeTokensProvider } from "@next-shared/monaco-textmate";
+import "@next-shared/monaco-textmate/workers.js";
+import tmVsLight from "@next-shared/monaco-textmate/themes/light-modern.json";
+import tmVsDark from "@next-shared/monaco-textmate/themes/dark-modern.json";
 import {
   EDITOR_SCROLLBAR_SIZE,
   EDITOR_PADDING_TOP,
@@ -14,14 +18,20 @@ import {
 } from "@site/src/constants";
 import clsx from "clsx";
 import type { FileInfo } from "@site/src/interfaces";
-import { register as registerJavaScript } from "@next-core/monaco-contributions/javascript";
-import { register as registerTypeScript } from "@next-core/monaco-contributions/typescript";
-import { register as registerYaml } from "@next-core/monaco-contributions/yaml";
 import styles from "./styles.module.css";
 
-registerJavaScript(monaco);
-registerTypeScript(monaco);
-registerYaml(monaco);
+monaco.editor.defineTheme(
+  "tm-vs-light",
+  tmVsLight as monaco.editor.IStandaloneThemeData
+);
+monaco.editor.defineTheme(
+  "tm-vs-dark",
+  tmVsDark as monaco.editor.IStandaloneThemeData
+);
+
+initializeTokensProvider("javascript");
+initializeTokensProvider("typescript");
+initializeTokensProvider("brick_next_yaml");
 
 export interface MonacoEditorWorkspaceProps {
   files: FileInfo[];
@@ -56,6 +66,13 @@ monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
   lib: [],
 });
 
+function convertLanguage(lang: string) {
+  if (lang === "yaml") {
+    return "brick_next_yaml";
+  }
+  return lang;
+}
+
 export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
   function MonacoEditorWorkspace(
     { files, currentFile, className, theme, typingEffectReady, onChange },
@@ -79,7 +96,7 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
         const file = files.find((f) => f.name === currentFile);
         model = monaco.editor.createModel(
           file.codeSlides?.[0] ?? file.code,
-          file.lang ?? "yaml",
+          convertLanguage(file.lang ?? "yaml"),
           monaco.Uri.file(`${workspace}/${file.name}`)
         );
         modelsMap.set(currentFile, model);
@@ -87,13 +104,12 @@ export default forwardRef<MonacoEditorWorkspaceRef, MonacoEditorWorkspaceProps>(
       return model;
     }, [currentFile, modelsMap, files, workspace]);
 
+    const convertedTheme = theme === "vs-dark" ? "tm-vs-dark" : "tm-vs-light";
     useEffect(() => {
-      if (theme) {
-        // Currently theme is configured globally.
-        // See https://github.com/microsoft/monaco-editor/issues/338
-        monaco.editor.setTheme(theme);
-      }
-    }, [theme]);
+      // Currently theme is configured globally.
+      // See https://github.com/microsoft/monaco-editor/issues/338
+      monaco.editor.setTheme(convertedTheme);
+    }, [convertedTheme]);
 
     useEffect(() => {
       if (editorRef.current) {
