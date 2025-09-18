@@ -80,6 +80,8 @@ events:
 
 ### 内建处理器：console.\* {#builtin-actions-console}
 
+`console.log|warn|info` 默认不会打印信息在 console 中，如何开启请在 devtools 中输入`window.debugConsole.help()`查看。
+
 | Action          | Arguments | description |
 | --------------- | --------- | ----------- |
 | `console.log`   | `any`     | -           |
@@ -201,9 +203,10 @@ events:
 
 ## 变更历史 {#history}
 
-| 组件       | 版本   | 变更                      |
-| ---------- | ------ | ------------------------- |
-| brick_next | 3.18.9 | 支持 `window.postMessage` |
+| 组件       | 版本   | 变更                                                                                                                                  |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| brick_next | 3.22.3 | `console.log` `console.warn` `console.info` 默认不在 console 中打印信息，如何开启请在 devtools 中输入`window.debugConsole.help()`查看 |
+| -          | 3.18.9 | 支持 `window.postMessage`                                                                                                             |
 
 [history 会话历史]: history.md
 [provider 异步回调]: provider-bricks.md#provider-async-callback
