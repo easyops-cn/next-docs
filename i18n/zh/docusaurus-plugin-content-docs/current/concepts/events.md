@@ -80,6 +80,8 @@ events:
 
 ### 内建处理器：console.\* {#builtin-actions-console}
 
+`console.log|warn|info` 默认不会打印信息在 console 中，如何开启请在 devtools 中输入`window.debugConsole.help()`查看。
+
 | Action          | Arguments | description |
 | --------------- | --------- | ----------- |
 | `console.log`   | `any`     | -           |
