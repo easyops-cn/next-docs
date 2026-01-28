@@ -173,6 +173,14 @@ const config = {
             className: "header-github-link",
             "aria-label": "GitHub repository",
           },
+          {
+            position: "right",
+            type: "custom-ask-ai",
+          },
+          {
+            position: "right",
+            type: "search",
+          },
         ],
       },
       footer: {

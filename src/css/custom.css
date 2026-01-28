@@ -92,3 +92,14 @@ html[data-theme="dark"] .header-github-link::before {
 .monaco-editor .find-widget .button {
   color: inherit;
 }
+
+.ask-ai-navbar-item {
+  padding-left: 10px;
+  margin-right: -10px;
+}
+
+.ask-ai-navbar-item button {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  height: 36px;
+}
