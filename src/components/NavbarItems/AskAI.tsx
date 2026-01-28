@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AskAIWidget } from "open-ask-ai";
-import { useColorMode } from "@docusaurus/theme-common";
+import { useColorMode, type ColorMode } from "@docusaurus/theme-common";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
-const exampleQuestions = [
+const exampleQuestionsEn = [
   "What is Brick Next?",
-  "How do I integrate Brick Next?",
-  "Show me an example of using the Brick Next",
+  "What is a custom template and how to use it?",
+  "How to add event listeners in Brick Next?",
+];
+
+const exampleQuestionsZh = [
+  "什么是 Brick Next？",
+  "什么是自定义模板，如何使用？",
+  "如何在 Brick Next 中添加事件监听器？",
 ];
 
 export default function AskAI() {
   const { colorMode } = useColorMode();
+  const [theme, setTheme] = useState<ColorMode>("light");
+  const { i18n } = useDocusaurusContext();
+  const { currentLocale } = i18n;
+
+  useEffect(() => {
+    setTheme(colorMode);
+  }, [colorMode]);
+
   return (
     <AskAIWidget
       className="ask-ai-navbar-item"
-      theme={colorMode}
+      theme={theme}
       projectId="brick-next"
       apiUrl="https://lab.shenwei.xyz"
-      exampleQuestions={exampleQuestions}
+      exampleQuestions={
+        currentLocale === "zh" ? exampleQuestionsZh : exampleQuestionsEn
+      }
       systemPrompt="You are a documentation assistant for Brick Next. Be concise and accurate. Output in markdown format, use proper formatting such as inline code when referring to code elements. Use the user's language for responses."
     />
   );
