@@ -2125,10 +2125,10 @@
   resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-1.1.9.tgz#2fc69e92705516a63862fb1103ad77d78ccb212c"
   integrity sha512-yLl1zhTj1Y/sPAWOfeYbIzDuU10HrG4pfYRBGTnQtQVrfwDzApN6AeckcckFUMZzXZNku0BaHu5uf9UGEDjRDA==
 
-"@next-core/preview@^0.7.51":
-  version "0.7.51"
-  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.7.51.tgz#d0998eb96e87315bfdab9e181f5b7500c693488e"
-  integrity sha512-ZbX3wm+GN3ZpVW4M8Z6tazi9ZUmcXKlGoshlHQICCLuu9gPJ4a3BjnMML9A2bj1ko53nW9W7DW1HNcfjTchd6Q==
+"@next-core/preview@^0.8.36":
+  version "0.8.36"
+  resolved "https://registry.yarnpkg.com/@next-core/preview/-/preview-0.8.36.tgz#7210a134b8bdc5f6f81a4e637528288da59a8537"
+  integrity sha512-j8w/e2K6D8i/R5pw/+xu23j+Y8lLEljG23/nE2aVGgyKE2O6XJ4NxveRsdzphgVeo/DmmS5tNHd09l8XiE53lQ==
 
 "@next-shared/monaco-textmate@^0.1.2":
   version "0.1.2"
