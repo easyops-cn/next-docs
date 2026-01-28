@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AskAIWidget } from "open-ask-ai";
+import { AskAIWidget, type WidgetTexts } from "open-ask-ai";
 import { useColorMode, type ColorMode } from "@docusaurus/theme-common";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
@@ -14,6 +14,18 @@ const exampleQuestionsZh = [
   "什么是自定义模板，如何使用？",
   "如何在 Brick Next 中添加事件监听器？",
 ];
+
+const textsEn: WidgetTexts = {
+  welcomeMessage: "Ask me about Brick Next",
+  exampleQuestionsTitle: "Example questions:",
+  inputPlaceholder: "Ask a question...",
+};
+
+const textsZh: WidgetTexts = {
+  welcomeMessage: "关于 Brick Next，有什么问题可以问我",
+  exampleQuestionsTitle: "示例问题 ：",
+  inputPlaceholder: "请输入你的问题...",
+};
 
 export default function AskAI() {
   const { colorMode } = useColorMode();
@@ -31,10 +43,11 @@ export default function AskAI() {
       theme={theme}
       projectId="brick-next"
       apiUrl="https://lab.shenwei.xyz"
+      texts={currentLocale === "zh" ? textsZh : textsEn}
       exampleQuestions={
         currentLocale === "zh" ? exampleQuestionsZh : exampleQuestionsEn
       }
-      systemPrompt="You are a documentation assistant for Brick Next. Be concise and accurate. Output in markdown format, use proper formatting such as inline code when referring to code elements. Use the user's language for responses."
+      systemPrompt="You are a documentation assistant for Brick Next, a low-code framework, developed by UWinTech (优维科技). Be concise and accurate. Output in markdown format, use proper formatting such as inline code when referring to code elements. Use the user's language for responses."
     />
   );
 }
