@@ -47,7 +47,6 @@ export default function AskAI() {
       exampleQuestions={
         currentLocale === "zh" ? exampleQuestionsZh : exampleQuestionsEn
       }
-      systemPrompt="You are a documentation assistant for Brick Next, a low-code framework, developed by UWinTech (优维科技). Be concise and accurate. Output in markdown format, use proper formatting such as inline code when referring to code elements. Use the user's language for responses."
     />
   );
 }
