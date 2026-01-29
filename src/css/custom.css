@@ -93,6 +93,10 @@ html[data-theme="dark"] .header-github-link::before {
   color: inherit;
 }
 
+.ask-ai pre {
+  font-size: inherit;
+}
+
 .ask-ai-navbar-item {
   padding-left: 10px;
   margin-right: -10px;
