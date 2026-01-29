@@ -33,7 +33,7 @@
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.50.0",
-    "open-ask-ai": "^0.3.3",
+    "open-ask-ai": "^0.3.4",
     "prism-react-renderer": "^2.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
