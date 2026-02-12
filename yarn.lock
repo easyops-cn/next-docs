@@ -2100,30 +2100,30 @@
     "@module-federation/runtime" "0.8.4"
     "@module-federation/sdk" "0.8.4"
 
-"@next-bricks/basic@^1.50.2":
-  version "1.50.2"
-  resolved "https://registry.npmjs.org/@next-bricks/basic/-/basic-1.50.2.tgz"
-  integrity sha512-gyXVgA3YQLTMG+Uyiiq5m1eW69JBeIZQJdTqAOfivb/ME93D1qLY2gdh7aOQ/kisfpf09DOptbEPYUC8jXnnEw==
+"@next-bricks/basic@^1.63.7":
+  version "1.63.7"
+  resolved "https://registry.yarnpkg.com/@next-bricks/basic/-/basic-1.63.7.tgz#66f918af0a7846ac8e7da87e7d3a360b3949427d"
+  integrity sha512-vWe89jsyoci6kPQDBuXk/O1GGSRP8KdTDqy7KC5n5UhiWUyYIOb94Av5j4dwUkv+0K8ClmEtuO3L4bxhFspoPw==
 
-"@next-bricks/containers@^1.14.6":
-  version "1.14.6"
-  resolved "https://registry.npmjs.org/@next-bricks/containers/-/containers-1.14.6.tgz"
-  integrity sha512-iYbYhErPrbiXpXC03PH82HnGxVTzGw8aU1jzTdU2r2tQxbI1VHPRfi9U6xKLlO9BIKMlmbDHAqBUqoq/108jXw==
+"@next-bricks/containers@^1.18.4":
+  version "1.18.4"
+  resolved "https://registry.yarnpkg.com/@next-bricks/containers/-/containers-1.18.4.tgz#a734fc2626033200670da471595ae73ab0d9fb4f"
+  integrity sha512-891VoFliyg2LF5Th6Y58eqO9BK4427yDcVJvDX9QIU0TpnjYVzm3EJwJRuen46sItBm1mHDRluDdLT3Qv+H9QQ==
 
-"@next-bricks/form@^1.15.13":
-  version "1.15.13"
-  resolved "https://registry.npmjs.org/@next-bricks/form/-/form-1.15.13.tgz"
-  integrity sha512-rDdXhu+6uX7gc1Cc9llIwJoCu00f1/6ln5LX+q3CQCOmoqeldG7R1J2U1bq5ZHlAFua1FaGck459GUkiR3j/1A==
+"@next-bricks/form@^1.21.10":
+  version "1.21.10"
+  resolved "https://registry.yarnpkg.com/@next-bricks/form/-/form-1.21.10.tgz#98103ad74fbdf150853eb7e814d11ee36406d5e8"
+  integrity sha512-PHwZ7ASGVUhyasMpAW14RSArtMDY7enW3Jtd8hP2jdtOnsnRlRmGFQkD8CWpExYyEPAvdyVJfgIktygz7bcU+g==
 
-"@next-bricks/icons@^1.3.23":
-  version "1.3.23"
-  resolved "https://registry.npmjs.org/@next-bricks/icons/-/icons-1.3.23.tgz"
-  integrity sha512-cFzR58ylYZ40wOACpijkr86mQhllRT+WyWFProZyHkcLqXxAJYDW9JIwsE0xvCoqhdunszgwhLgQ95qo8RnozA==
+"@next-bricks/icons@^1.6.9":
+  version "1.6.9"
+  resolved "https://registry.yarnpkg.com/@next-bricks/icons/-/icons-1.6.9.tgz#75b0e6e2f954b65e6603b13551529950803b7bae"
+  integrity sha512-S7nJIFtB6A+xPjJqoIIDNRvbWJIj9WbHjlXVAumME0WTm/KAcseBR9nF5WD9wyqp86tXAuCXUVs0dXMeisGDMQ==
 
-"@next-bricks/shoelace@^1.1.9":
-  version "1.1.9"
-  resolved "https://registry.npmjs.org/@next-bricks/shoelace/-/shoelace-1.1.9.tgz"
-  integrity sha512-yLl1zhTj1Y/sPAWOfeYbIzDuU10HrG4pfYRBGTnQtQVrfwDzApN6AeckcckFUMZzXZNku0BaHu5uf9UGEDjRDA==
+"@next-bricks/shoelace@^1.1.13":
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/@next-bricks/shoelace/-/shoelace-1.1.13.tgz#eb04f149b468b0f5e69e40034cbac6b5c76ce314"
+  integrity sha512-D7fEX3Gs8C3RhHmWPR8uuycAD9nnmpPGE19/78mL7weYwhU67rgHeUhO+CJj01k+hcWOPPjbmmTtgMTrUSY4FA==
 
 "@next-core/preview@^0.7.51":
   version "0.7.51"
@@ -9247,19 +9247,7 @@ remark-frontmatter@^5.0.0:
     micromark-extension-frontmatter "^2.0.0"
     unified "^11.0.0"
 
-remark-gfm@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/remark-gfm/-/remark-gfm-4.0.0.tgz"
-  integrity sha512-U92vJgBPkbw4Zfu/IiW2oTZLSL3Zpv+uI7My2eq8JxKgqraFdU8YUGicEJCEgSbeaG+QDFqIcwwfMTOEelPxuA==
-  dependencies:
-    "@types/mdast" "^4.0.0"
-    mdast-util-gfm "^3.0.0"
-    micromark-extension-gfm "^3.0.0"
-    remark-parse "^11.0.0"
-    remark-stringify "^11.0.0"
-    unified "^11.0.0"
-
-remark-gfm@^4.0.1:
+remark-gfm@^4.0.0, remark-gfm@^4.0.1:
   version "4.0.1"
   resolved "https://registry.npmjs.org/remark-gfm/-/remark-gfm-4.0.1.tgz"
   integrity sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==
@@ -10105,15 +10093,10 @@ ts-api-utils@^1.0.1:
   resolved "https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-1.0.3.tgz"
   integrity sha512-wNMeqtMz5NtwpT/UZGY5alT+VoKdSsOOP/kqHFcUW1P/VRhH2wJ48+DN2WwUliNbQ976ETwDL0Ifd2VVvgonvg==
 
-tslib@^2.0.0:
+tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.0, tslib@^2.6.0:
   version "2.8.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
-
-tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.0, tslib@^2.6.0:
-  version "2.6.2"
-  resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz"
-  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
