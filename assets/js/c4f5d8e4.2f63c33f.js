@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknext_docs_website=self.webpackChunknext_docs_website||[]).push([[64195],{62841:function(e,t,n){n.r(t);var c=n(67294),s=n(76775);t.default=function(){return c.createElement(s.l_,{to:"docs/introduction"})}}}]);

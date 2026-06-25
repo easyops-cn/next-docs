@@ -1,0 +1,25 @@
+{
+  "name": "优维科技 - 文档中心",
+  "short_name": "优维科技 - 文档中心",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Brick Next 是 EasyOps 的新一代前端框架，旨在提供一套高度插件化、高度可配置化的企业用户界面解决方案。",
+  "icons": [
+    {
+      "src": "img/logo.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "img/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknext_docs_website=self.webpackChunknext_docs_website||[]).push([[92105],{18381:function(e,t,n){n.r(t);var s=n(67294),c=n(76775);t.default=function(){return s.createElement(c.l_,{to:"/next/next-documents/apps/next-builder/redirect"})}}}]);

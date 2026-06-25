@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknext_docs_website=self.webpackChunknext_docs_website||[]).push([[22655],{92775:function(e){e.exports=JSON.parse('{"permalink":"/next-docs/blog/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":14,"previousPage":"/next-docs/blog","blogDescription":"\u6280\u672f\u535a\u5ba2","blogTitle":"Blog"}')}}]);
